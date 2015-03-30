@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: travelers
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  age        :integer
+#  countries  :text             default("{}"), is an Array
+#  brief      :string
+#  bio        :string
+#  profpic    :string
+#  allpics    :text             default("{}"), is an Array
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  age: 1
+  countries: 
+  brief: MyString
+  bio: MyString
+  profpic: MyString
+  allpics: 
+  belongs_to: 
+
+two:
+  name: MyString
+  age: 1
+  countries: 
+  brief: MyString
+  bio: MyString
+  profpic: MyString
+  allpics: 
+  belongs_to: 

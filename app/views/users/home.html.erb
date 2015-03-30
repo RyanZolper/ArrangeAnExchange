@@ -1,0 +1,11 @@
+<div class="center-block">
+
+  <%= form_tag("/search", method: "get") do %>
+    <%= label_tag(:q, "Select your destination") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+
+</div>
+
+<h1>test</h1>
