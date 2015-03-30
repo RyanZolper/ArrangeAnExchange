@@ -170,11 +170,13 @@
       - [ ] Require phone number for refs:
         - [ ] 0, 1, 2, 3, 4, 5
 
-- [ ] Controllers:
+
+
+## Controllers:
 
   - [ ] Users
 
-- [ ] Models:
+## Models:
 
   - [ ] User:
 
