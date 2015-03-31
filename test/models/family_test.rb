@@ -6,12 +6,22 @@
 #  name       :string
 #  profpic    :string
 #  housepic   :string
-#  brief      :string
 #  bio        :string
-#  allpics    :text             default("{}"), is an Array
-#  user_id    :integer
+#  tagline    :string
+#  hostdates  :string
+#  pvtbed     :boolean
+#  pvtbath    :boolean
+#  beds       :integer
+#  baths      :integer
+#  size       :integer
+#  lifehere   :string
+#  features   :string
+#  attracts   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  country    :string
+#  address    :string
+#  city       :string
 #
 
 require 'test_helper'

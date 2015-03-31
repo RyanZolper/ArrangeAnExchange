@@ -1,0 +1,17 @@
+  <div class="absolute-center">
+
+    <%= form_tag("/search", method: "get") do %>
+
+      <%= label_tag(:q, "Where do you want to go?") %>
+      <%= text_field_tag(:q) %>
+
+      <%= label_tag(:, "Where do you live?") %>
+      <%= text_field_tag(:r) %>
+
+      <%= label_tag(:s, "How old are you?") %>
+      <%= text_field_tag(:s) %>
+
+      <%= submit_tag("Search") %>
+    <% end %>
+
+  </div>

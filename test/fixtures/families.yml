@@ -6,12 +6,22 @@
 #  name       :string
 #  profpic    :string
 #  housepic   :string
-#  brief      :string
 #  bio        :string
-#  allpics    :text             default("{}"), is an Array
-#  user_id    :integer
+#  tagline    :string
+#  hostdates  :string
+#  pvtbed     :boolean
+#  pvtbath    :boolean
+#  beds       :integer
+#  baths      :integer
+#  size       :integer
+#  lifehere   :string
+#  features   :string
+#  attracts   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  country    :string
+#  address    :string
+#  city       :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -20,16 +30,30 @@ one:
   name: MyString
   profpic: MyString
   housepic: MyString
-  brief: MyString
   bio: MyString
-  allpics: 
-  user_id: 
+  tagline: MyString
+  hostdates: MyString
+  pvtbed: false
+  pvtbath: false
+  beds: 1
+  baths: 1
+  size: 1
+  lifehere: MyString
+  features: MyString
+  attracts: MyString
 
 two:
   name: MyString
   profpic: MyString
   housepic: MyString
-  brief: MyString
   bio: MyString
-  allpics: 
-  user_id: 
+  tagline: MyString
+  hostdates: MyString
+  pvtbed: false
+  pvtbath: false
+  beds: 1
+  baths: 1
+  size: 1
+  lifehere: MyString
+  features: MyString
+  attracts: MyString

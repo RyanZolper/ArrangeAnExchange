@@ -6,17 +6,31 @@
 #  name       :string
 #  profpic    :string
 #  housepic   :string
-#  brief      :string
 #  bio        :string
-#  allpics    :text             default("{}"), is an Array
-#  user_id    :integer
+#  tagline    :string
+#  hostdates  :string
+#  pvtbed     :boolean
+#  pvtbath    :boolean
+#  beds       :integer
+#  baths      :integer
+#  size       :integer
+#  lifehere   :string
+#  features   :string
+#  attracts   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  country    :string
+#  address    :string
+#  city       :string
 #
 
 class Family < ActiveRecord::Base
-  belongs_to :user
-  mount_uploader :profpic, PicUploader
-  mount_uploader :allpics, PicUploader
+  has_many :users
+  has_many :travelers
+  has_and_belongs_to_many :hosteds, class_name: "Traveler", :join_table => :previous_hosting, inverse_of: :hosts
+
+  def self.search(query)
+    where("title like ?", "%#{query}%")
+  end
 
 end

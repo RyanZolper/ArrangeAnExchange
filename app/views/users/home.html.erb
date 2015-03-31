@@ -1,11 +1,13 @@
-<div class="center-block">
+<div class="container-fluid">
+    <% @family.each do |family| %>
+      <div class="row">
+        <div class="col-md-3"><%= image_tag("#{family.housepic}") %></div>
+        <div class="col-md-9">
+          <%= family.tagline %><br>
+          <%= family.city %>", "
+          <%= family.country %>
+        </div>
 
-  <%= form_tag("/search", method: "get") do %>
-    <%= label_tag(:q, "Select your destination") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-
+      </div>
+    <% end %>
 </div>
-
-<h1>test</h1>

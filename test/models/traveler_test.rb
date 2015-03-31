@@ -2,17 +2,16 @@
 #
 # Table name: travelers
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  age        :integer
-#  countries  :text             default("{}"), is an Array
-#  brief      :string
-#  bio        :string
-#  profpic    :string
-#  allpics    :text             default("{}"), is an Array
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  name         :string
+#  age          :integer
+#  destinations :string
+#  trvldates    :string
+#  bio          :string
+#  tagline      :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  family_id    :integer
 #
 
 require 'test_helper'

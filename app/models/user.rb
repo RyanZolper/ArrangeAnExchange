@@ -8,15 +8,12 @@
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  family_id       :integer
 #
 
 class User < ActiveRecord::Base
-  has_and_belongs_to_many(:users,
-    :join_table => "user_connections",
-    :foreign_key => "user_a_id",
-    :association_foreign_key => "user_b_id")
-  has_one :family, inverse_of: :user
-  has_many :travelers, inverse_of: :user
+  belongs_to :family, inverse_of: :users
+  has_many :travelers
   has_secure_password
 
 

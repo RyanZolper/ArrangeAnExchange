@@ -2,17 +2,16 @@
 #
 # Table name: travelers
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  age        :integer
-#  countries  :text             default("{}"), is an Array
-#  brief      :string
-#  bio        :string
-#  profpic    :string
-#  allpics    :text             default("{}"), is an Array
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  name         :string
+#  age          :integer
+#  destinations :string
+#  trvldates    :string
+#  bio          :string
+#  tagline      :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  family_id    :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -20,19 +19,15 @@
 one:
   name: MyString
   age: 1
-  countries: 
-  brief: MyString
+  destinations: MyString
+  trvldates: MyString
   bio: MyString
-  profpic: MyString
-  allpics: 
-  belongs_to: 
+  tagline: MyString
 
 two:
   name: MyString
   age: 1
-  countries: 
-  brief: MyString
+  destinations: MyString
+  trvldates: MyString
   bio: MyString
-  profpic: MyString
-  allpics: 
-  belongs_to: 
+  tagline: MyString

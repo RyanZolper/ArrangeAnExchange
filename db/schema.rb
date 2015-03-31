@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330165432) do
+ActiveRecord::Schema.define(version: 20150331134752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,35 +20,42 @@ ActiveRecord::Schema.define(version: 20150330165432) do
     t.string   "name"
     t.string   "profpic"
     t.string   "housepic"
-    t.string   "brief"
     t.string   "bio"
-    t.text     "allpics",    default: [],              array: true
-    t.integer  "user_id"
+    t.string   "tagline"
+    t.string   "hostdates"
+    t.boolean  "pvtbed"
+    t.boolean  "pvtbath"
+    t.integer  "beds"
+    t.integer  "baths"
+    t.integer  "size"
+    t.string   "lifehere"
+    t.string   "features"
+    t.string   "attracts"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "country"
-    t.string   "locations"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "address"
+    t.string   "city"
   end
 
-  add_index "families", ["user_id"], name: "index_families_on_user_id", using: :btree
+  create_table "previous_hosting", id: false, force: :cascade do |t|
+    t.integer "family_id"
+    t.integer "traveler_id"
+  end
 
   create_table "travelers", force: :cascade do |t|
     t.string   "name"
     t.integer  "age"
-    t.text     "countries",  default: [],              array: true
-    t.string   "brief"
+    t.string   "destinations"
+    t.string   "trvldates"
     t.string   "bio"
-    t.string   "profpic"
-    t.text     "allpics",    default: [],              array: true
-    t.integer  "user_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "tagline"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "family_id"
   end
 
-  create_table "user_connections", id: false, force: :cascade do |t|
-    t.integer "user_a_id", null: false
-    t.integer "user_b_id", null: false
-  end
+  add_index "travelers", ["family_id"], name: "index_travelers_on_family_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -56,7 +63,11 @@ ActiveRecord::Schema.define(version: 20150330165432) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "family_id"
   end
 
-  add_foreign_key "families", "users"
+  add_index "users", ["family_id"], name: "index_users_on_family_id", using: :btree
+
+  add_foreign_key "travelers", "families"
+  add_foreign_key "users", "families"
 end

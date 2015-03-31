@@ -16,19 +16,37 @@
   - [ ] Host Family search filters
   - [ ] Sign up, login buttons
 
+  ORRRRRR
+
+  - [ ] If cookies[:herebefore] is empty
+    - [ ] Welcome/info page
+
 - [ ] Sign up page: 3 hrs
 
   - [ ] Hello! Thank you for using ""! <br> As we establish our new company as the best way to exchange students, you can have one traveler per home for free!
 
   - [ ] Name
   - [ ] Email
+  - [ ] Country
   - [ ] Create, redirect to login page notice: "You have been sent an email with a temporary password"
+
+- [ ] First Login Page
+  - [ ] Email
+  - [ ] Temp pwd
+  - [ ] New pwd
+  - [ ] Confirm new pwd
+  - [ ] Redirect to Profile Set up
+
+- [ ] Payment page
+  - [ ] yadadada
+  - [ ] redirect to setup profile
+
 
 - [ ] Login page: 2 hrs
 
   - [ ] Email
   - [ ] Password
-  - [ ] If first login, redirect to setup profile page, else profile page
+  - [ ] Redirect to Logged in Search
 
 
 - [ ] Logged in Search Page: 1 hr
@@ -38,6 +56,7 @@
 
 - [ ] After Search: 6 hrs
 
+  - [ ] Search Filters/ search again up top
   - [ ] Index Page of hosts
   - [ ] Each host:
     - [ ] Location
@@ -56,6 +75,8 @@
     - [ ] If User.family is blank, "This is my family" link to request acceptance
   - [ ] Family Picture
   - [ ] House Picture
+  - [ ] House feature checkbox
+  - [ ] Nearby Attractions
   - [ ] Host Owner Name
   - [ ] Brief description of family
   - [ ] Prof picture, name, age, dates of potential traveler(s)
@@ -67,6 +88,7 @@
   - [ ] Other relevant info:
     - [ ] Requests of traveler
     - [ ] Pets
+    - [ ] Smokers?
     - [ ] More in- [ ] depth family bio
     - [ ] Favorite family activities
     - [ ] Hosting Experience:
@@ -102,16 +124,18 @@
       - [ ] Link to profile
     - [ ] Previously hosted by:
       - [ ] "The Adams Family"
-      - [ ] Picture
-      - [ ] Location
-      - [ ] Brief description of Brick's experience:
-        - [ ] "Brick was a pleasure to have! Polite and intelligent!"
-      - [ ] Link to their page
+    - [ ] Picture
+    - [ ] Smokes?
+    - [ ] Location
+    - [ ] Brief description of Brick's experience:
+      - [ ] "Brick was a pleasure to have! Polite and intelligent!"
+    - [ ] Link to their page
     - [ ] Clickable thumbnails of any other pictures
 
-- [ ] Setup Profile 1 hr
+- [ ] Setup Profile 2 hr
 
   - [ ] form
+  - [ ] redirect to payment page
 
 
 - [ ] My Traveler Profile: 3 hrs
@@ -181,7 +205,7 @@
   - [ ] User:
 
 has_many :travelers
-has_one :family
+belongs_to :family
 
 has_many_and_belongs_to :users
 
@@ -194,6 +218,8 @@ has_secure_password
 
 - [ ]  Traveler
 
+belongs_to :family
+belongs_to :hosted, class_name: "family"
 belongs_to :user
 
 attrs:
@@ -210,7 +236,9 @@ attrs:
 
 - [ ]  Family
 
-belongs_to :user
+has_many :users
+has_many :travelers
+has_many :hosteds, class_name "Travelers", foreign_key: "host_id"
 
 attrs:
     - [ ] Name
@@ -218,3 +246,20 @@ attrs:
     - [ ] House pic
     - [ ] brief info
     - [ ] bio
+
+
+## MAILERS
+
+- [ ] Sign up Mailer
+  - [ ] Send custom link with username in params, username populates form field
+
+- [ ]
+
+
+
+
+Notes:
+
+For home page:
+
+Have necessary search filters, Age, Country they live in, Destination
