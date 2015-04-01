@@ -1,12 +1,12 @@
+<%= link_to("Log In", users_loginpage_path) %>
+<%= link_to("Sign up!", users_signup_path) %>
+
   <div class="absolute-center">
 
-    <%= form_tag("/search", method: "get") do %>
+    <%= form_tag(users_home_path, method: "get") do %>
 
       <%= label_tag(:q, "Where do you want to go?") %>
       <%= text_field_tag(:q) %>
-
-      <%= label_tag(:, "Where do you live?") %>
-      <%= text_field_tag(:r) %>
 
       <%= label_tag(:s, "How old are you?") %>
       <%= text_field_tag(:s) %>

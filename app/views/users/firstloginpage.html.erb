@@ -1,0 +1,16 @@
+Welcome to Demo!
+<br><br>
+Please enter your email and your temporary password:<br>
+<%= form_for @user, url: {action: "firstlogin"} do |f| %>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.search_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Login" %>
+  </div>
+<% end %>

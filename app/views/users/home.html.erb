@@ -1,13 +1,38 @@
 <div class="container-fluid">
-    <% @family.each do |family| %>
+    <% @fams.each do |family| %>
       <div class="row">
-        <div class="col-md-3"><%= image_tag("#{family.housepic}") %></div>
+        <div class="col-md-3"><%= image_tag("#{family.housepic}", width: '100%' ) %></div>
         <div class="col-md-9">
           <%= family.tagline %><br>
-          <%= family.city %>", "
+          <%= family.city %>,
           <%= family.country %>
+
+          <div class="right-align">
+
+            <% @saved = @current_user.saves.where(id: family.id) %>
+
+            <% if @saved.exists? %>
+
+            <%= form_tag users_unsavefam_path do %>
+              <%= hidden_field_tag(:family_id, family.id) %>
+              <%= submit_tag("Unsave") %>
+            <% end %>
+
+            <% else %>
+
+              <%= form_tag users_savefam_path do %>
+                <%= hidden_field_tag(:family_id, family.id) %>
+                <%= submit_tag("Save") %>
+              <% end %>
+
+            <% end %>
+
+
+
+            <a class="btn btn-default" href="#" role="button">Connect</a>
+          </div>
         </div>
 
-      </div>
+      </div><br>
     <% end %>
 </div>

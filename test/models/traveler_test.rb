@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  name         :string
 #  age          :integer
-#  destinations :string
+#  destinations :string           default("{}"), is an Array
 #  trvldates    :string
 #  bio          :string
 #  tagline      :string

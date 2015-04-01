@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Demo.com, <%= @user.name %>!</h1>
+    <p>
+      You have successfully signed up to Demo.com,
+      your login email is: <%= @user.email %>.<br>
+    </p>
+    <p>
+      Your temporary password is: <%= @temp %>
+    <p>
+      To login to the site, just follow this link:<br><br> <%= @url %>
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

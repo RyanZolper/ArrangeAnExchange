@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331134752) do
+ActiveRecord::Schema.define(version: 20150401150823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,11 +31,12 @@ ActiveRecord::Schema.define(version: 20150331134752) do
     t.string   "lifehere"
     t.string   "features"
     t.string   "attracts"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string   "country"
-    t.string   "address"
     t.string   "city"
+    t.string   "address"
+    t.string   "age_range",  default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "previous_hosting", id: false, force: :cascade do |t|
@@ -43,15 +44,20 @@ ActiveRecord::Schema.define(version: 20150331134752) do
     t.integer "traveler_id"
   end
 
+  create_table "save_interest", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "family_id"
+  end
+
   create_table "travelers", force: :cascade do |t|
     t.string   "name"
     t.integer  "age"
-    t.string   "destinations"
+    t.string   "destinations", default: [],              array: true
     t.string   "trvldates"
     t.string   "bio"
     t.string   "tagline"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "family_id"
   end
 
@@ -60,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150331134752) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
+    t.string   "country"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false

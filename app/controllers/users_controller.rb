@@ -1,9 +1,157 @@
-class UsersController < InheritedResources::Base
+class UsersController < ApplicationController
+  before_action :current_user, only: [:home, :savefam, :unsavefam, :changepwdpage, :changepwd]
 
+  # GET /users
+  # GET /users.json
+  def index
+    @users = User.all
+  end
+
+  # GET /users/1
+  # GET /users/1.json
+  def show
+  end
+
+  def home
+    if params[:q]
+      @fams = Family.search([params[:q], params[:s]]).order("created_at DESC")
+    else
+      @fams = Family.order("created_at DESC")
+    end
+  end
+
+  def signup
+    @user = User.new
+    @random = Faker::Number.number(10)
+    @temp = @random
+  end
+
+  def setupme
+  end
+
+  # GET /users/new
+  def new
+    @user = User.new
+  end
+
+  # GET /users/1/edit
+  def edit
+  end
+
+  def showfam
+    @fam = Family.find(params[:id])
+  end
+
+  def savefam
+    @newfav = Family.find(params[:family_id])
+    @current_user.saves << @newfav
+    redirect_to users_home_path
+  end
+
+  def unsavefam
+    @fam = @current_user.saves.find(params[:family_id])
+    @current_user.saves.delete(@fam)
+    redirect_to users_home_path
+  end
+
+
+  # POST /users
+  # POST /users.json
+  def create
+    @user = User.new(user_params)
+    @temp = params[:temp]
+    if @user.save
+      UserMailer.signup_email(@user, @temp).deliver_later
+      session[:current_user_id] = @user.id
+      redirect_to users_check_email_path
+    else
+      redirect_to 'users/signup', alert: "Try again"
+
+    end
+  end
+
+  def loginpage
+    @user = User.new
+  end
+
+  def login
+    @user = User.find_by(email: params[:user][:email])
+    if @user && @user.authenticate(params[:user][:password])
+      redirect_to users_home_path, alert: "Login Success!"
+      session[:current_user_id] = @user.id
+    else redirect_to :back, alert: "Try Again"
+    end
+  end
+
+  def firstloginpage
+    @user = User.new
+  end
+
+  def firstlogin
+    @user = User.find_by(email: params[:user][:email])
+    if @user && @user.authenticate(params[:user][:password])
+      redirect_to users_changepwdpage_path
+      session[:current_user_id] = @user.id
+    else redirect_to :back, alert: "Try Again"
+    end
+  end
+
+  def changepwdpage
+    @user = @current_user
+  end
+
+  def changepwd
+    if @user.update(user_params)
+      redirect_to users_setupme_path
+    else redirect_to :back, alert: "Try Again"
+    end
+  end
+
+  helper_method :current_user, :signed_in?
+
+  def current_user
+    @current_user ||= User.where(:id => session[:current_user_id]).first
+  end
+
+  def signed_in?
+    if current_user.present?
+      return true
+    end
+  end
+
+
+  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1.json
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /users/1
+  # DELETE /users/1.json
+  def destroy
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password_digest)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :password_digest, :family_id, :country)
     end
 end

@@ -15,6 +15,10 @@ class CreateFamilies < ActiveRecord::Migration
       t.string :lifehere
       t.string :features
       t.string :attracts
+      t.string :country
+      t.string :city
+      t.string :address
+      t.string :age_range, array: true, default: []
 
       t.timestamps null: false
     end

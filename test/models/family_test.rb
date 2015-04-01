@@ -17,11 +17,12 @@
 #  lifehere   :string
 #  features   :string
 #  attracts   :string
+#  country    :string
+#  city       :string
+#  address    :string
+#  age_range  :string           default("{}"), is an Array
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  country    :string
-#  address    :string
-#  city       :string
 #
 
 require 'test_helper'
