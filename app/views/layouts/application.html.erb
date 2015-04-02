@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>TIYdemo</title>
+  <%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -31,7 +32,7 @@ var countries =
 ;
 
 </script>
-<%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" %>
+
 
 <!--
   <%= stylesheet_link_tag "jquery.autocomplete.css" %>
@@ -39,12 +40,35 @@ var countries =
   <%= javascript_include_tag "autocomp.js" %>
 -->
 
+<%= javascript_include_tag "jquery.simpleGal" %>
+<script>
+$(document).ready(function () {
+  $('.thumbnails').simpleGal({
+    mainImage: '.custom'
+  });
+});
+</script>
+
+<script>
+$(document).ready(function () {
+  $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').focus()
+  });
+})
+</script>
+
+
+<!--<%= javascript_include_tag "gallery" %>-->
+
+<!--
 <script>
 $(document).ready(function(){
   $("#ref_butn").click(function(){
  location.reload();
   });
 });
-</script>
 
+
+</script>
+-->
 </html>

@@ -19,6 +19,7 @@ class CreateFamilies < ActiveRecord::Migration
       t.string :city
       t.string :address
       t.string :age_range, array: true, default: []
+      t.string :morepics, array:true, default: []
 
       t.timestamps null: false
     end

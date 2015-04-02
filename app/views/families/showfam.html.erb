@@ -1,0 +1,22 @@
+
+
+<%= @fam.tagline %><br>
+
+<div class="main-image">
+  <img src="<%= @fam.housepic %>" alt="Placeholder" class="custom">
+</div>
+
+
+<div class="thumbnails">
+
+<% @fam.morepics.each do |pic| %>
+
+  <a href="<%= pic %>">
+    <%= image_tag("#{pic}", width: '100', alt: "Thumbnails") %>
+  </a>
+
+<% end %>
+
+
+
+</div>

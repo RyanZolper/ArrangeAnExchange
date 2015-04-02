@@ -1,0 +1,39 @@
+
+
+
+<%= form_for @trav do |f| %>
+
+<div class="field">
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+</div>
+
+<div class="field">
+  <%= f.label :age %><br>
+  <%= f.text_field :age %>
+</div>
+
+<!--
+<div class="field">
+  <%= f.label :destinations %><br>
+  <%= f.text_field :destinations %>
+</div>
+-->
+<!--
+<div class="field">
+  <%= f.label :traveldates %><br>
+  <%= f.text_field :trvldates %>
+</div>
+-->
+
+<div class="field">
+  <%= f.label :tagline %><br>
+  <%= f.text_field :tagline %>
+</div>
+
+<textarea rows="10" cols="75" name="content" placeholder="Hint: Friendlyness of connection email and connection success are directly correlated!"></textarea>
+
+
+<div class="actions">
+  <%= f.submit %>
+</div>

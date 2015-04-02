@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :current_user, only: [:home, :savefam, :unsavefam, :changepwdpage, :changepwd]
 
   # GET /users
   # GET /users.json
@@ -12,12 +11,8 @@ class UsersController < ApplicationController
   def show
   end
 
-  def home
-    if params[:q]
-      @fams = Family.search([params[:q], params[:s]]).order("created_at DESC")
-    else
-      @fams = Family.order("created_at DESC")
-    end
+  def mysaves
+    @fams = @current_user.saves
   end
 
   def signup
@@ -38,9 +33,6 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def showfam
-    @fam = Family.find(params[:id])
-  end
 
   def savefam
     @newfav = Family.find(params[:family_id])
@@ -51,7 +43,15 @@ class UsersController < ApplicationController
   def unsavefam
     @fam = @current_user.saves.find(params[:family_id])
     @current_user.saves.delete(@fam)
-    redirect_to users_home_path
+    redirect_to :back
+  end
+
+  def connect
+    @user = User.find(params[:user_id])
+    @fam = Family.find(params[:fam_id])
+    @content = params[:content]
+    UserMailer.connect_email(@user, @fam, @content).deliver_later
+    redirect_to :back, alert: "Message Sent!"
   end
 
 
@@ -65,7 +65,8 @@ class UsersController < ApplicationController
       session[:current_user_id] = @user.id
       redirect_to users_check_email_path
     else
-      redirect_to 'users/signup', alert: "Try again"
+      redirect_to 'users/signup', alert: "Try again, errors: #{@user.errors}"
+
 
     end
   end
@@ -81,6 +82,11 @@ class UsersController < ApplicationController
       session[:current_user_id] = @user.id
     else redirect_to :back, alert: "Try Again"
     end
+  end
+
+  def logout
+    session.delete :current_user_id
+    redirect_to users_welcome_path
   end
 
   def firstloginpage
@@ -107,29 +113,17 @@ class UsersController < ApplicationController
     end
   end
 
-  helper_method :current_user, :signed_in?
-
-  def current_user
-    @current_user ||= User.where(:id => session[:current_user_id]).first
-  end
-
-  def signed_in?
-    if current_user.present?
-      return true
-    end
-  end
 
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user = @current_user
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        redirect_to users_setupme_path
       else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        redirect_to :back, alert: 'Try again!'
       end
     end
   end

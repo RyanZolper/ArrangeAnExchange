@@ -21,6 +21,7 @@
 #  city       :string
 #  address    :string
 #  age_range  :string           default("{}"), is an Array
+#  morepics   :string           default("{}"), is an Array
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -32,7 +33,7 @@ class Family < ActiveRecord::Base
   has_and_belongs_to_many :hosteds, class_name: "Traveler", join_table: "previous_hosting", inverse_of: :hosts
 
   def self.search(query)
-    @step = Family.includes(:travelers).where(["country = ? and ?=ANY(agerange)", query[0], query[1]])
+    @step = Family.includes(:travelers).where(["country = ? and ?=ANY(age_range)", query[0], query[1]])
     #@result = Array.new
     #  @step.each do |p|
     #    if p.destinations.include?(query[1])

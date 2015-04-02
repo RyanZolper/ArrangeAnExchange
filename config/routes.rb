@@ -1,18 +1,22 @@
 Rails.application.routes.draw do
 
   root 'users#welcome'
-  get 'users/home'
+  get 'families/home'
   get 'users/signup'
   get 'users/check_email'
   get 'users/loginpage'
   get 'users/login'
   post 'users/login'
+  get 'users/logout'
   get 'users/firstloginpage'
   post 'users/firstlogin'
   get 'users/changepwdpage'
   post 'users/changepwd'
   post 'users/savefam'
   post 'users/unsavefam'
+  get 'showfam/:id' => 'families#showfam', as: 'showfam'
+  get 'users/mysaves'
+  post 'users/connect'
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

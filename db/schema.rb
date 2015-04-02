@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20150401150823) do
     t.string   "city"
     t.string   "address"
     t.string   "age_range",  default: [],              array: true
+    t.string   "morepics",   default: [],              array: true
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 20150401150823) do
     t.string   "trvldates"
     t.string   "bio"
     t.string   "tagline"
+    t.string   "pic"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "family_id"

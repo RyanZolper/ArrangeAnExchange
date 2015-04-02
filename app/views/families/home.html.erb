@@ -1,0 +1,101 @@
+
+<% if session[:current_user_id] != nil %>
+
+  <%= link_to("My Saves", users_mysaves_path) %>
+
+
+
+
+
+
+
+
+
+<% end %>
+
+
+<div class="container-fluid">
+  <% x = 0 %>
+    <% @fams.each do |family| %>
+      <% x += 1 %>
+      <div class="row">
+        <div class="col-md-3"><%= image_tag("#{family.housepic}", width: '100%' ) %></div>
+        <div class="col-md-9">
+          <%= link_to(family.tagline, showfam_path(family))  %><br>
+          <%= family.city %>,
+          <%= family.country %>
+
+          <div class="right-align">
+
+            <% if session[:current_user_id] != nil %>
+
+              <% @saved = @current_user.saves.where(id: family.id) %>
+
+              <% if @saved.exists? %>
+
+              <%= form_tag users_unsavefam_path do %>
+                <%= hidden_field_tag(:family_id, family.id) %>
+                <%= submit_tag("Unsave") %>
+              <% end %>
+
+              <% else %>
+
+                <%= form_tag users_savefam_path do %>
+                  <%= hidden_field_tag(:family_id, family.id) %>
+                  <%= submit_tag("Save") %>
+                <% end %>
+
+              <% end %>
+
+              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<%= x %>">
+                Connect!
+              </button>
+
+              <div class="modal fade" id="myModal<%= x %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Connect with this family from <%= family.country %>!</h4>
+                    </div>
+                    <div class="modal-body">
+                      This family will receive an email from you that looks like this:<br><br>
+
+                      Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
+
+                      The body of the email will be whatever you enter below!<br>
+
+
+
+                      <%= form_tag users_connect_path do %>
+                        <textarea rows="10" cols="75" name="content" placeholder="Hint: Friendlyness of connection email and connection success are directly correlated!"></textarea>
+                        <%= hidden_field_tag 'user_id', @current_user.id %>
+                        <%= hidden_field_tag 'fam_id', family.id %>
+                        <br>
+                        <%= submit_tag 'Send!' %>
+                      <% end %>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <% else %>
+
+            <a class="btn btn-default" href="#" role="button">Save</a>
+            <a class="btn btn-default" href="#" role="button">Connect</a>
+
+
+            <% end %>
+
+
+
+          </div>
+        </div>
+
+      </div><br>
+    <% end %>
+</div>

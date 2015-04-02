@@ -13,6 +13,7 @@
 #
 
 class User < ActiveRecord::Base
+  validates :email, presence: true, uniqueness: true
   belongs_to :family, inverse_of: :users
   has_many :travelers
   has_secure_password

@@ -7,6 +7,7 @@ class CreateTravelers < ActiveRecord::Migration
       t.string :trvldates
       t.string :bio
       t.string :tagline
+      t.string :pic
 
       t.timestamps null: false
     end
