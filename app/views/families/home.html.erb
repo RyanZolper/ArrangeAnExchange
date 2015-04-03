@@ -1,33 +1,29 @@
 
-<% if session[:current_user_id] != nil %>
-
-  <%= link_to("My Saves", users_mysaves_path) %>
-
-
-
-
-
-
-
-
-
-<% end %>
 
 
 <div class="container-fluid">
   <% x = 0 %>
+  <% y = 0 %>
     <% @fams.each do |family| %>
       <% x += 1 %>
+      <% y += 1 %>
       <div class="row">
         <div class="col-md-3"><%= image_tag("#{family.housepic}", width: '100%' ) %></div>
         <div class="col-md-9">
-          <%= link_to(family.tagline, showfam_path(family))  %><br>
+
+          <% if @current_user != nil %>
+            <%= link_to(family.tagline, showfam_path(family))  %>
+          <% else %>
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal<%= y %>"><%= family.tagline %></button>
+          <% end %>
+
+          <br>
           <%= family.city %>,
           <%= family.country %>
 
           <div class="right-align">
 
-            <% if session[:current_user_id] != nil %>
+            <% if @current_user != nil %>
 
               <% @saved = @current_user.saves.where(id: family.id) %>
 
@@ -85,8 +81,33 @@
 
             <% else %>
 
-            <a class="btn btn-default" href="#" role="button">Save</a>
-            <a class="btn btn-default" href="#" role="button">Connect</a>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<%= y %>">
+              Save
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<%= y %>">
+              Connect!
+            </button>
+
+
+            <div class="modal fade" id="myModal<%= y %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Please Log In or Sign Up for "View", "Save" and "Connect" features</h4>
+                  </div>
+                  <div class="modal-body">
+                    <a class="btn btn-primary btn-lg btn-block" href="/users/loginpage" role="button">Log In</a><br><br>
+                    <a class="btn btn-primary btn-lg btn-block" href="/users/signup" role="button">Sign Up!</a>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
 
             <% end %>

@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401150823) do
+ActiveRecord::Schema.define(version: 20150403155613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fam_attachments", force: :cascade do |t|
+    t.string   "family_id"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "families", force: :cascade do |t|
     t.string   "name"
@@ -29,13 +36,15 @@ ActiveRecord::Schema.define(version: 20150401150823) do
     t.integer  "baths"
     t.integer  "size"
     t.string   "lifehere"
-    t.string   "features"
+    t.string   "features",   default: [],              array: true
     t.string   "attracts"
     t.string   "country"
     t.string   "city"
     t.string   "address"
     t.string   "age_range",  default: [],              array: true
     t.string   "morepics",   default: [],              array: true
+    t.boolean  "smokers"
+    t.string   "env"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -61,9 +70,11 @@ ActiveRecord::Schema.define(version: 20150401150823) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "family_id"
+    t.integer  "user_id"
   end
 
   add_index "travelers", ["family_id"], name: "index_travelers_on_family_id", using: :btree
+  add_index "travelers", ["user_id"], name: "index_travelers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -78,5 +89,6 @@ ActiveRecord::Schema.define(version: 20150401150823) do
   add_index "users", ["family_id"], name: "index_users_on_family_id", using: :btree
 
   add_foreign_key "travelers", "families"
+  add_foreign_key "travelers", "users"
   add_foreign_key "users", "families"
 end

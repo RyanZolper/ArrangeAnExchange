@@ -1,0 +1,81 @@
+Your Family:
+<br><br>
+
+  <div class="main-image">
+    <img src="<%= @fam.housepic %>" alt="Placeholder" class="custom">
+  </div>
+
+
+  <div class="thumbnails">
+
+  <% @fam_attachments.each do |pichold| %>
+
+    <a href="<%= pichold.image %>">
+      <%= image_tag("#{pichold.image}", width: '100', alt: "Thumbnails") %>
+    </a>
+
+  <% end %>
+  </div>
+  <br><br>
+
+  Our family is located in <%= @fam.city %>, <%= @fam.country %>.
+  <br><br>
+  About staying here:<br><br>
+
+    Our family:<br><br>
+
+      <%= @fam.bio %>
+
+    Our home:<br><br>
+
+      General info:<br><br>
+
+        <%= @fam.beds %> beds
+        <%= @fam.baths %> baths
+        <%= @fam.size %> family members<br><br>
+
+      Smokers?<br><br>
+
+        <% if @fam.smokers == true %>
+          Yes
+        <% else %>
+          No
+        <% end %>
+        <br><br>
+      Traveler Privacy:<br><br>
+
+        Private bedroom?<br><br>
+
+        <% if @fam.pvtbed == true %>
+          Yes!
+        <% else %>
+          No
+        <% end %>
+        <br><br>
+        Private bathroom?<br><br>
+
+        <% if @fam.pvtbath = true %>
+          Yes!
+        <% else %>
+          No
+        <% end %>
+        <br><br>
+      Special features:<br><br>
+
+        <% @fam.features.each do |f| %>
+          <%= f.upcase %>!<br>
+        <% end %>
+        <br><br>
+    Our area:<br><br>
+
+      About life here:<br><br>
+
+      <%= @fam.lifehere %><br><br>
+
+      Attractions:<br><br>
+
+        <%= @fam.attracts %><br><br>
+
+      Local environment:<br><br>
+
+        <%= @fam.env %><br><br>

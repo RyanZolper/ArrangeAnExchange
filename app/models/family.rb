@@ -15,18 +15,23 @@
 #  baths      :integer
 #  size       :integer
 #  lifehere   :string
-#  features   :string
+#  features   :string           default("{}"), is an Array
 #  attracts   :string
 #  country    :string
 #  city       :string
 #  address    :string
 #  age_range  :string           default("{}"), is an Array
 #  morepics   :string           default("{}"), is an Array
+#  smokers    :boolean
+#  env        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class Family < ActiveRecord::Base
+  mount_uploader :housepic, PicUploader
+  has_many :fam_attachments
+  accepts_nested_attributes_for :fam_attachments
   has_many :users
   has_many :travelers
   has_and_belongs_to_many :interesteds, class_name: "User", join_table: "save_interest", inverse_of: :saves

@@ -1,12 +1,10 @@
-<%= link_to("Log In", users_loginpage_path) %>
-<%= link_to("Sign up!", users_signup_path) %>
 
   <div class="absolute-center">
 
     <%= form_tag(families_home_path, method: "get") do %>
 
       <%= label_tag(:q, "Where do you want to go?") %>
-      <%= text_field_tag(:q) %>
+      <%= text_field_tag(:q, nil, id: "country-input") %>
 
       <%= label_tag(:s, "How old are you?") %>
       <%= text_field_tag(:s) %>

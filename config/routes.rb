@@ -1,22 +1,51 @@
 Rails.application.routes.draw do
 
+
+  #users
+
   root 'users#welcome'
-  get 'families/home'
   get 'users/signup'
   get 'users/check_email'
   get 'users/loginpage'
   get 'users/login'
-  post 'users/login'
   get 'users/logout'
   get 'users/firstloginpage'
-  post 'users/firstlogin'
+  get 'users/mysaves'
   get 'users/changepwdpage'
+  get 'users/account'
+
   post 'users/changepwd'
   post 'users/savefam'
   post 'users/unsavefam'
-  get 'showfam/:id' => 'families#showfam', as: 'showfam'
-  get 'users/mysaves'
+  post 'users/login'
+  post 'users/logout'
+  post 'users/firstlogin'
   post 'users/connect'
+
+  #fams
+
+  get 'families/setup'
+  get 'families/home'
+  get 'showfam/:id' => 'families#showfam', as: 'showfam'
+  get 'families/myfam'
+
+  post 'families/create'
+
+  #travs
+
+  get 'travelers/setup'
+  get 'showtrav/:id' => 'travelers#showtrav', as: 'showtrav'
+  get 'travelers/mytrav'
+
+  post 'travelers/create'
+
+
+
+
+
+
+  resources :fam_attachments
+
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

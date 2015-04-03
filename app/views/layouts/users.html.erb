@@ -9,15 +9,19 @@
 </head>
 <body>
 
+<% if current_page?(root_url) %>
+  <% @h = '40' %>
+<% else @h = '50' %>
+<% end %>
+
+<% @a = ['account', 'mysaves', 'welcome'] %>
+
+<% if @a.include?(action_name) == false %>
 
 
-<% if action_name == 'setup' %>
 
 
-
-<% else %>
-
-  <% if @current_user == nil %>
+  <% elsif @current_user == nil %>
 
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -30,24 +34,28 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/families/home">
-              <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: '50' %>
+              <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: @h %>
             </a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <div class="navbar-form">
-              <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
+            <% if current_page?(root_url) == false %>
+              <div class="navbar-form">
+                <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
 
-                <%= label_tag(:q, "Where do you want to go?") %>
-                <%= text_field_tag(:q, nil, id: "country-input") %>
+                  <%= label_tag(:q, "Where do you want to go?") %>
+                  <%= text_field_tag(:q, nil, id: "country-input") %>
 
-                <%= label_tag(:s, "How old are you?") %>
-                <%= text_field_tag(:s) %>
+                  <%= label_tag(:s, "How old are you?") %>
+                  <%= text_field_tag(:s) %>
 
-                <%= submit_tag("Search") %>
-              <% end %>
-            </div>
+                  <%= submit_tag("Search") %>
+                <% end %>
+              </div>
+            <% else %>
+              <p class="navbar-text">Welcome to Abroad Minus Façade!</p>
+            <% end %>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/users/loginpage">Login</a></li>
               <li><a href="/users/signup">Sign Up!</a></li>
@@ -70,24 +78,28 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/families/home">
-              <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: '50' %>
+              <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: @h %>
             </a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <div class="navbar-form">
-              <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
+            <% if current_page?(root_url) == false %>
+              <div class="navbar-form">
+                <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
 
-                <%= label_tag(:q, "Where do you want to go?") %>
-                <%= text_field_tag(:q, nil, id: "country-input") %>
+                  <%= label_tag(:q, "Where do you want to go?") %>
+                  <%= text_field_tag(:q, nil, id: "country-input") %>
 
-                <%= label_tag(:s, "How old are you?") %>
-                <%= text_field_tag(:s) %>
+                  <%= label_tag(:s, "How old are you?") %>
+                  <%= text_field_tag(:s) %>
 
-                <%= submit_tag("Search") %>
-              <% end %>
-            </div>
+                  <%= submit_tag("Search") %>
+                <% end %>
+              </div>
+            <% else %>
+              <p class="navbar-text">Welcome to Abroad Minus Façade!</p>
+            <% end %>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/users/mysaves">My Saves</a></li>
               <li class="dropdown">
@@ -106,8 +118,9 @@
       </nav>
 
 
-  <% end %>
 <% end %>
+
+
 
 
 <%= yield %>

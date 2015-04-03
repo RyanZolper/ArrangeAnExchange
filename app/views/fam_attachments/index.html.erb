@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Fam Attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Family</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fam_attachments.each do |fam_attachment| %>
+      <tr>
+        <td><%= fam_attachment.family_id %></td>
+        <td><%= fam_attachment.image %></td>
+        <td><%= link_to 'Show', fam_attachment %></td>
+        <td><%= link_to 'Edit', edit_fam_attachment_path(fam_attachment) %></td>
+        <td><%= link_to 'Destroy', fam_attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fam attachment', new_fam_attachment_path %>

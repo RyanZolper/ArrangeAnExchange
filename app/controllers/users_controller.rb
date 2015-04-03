@@ -16,6 +16,9 @@ class UsersController < ApplicationController
   end
 
   def signup
+    if session[:current_user_id] != nil
+      session[:current_user_id] = nil
+    end
     @user = User.new
     @random = Faker::Number.number(10)
     @temp = @random
@@ -37,7 +40,7 @@ class UsersController < ApplicationController
   def savefam
     @newfav = Family.find(params[:family_id])
     @current_user.saves << @newfav
-    redirect_to users_home_path
+    redirect_to :back
   end
 
   def unsavefam
@@ -78,7 +81,7 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
-      redirect_to users_home_path, alert: "Login Success!"
+      redirect_to families_home_path, alert: "Login Success!"
       session[:current_user_id] = @user.id
     else redirect_to :back, alert: "Try Again"
     end
@@ -86,7 +89,11 @@ class UsersController < ApplicationController
 
   def logout
     session.delete :current_user_id
-    redirect_to users_welcome_path
+    redirect_to root_path
+  end
+
+  def account
+    @user = @current_user
   end
 
   def firstloginpage
@@ -119,13 +126,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     @user = @current_user
-    respond_to do |format|
       if @user.update(user_params)
-        redirect_to users_setupme_path
+        redirect_to travelers_setup_path
       else
         redirect_to :back, alert: 'Try again!'
       end
-    end
   end
 
   # DELETE /users/1

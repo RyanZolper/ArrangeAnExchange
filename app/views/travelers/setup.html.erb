@@ -1,17 +1,23 @@
 
 
 
-<%= form_for @trav do |f| %>
+<%= form_for @trav, url: {action: "create"} do |f| %>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :name %><br>
   <%= f.text_field :name %>
 </div>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :age %><br>
   <%= f.text_field :age %>
 </div>
+
+<div class="field">
+  <%= f.label :profile_picture %><br>
+  <%= f.file_field :pic %>
+</div>
+
 
 <!--
 <div class="field">
@@ -26,14 +32,17 @@
 </div>
 -->
 
-<div class="field">
+<div class="form-group">
   <%= f.label :tagline %><br>
   <%= f.text_field :tagline %>
 </div>
 
-<textarea rows="10" cols="75" name="content" placeholder="Hint: Friendlyness of connection email and connection success are directly correlated!"></textarea>
-
+<div class="form-group">
+  <textarea class="form-control" rows="10" cols="75" name="bio" placeholder="Write a little bit about yourself! What would you want to know about a child before inviting him/her in your home?"></textarea>
+</div>
 
 <div class="actions">
   <%= f.submit %>
 </div>
+
+<% end %>

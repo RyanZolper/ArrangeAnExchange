@@ -1,0 +1,14 @@
+<% @travs.each do |trav| %>
+
+  <%=image_tag trav.pic %>
+  <br><br>
+  Age:
+  <%= trav.age %>
+  <br>
+  <%= trav.tagline %>
+  <br><br>
+  About me:<br><br>
+  <%= trav.bio %>
+  <br><br>
+
+<% end %>

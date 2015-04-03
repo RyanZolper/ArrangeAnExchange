@@ -13,13 +13,15 @@ class CreateFamilies < ActiveRecord::Migration
       t.integer :baths
       t.integer :size
       t.string :lifehere
-      t.string :features
+      t.string :features, array: true, default: []
       t.string :attracts
       t.string :country
       t.string :city
       t.string :address
       t.string :age_range, array: true, default: []
       t.string :morepics, array:true, default: []
+      t.boolean :smokers
+      t.string :env
 
       t.timestamps null: false
     end

@@ -18,3 +18,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "users";
+
+
+body {
+    background-image: url("bkg.jpg");
+    background-size: 100% auto;
+    background-attachment: fixed;
+}
+
+.navbar-brand {
+  // Vertically center the text given $navbarHeight
+  @elementHeight: 20px;
+  padding: 5px 20px 5px;
+  font-size: 20px;
+  line-height: 1.1;
+}

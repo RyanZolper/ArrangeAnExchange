@@ -15,13 +15,15 @@
 #  baths      :integer
 #  size       :integer
 #  lifehere   :string
-#  features   :string
+#  features   :string           default("{}"), is an Array
 #  attracts   :string
 #  country    :string
 #  city       :string
 #  address    :string
 #  age_range  :string           default("{}"), is an Array
 #  morepics   :string           default("{}"), is an Array
+#  smokers    :boolean
+#  env        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

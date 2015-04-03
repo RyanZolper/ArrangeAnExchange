@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Family:</strong>
+  <%= @fam_attachment.family_id %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @fam_attachment.image %>
+</p>
+
+<%= link_to 'Edit', edit_fam_attachment_path(@fam_attachment) %> |
+<%= link_to 'Back', fam_attachments_path %>

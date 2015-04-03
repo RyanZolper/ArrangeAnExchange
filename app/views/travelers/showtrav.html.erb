@@ -1,0 +1,11 @@
+<%=image_tag @trav.pic %>
+<br><br>
+Age:
+<%= @trav.age %>
+<br>
+<%= @trav.tagline %>
+<br><br>
+About me:<br><br>
+<%= @trav.bio %>
+<br><br>
+<%= link_to "Back to Family", showfam_path(@trav.family), class: "btn btn-default" %>

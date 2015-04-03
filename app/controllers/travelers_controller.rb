@@ -5,14 +5,20 @@ class TravelersController < ApplicationController
   end
 
   def create
-    @trav = Traveler.new(trav_params)
+    @trav = @current_user.travelers.new(trav_params)
     if @trav.save
       redirect_to families_setup_path
     else redirect_to :back, alert: 'Try again!'
     end
   end
 
+  def showtrav
+    @trav = Traveler.find(params[:id])
+  end
 
+  def mytrav
+    @travs = @current_user.family.travelers.all
+  end
 
 
 

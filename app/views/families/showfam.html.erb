@@ -2,6 +2,59 @@
 
 <%= @fam.tagline %><br>
 
+  <% if @fam.interesteds.include?(@current_user) %>
+
+    <%= form_tag users_unsavefam_path do %>
+      <%= hidden_field_tag(:family_id, @fam.id) %>
+      <%= submit_tag("Unsave") %>
+    <% end %>
+
+  <% else %>
+
+    <%= form_tag users_savefam_path do %>
+      <%= hidden_field_tag(:family_id, @fam.id) %>
+      <%= submit_tag("Save") %>
+    <% end %>
+
+  <% end %>
+
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+  Connect!
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Connect with this family from <%= @fam.country %>!</h4>
+      </div>
+      <div class="modal-body">
+        This family will receive an email from you that looks like this:<br><br>
+
+        Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
+
+        The body of the email will be whatever you enter below!<br>
+
+
+
+        <%= form_tag users_connect_path do %>
+          <textarea rows="10" cols="75" name="content" placeholder="Hint: Friendlyness of connection email and connection success are directly correlated!"></textarea>
+          <%= hidden_field_tag 'user_id', @current_user.id %>
+          <%= hidden_field_tag 'fam_id', @fam.id %>
+          <br>
+          <%= submit_tag 'Send!' %>
+        <% end %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="main-image">
   <img src="<%= @fam.housepic %>" alt="Placeholder" class="custom">
 </div>
@@ -9,14 +62,104 @@
 
 <div class="thumbnails">
 
-<% @fam.morepics.each do |pic| %>
+<% @fam_attachments.each do |pichold| %>
 
-  <a href="<%= pic %>">
-    <%= image_tag("#{pic}", width: '100', alt: "Thumbnails") %>
+  <a href="<%= pichold.image %>">
+    <%= image_tag("#{pichold.image}", width: '100', alt: "Thumbnails") %>
   </a>
 
 <% end %>
+</div>
+<br><br>
+
+Our family is located in <%= @fam.city %>, <%= @fam.country %>.
+<br><br>
+About staying here:<br><br>
+
+  Our family:<br><br>
+
+    <%= @fam.bio %>
+
+  Our home:<br><br>
+
+    General info:<br><br>
+
+      <%= @fam.beds %> beds
+      <%= @fam.baths %> baths
+      <%= @fam.size %> family members<br><br>
+
+    Smokers?<br><br>
+
+      <% if @fam.smokers == true %>
+        Yes
+      <% else %>
+        No
+      <% end %>
+      <br><br>
+    Traveler Privacy:<br><br>
+
+      Private bedroom?<br><br>
+
+      <% if @fam.pvtbed == true %>
+        Yes!
+      <% else %>
+        No
+      <% end %>
+      <br><br>
+      Private bathroom?<br><br>
+
+      <% if @fam.pvtbath = true %>
+        Yes!
+      <% else %>
+        No
+      <% end %>
+      <br><br>
+    Special features:<br><br>
+
+      <% @fam.features.each do |f| %>
+        <%= f.upcase %>!<br>
+      <% end %>
+      <br><br>
+  Our area:<br><br>
+
+    About life here:<br><br>
+
+    <%= @fam.lifehere %><br><br>
+
+    Attractions:<br><br>
+
+      <%= @fam.attracts %><br><br>
+
+    Local environment:<br><br>
+
+      <%= @fam.env %><br><br>
 
 
 
+
+
+
+
+<br>
+<div class="container-fluid">
+
+  This family's travelers:<br><br>
+  <div class="row">
+    <% @fam.travelers.each do |trav| %>
+
+      <div class="col-md-3">
+        Age: <%= trav.age %><br>
+        <%= image_tag("#{trav.pic}", width: '300') %><br><br>
+        <%= trav.tagline %><br><br>
+        <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-default" %>
+
+      </div>
+
+
+
+
+
+
+    <% end %>
+  </div>
 </div>

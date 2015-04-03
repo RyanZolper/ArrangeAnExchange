@@ -1,5 +1,5 @@
 $(function(){
-  $("input").autocomplete({
+  $('#country-input').autocomplete({
     source:[countries]
   });
 });
