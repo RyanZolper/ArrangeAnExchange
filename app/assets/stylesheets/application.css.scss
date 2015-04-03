@@ -19,6 +19,7 @@
 @import "bootstrap";
 @import "users";
 
+//= depend_on_asset "bkg.jp"
 
 body {
     background-image: url("bkg.jpg");
