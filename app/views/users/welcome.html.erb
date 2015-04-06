@@ -5,10 +5,10 @@
 
       <%= label_tag(:q, "Where do you want to go?") %>
       <%= text_field_tag(:q, nil, id: "country-input") %>
-
+      &nbsp;&nbsp;&nbsp;
       <%= label_tag(:s, "How old are you?") %>
-      <%= text_field_tag(:s) %>
-
+      <%= select_tag(:s, options_for_select(13..28)) %>
+      &nbsp;&nbsp;&nbsp;
       <%= submit_tag("Search") %>
     <% end %>
 

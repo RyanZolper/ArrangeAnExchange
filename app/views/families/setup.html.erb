@@ -1,5 +1,5 @@
 
-
+<h3>Family Setup</h3>
 
 <%= form_for(@fam, {url: {action: "create"}, html: {multipart: "true"}}) do |f| %>
 
@@ -81,14 +81,17 @@
 </div>
 
 <div class="form-group">
+  <%= label_tag "Family Life" %><br>
   <textarea rows="10" cols="75" name="bio" placeholder="Write a little bit about your family, and what it is like living with them!"></textarea>
 </div>
 
 <div class="form-group">
+  <%= label_tag "Life In Your Area" %><br>
   <textarea rows="10" cols="75" name="lifehere" placeholder="Write a little bit about life in your city/town."></textarea>
 </div>
 
 <div class="form-group">
+  <%= label_tag "Local Attractions" %><br>
   <textarea rows="10" cols="75" name="attracts" placeholder="Write about a few cool attractions in your area."></textarea>
 </div>
 

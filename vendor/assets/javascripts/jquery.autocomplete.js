@@ -463,7 +463,7 @@
 		replaceAccentsForRemote: true,
 
 		limit: 300,
-		visibleLimit: 20,
+		visibleLimit: 10,
 		visibleHeight: 0,
 		defaultHeightItem: 30,
 

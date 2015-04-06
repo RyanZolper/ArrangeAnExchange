@@ -1,5 +1,5 @@
 
-
+<h3>Traveler Setup</h3>
 
 <%= form_for @trav, url: {action: "create"} do |f| %>
 
@@ -38,6 +38,7 @@
 </div>
 
 <div class="form-group">
+  <%= label_tag "Traveler's Bio" %>
   <textarea class="form-control" rows="10" cols="75" name="bio" placeholder="Write a little bit about yourself! What would you want to know about a child before inviting him/her in your home?"></textarea>
 </div>
 

@@ -38,7 +38,12 @@ class Family < ActiveRecord::Base
   has_and_belongs_to_many :hosteds, class_name: "Traveler", join_table: "previous_hosting", inverse_of: :hosts
 
   def self.search(query)
-    @step = Family.includes(:travelers).where(["country = ? and ?=ANY(age_range)", query[0], query[1]])
+    @a = ["Anywhere!", ""]
+    if @a.include?(query[0])
+      @step = Family.where(["?=ANY(age_range)", query[1]])
+    else
+      @step = Family.where(["country = ? and ?=ANY(age_range)", query[0], query[1]])
+    end
     #@result = Array.new
     #  @step.each do |p|
     #    if p.destinations.include?(query[1])

@@ -2,15 +2,15 @@ class FamiliesController < ApplicationController
 
   def home
     if @current_user != nil
-      @fams = Family.where.not(id: @current_user.family_id)
+      @famils = Family.where.not(id: @current_user.family_id)
     else
-      @fams = Family.all
+      @famils = Family.all
     end
 
     if params[:q]
-      @fams.search([params[:q], params[:s]]).order("created_at DESC")
+      @fams = @famils.search([params[:q], params[:s]]).order("created_at DESC")
     else
-      @fams.order("created_at DESC")
+      @fams = @famils.order("created_at DESC")
     end
   end
 

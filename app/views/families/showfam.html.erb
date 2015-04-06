@@ -56,7 +56,7 @@
 
 
 <div class="main-image">
-  <img src="<%= @fam.housepic %>" alt="Placeholder" class="custom">
+  <img src="<%= @fam.housepic %>" alt="Placeholder" height="400" class="custom">
 </div>
 
 
@@ -65,30 +65,30 @@
 <% @fam_attachments.each do |pichold| %>
 
   <a href="<%= pichold.image %>">
-    <%= image_tag("#{pichold.image}", width: '100', alt: "Thumbnails") %>
+    <%= image_tag("#{pichold.image}", height: '60', alt: "Thumbnails") %>
   </a>
 
 <% end %>
 </div>
 <br><br>
 
-Our family is located in <%= @fam.city %>, <%= @fam.country %>.
+<h2>Our family is located in <%= @fam.city %>, <%= @fam.country %>.</h2>
 <br><br>
-About staying here:<br><br>
+<h2>About staying here:</h2><br><br>
 
-  Our family:<br><br>
+  <h3>Our family:</h3><br><br>
 
     <%= @fam.bio %>
 
-  Our home:<br><br>
+    <h3>Our home:</h3><br><br>
 
-    General info:<br><br>
+    <h4>General info:</h4><br><br>
 
       <%= @fam.beds %> beds
       <%= @fam.baths %> baths
       <%= @fam.size %> family members<br><br>
 
-    Smokers?<br><br>
+      <h4>Smokers?</h4><br><br>
 
       <% if @fam.smokers == true %>
         Yes
@@ -96,9 +96,9 @@ About staying here:<br><br>
         No
       <% end %>
       <br><br>
-    Traveler Privacy:<br><br>
+      <h4>Traveler Privacy:</h4><br><br>
 
-      Private bedroom?<br><br>
+      <h4>Private bedroom?</h4><br><br>
 
       <% if @fam.pvtbed == true %>
         Yes!
@@ -106,7 +106,7 @@ About staying here:<br><br>
         No
       <% end %>
       <br><br>
-      Private bathroom?<br><br>
+      <h4>Private bathroom?</h4><br><br>
 
       <% if @fam.pvtbath = true %>
         Yes!
@@ -114,23 +114,23 @@ About staying here:<br><br>
         No
       <% end %>
       <br><br>
-    Special features:<br><br>
+    <h4>Special features:</h4><br><br>
 
       <% @fam.features.each do |f| %>
         <%= f.upcase %>!<br>
       <% end %>
       <br><br>
-  Our area:<br><br>
+  <h3>Our area:</h3><br><br>
 
-    About life here:<br><br>
+    <h4>About life here:</h4><br><br>
 
     <%= @fam.lifehere %><br><br>
 
-    Attractions:<br><br>
+    <h4>Attractions:</h4><br><br>
 
       <%= @fam.attracts %><br><br>
 
-    Local environment:<br><br>
+      <h4>Local environment:</h4><br><br>
 
       <%= @fam.env %><br><br>
 
@@ -143,7 +143,7 @@ About staying here:<br><br>
 <br>
 <div class="container-fluid">
 
-  This family's travelers:<br><br>
+  <h3>This family's travelers:</h3><br><br>
   <div class="row">
     <% @fam.travelers.each do |trav| %>
 
