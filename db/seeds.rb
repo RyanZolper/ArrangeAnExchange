@@ -5,11 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+
+
 @f = Family.create do |f|
   f.city = Faker::Address.city
   @c = f.country = Faker::Address.country
   f.tagline = "Come stay with us in #{@c} and live the high life"
-  f.remote_housepic_url = Faker::Company.logo
+  f.housepic = Rails.root.join("app/assets/images/seed0.jpg").open
   f.age_range = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   f.bio = Faker::Lorem.paragraph
   f.lifehere = Faker::Lorem.paragraph
@@ -25,24 +29,26 @@
 
 end
 
-5.times do
+@f.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed1.jpg").open)
+@f.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed2.jpg").open)
+@f.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed3.jpg").open)
+@f.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed4.jpg").open)
+@f.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed5.jpg").open)
 
-@f.fam_attachments.create(remote_image_url: Faker::Company.logo)
-
-end
 
 @z = @f.users.create(name: 'Ryan Zolper', email: 'zolper11@gmail.com', password: 'pwd', password_confirmation: 'pwd', country: "Portugal")
 
-2.times do
-  @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: Faker::Number.number(2), remote_pic_url: Faker::Company.logo, tagline: Faker::Company.bs, user_id: @z.id, bio: Faker::Lorem.paragraph)
-end
+@z1 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: Faker::Number.number(2), pic: Rails.root.join("app/assets/images/kid1.jpg").open, tagline: Faker::Company.bs, user_id: @z.id, bio: Faker::Lorem.paragraph)
+@z2 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: Faker::Number.number(2), pic: Rails.root.join("app/assets/images/kid2.jpg").open, tagline: Faker::Company.bs, user_id: @z.id, bio: Faker::Lorem.paragraph)
+
 
 4.times do
+  @num = Faker::Number.digit
   @fam = Family.create do |f|
     f.city = Faker::Address.city
     @c = f.country = "France"
     f.tagline = "Come stay with us in #{@c} and live the high life"
-    f.remote_housepic_url = "http://suburbanfinance.com/wp-content/uploads/2013/04/streetinfo.jpg"
+    f.housepic = Rails.root.join("app/assets/images/seed#{@num}.jpg").open
     f.age_range = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     f.bio = Faker::Lorem.paragraph
     f.lifehere = Faker::Lorem.paragraph
@@ -57,19 +63,25 @@ end
     f.env = "Suburban"
   end
 
+  @fam.hosteds << @z1
+  @fam.hosteds << @z2
 
-  @fam.fam_attachments.create(remote_image_url: "http://www.smple.co/wp-content/uploads/2015/03/inside-house-pictures-imspirational-ideas-2-on-house-design-ideas.jpg")
-  @fam.fam_attachments.create(remote_image_url: "http://www.smple.co/wp-content/uploads/2015/03/pool-inside-house-inspired-design-1-on-house-design-ideas.jpg")
-  @fam.fam_attachments.create(remote_image_url: "http://www.mflandscapeanddesign.com/wp-content/uploads/2013/10/dream-backyard.jpg")
-  @fam.fam_attachments.create(remote_image_url: "http://www.smple.co/wp-content/uploads/2015/03/bedroom-pictures-awesome-decoration-9-on-bedroom-design-ideas.jpg")
-  @fam.fam_attachments.create(remote_image_url: "http://uglyhousephotos.com/wordpress/wp-content/uploads/2013/03/130317trentonnj5.jpg")
+  @fam.connections.first.update("hostreview" => "What a wonderful family! Would love to visit again! Beautiful home too!", "travreview" => "Great kid :)", "hoststars" => "5", "travstars" => "5")
+  @fam.connections.second.update("hostreview" => "Wish that this was my real family... awesome yard and an even better atmosphere for happiness!", "travreview" => "Great kid :)", "hoststars" => "4", "travstars" => "5")
+
+
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed1.jpg").open)
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed2.jpg").open)
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed3.jpg").open)
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed4.jpg").open)
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed5.jpg").open)
 
 
   @u = @fam.users.create(name: Faker::Name.name, email:Faker::Internet.email, password: 'password123', password_confirmation: 'password123', country: Faker::Address.country)
   @fam.travelers.create do |t|
     t.destinations = ["United States", Faker::Address.country, Faker::Address.country]
     t.age = Faker::Number.number(2)
-    t.remote_pic_url = Faker::Company.logo
+    t.pic = Rails.root.join("app/assets/images/kid3.jpg").open
     t.tagline = Faker::Company.bs
     t.user_id = @u.id
     t.bio = Faker::Lorem.paragraph
@@ -80,11 +92,12 @@ end
 
 
 30.times do
+  @num = Faker::Number.digit
   @fam = Family.create do |f|
     f.city = Faker::Address.city
     @c = f.country = Faker::Address.country
     f.tagline = "Come stay with us in #{@c} and live the high life"
-    f.remote_housepic_url = "http://suburbanfinance.com/wp-content/uploads/2013/04/streetinfo.jpg"
+    f.housepic = Rails.root.join("app/assets/images/seed#{@num}.jpg").open
     f.age_range = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     f.bio = Faker::Lorem.paragraph
     f.lifehere = Faker::Lorem.paragraph
@@ -99,19 +112,26 @@ end
     f.env = "Suburban"
   end
 
+  @fam.hosteds << @z1
+  @fam.hosteds << @z2
 
-  @fam.fam_attachments.create(remote_image_url: "http://www.smple.co/wp-content/uploads/2015/03/inside-house-pictures-imspirational-ideas-2-on-house-design-ideas.jpg")
-  @fam.fam_attachments.create(remote_image_url: "http://www.smple.co/wp-content/uploads/2015/03/pool-inside-house-inspired-design-1-on-house-design-ideas.jpg")
-  @fam.fam_attachments.create(remote_image_url: "http://www.mflandscapeanddesign.com/wp-content/uploads/2013/10/dream-backyard.jpg")
-  @fam.fam_attachments.create(remote_image_url: "http://www.smple.co/wp-content/uploads/2015/03/bedroom-pictures-awesome-decoration-9-on-bedroom-design-ideas.jpg")
-  @fam.fam_attachments.create(remote_image_url: "http://uglyhousephotos.com/wordpress/wp-content/uploads/2013/03/130317trentonnj5.jpg")
+  @fam.connections.first.update("hostreview" => "What a wonderful family! Would love to visit again! Beautiful home too!", "travreview" => "Great kid :)", "hoststars" => "5", "travstars" => "5")
+  @fam.connections.second.update("hostreview" => "Wish that this was my real family... awesome yard and an even better atmosphere for happiness!", "travreview" => "Great kid :)", "hoststars" => "4", "travstars" => "5")
+
+  @fam.save
+
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed1.jpg").open)
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed2.jpg").open)
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed3.jpg").open)
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed4.jpg").open)
+  @fam.fam_attachments.create(image: Rails.root.join("app/assets/images/inseed5.jpg").open)
 
 
   @u = @fam.users.create(name: Faker::Name.name, email:Faker::Internet.email, password: 'password123', password_confirmation: 'password123', country: Faker::Address.country)
   @fam.travelers.create do |t|
     t.destinations = ["United States", Faker::Address.country, Faker::Address.country]
     t.age = Faker::Number.number(2)
-    t.remote_pic_url = Faker::Company.logo
+    t.pic = Rails.root.join("app/assets/images/kid4.jpg").open
     t.tagline = Faker::Company.bs
     t.user_id = @u.id
     t.bio = Faker::Lorem.paragraph

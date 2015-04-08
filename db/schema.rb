@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403155613) do
+ActiveRecord::Schema.define(version: 20150407155514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "connections", force: :cascade do |t|
+    t.integer  "family_id"
+    t.integer  "traveler_id"
+    t.string   "hostreview"
+    t.string   "travreview"
+    t.integer  "hoststars"
+    t.integer  "travstars"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "connections", ["family_id"], name: "index_connections_on_family_id", using: :btree
+  add_index "connections", ["traveler_id"], name: "index_connections_on_traveler_id", using: :btree
 
   create_table "fam_attachments", force: :cascade do |t|
     t.string   "family_id"
@@ -47,11 +61,6 @@ ActiveRecord::Schema.define(version: 20150403155613) do
     t.string   "env"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-  end
-
-  create_table "previous_hosting", id: false, force: :cascade do |t|
-    t.integer "family_id"
-    t.integer "traveler_id"
   end
 
   create_table "save_interest", id: false, force: :cascade do |t|

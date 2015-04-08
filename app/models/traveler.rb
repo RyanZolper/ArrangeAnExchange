@@ -20,5 +20,6 @@ class Traveler < ActiveRecord::Base
   mount_uploader :pic, PicUploader
   belongs_to :family, inverse_of: :travelers
   belongs_to :user, inverse_of: :travelers
-  has_and_belongs_to_many :hosts, class_name: "Family", :join_table => :previous_hosting, inverse_of: :hosteds
+  has_many :connections
+  has_many :hosts, :through => :connections, :source => :family
 end

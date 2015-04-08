@@ -9,6 +9,20 @@
 </head>
 <body>
 
+  <% if notice != nil %>
+    <div class="alert alert-success alert-dismissable" id="notice" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= notice %>
+    </div>
+  <% end %>
+  <% if alert != nil %>
+    <div class="alert alert-danger alert-dismissable" id="alert" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= alert %>
+    </div>
+  <% end %>
+
+
 <% if current_page?(root_url) %>
   <% @h = '40' %>
 <% else @h = '50' %>
@@ -27,7 +41,7 @@
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -39,27 +53,27 @@
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <% if current_page?(root_url) == false %>
               <div class="navbar-form">
                 <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
 
                   <%= label_tag(:q, "Where do you want to go?") %>
-                  <%= text_field_tag(:q, nil, id: "country-input") %>
+                  <n1><%= text_field_tag(:q, nil, id: "country-input") %></n1>
                   &nbsp;&nbsp;
 
-                  <%= label_tag(:s, "How old are you?") %>
+                  <n1><%= label_tag(:s, "How old are you?") %></n1>
                   <%= text_field_tag(:s) %>
 
-                  <%= submit_tag("Search") %>
+                  <%= submit_tag("Search", class: "btn btn-default") %>
                 <% end %>
               </div>
             <% else %>
               <p class="navbar-text">Welcome to Arrange An Exchange!</p>
             <% end %>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/users/loginpage">Login</a></li>
-              <li><a href="/users/signup">Sign Up!</a></li>
+              <li><a href="/users/loginpage"><n2>Login</n2></a></li>
+              <li><a href="/users/signup"><n2>Sign Up!</n2></a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -72,7 +86,7 @@
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -84,33 +98,33 @@
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <% if current_page?(root_url) == false %>
               <div class="navbar-form">
                 <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
 
-                  <%= label_tag(:q, "Where do you want to go?") %>
+                <n1><%= label_tag(:q, "Where do you want to go?") %></n1>
                   <%= text_field_tag(:q, nil, id: "country-input") %>
                   &nbsp;&nbsp;
 
-                  <%= label_tag(:s, "How old are you?") %>
-                  <%= text_field_tag(:s) %>
-
-                  <%= submit_tag("Search") %>
+                  <n1><%= label_tag(:s, "How old are you?") %></n1>&nbsp;&nbsp;
+                  <%= select_tag :s, options_for_select(13..28) %>
+                  &nbsp;&nbsp;
+                  <%= submit_tag("Search", class: "btn btn-default") %>
                 <% end %>
               </div>
             <% else %>
               <p class="navbar-text">Welcome to Arrange An Exchange!</p>
             <% end %>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/users/mysaves">My Saves</a></li>
+              <li><a href="/users/mysaves"><n2>My Saves</n2></a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Account <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><nd1>My Account</nd1><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="/users/account">Account Info</a></li>
-                  <li><a href="/families/myfam">My Family</a></li>
-                  <li><a href="/travelers/mytrav">My Travelers</a></li>
-                  <li><a href="/users/logout">Log Out</a></li>
+                  <li><a href="/users/account"><n2>Account Info</n2></a></li>
+                  <li><a href="/families/myfam"><n2>My Family</n2></a></li>
+                  <li><a href="/travelers/mytrav"><n2>My Travelers</n2></a></li>
+                  <li><a href="/users/logout"><n2>Log Out</n2></a></li>
 
                 </ul>
               </li>
@@ -132,7 +146,7 @@
 <script type="text/javascript">
 
 var countries =
-["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+["Anywhere!", "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
  "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde",
  "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, the Democratic Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
  "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon",
@@ -154,9 +168,10 @@ var countries =
   <%= stylesheet_link_tag "jquery.autocomplete.css" %>
   <%= javascript_include_tag "jquery.autocomplete.js" %>
   <%= javascript_include_tag "autocomp.js" %>
+  <%= javascript_include_tag "jquery.rating.js" %>
+  <%= stylesheet_link_tag "jquery.rating.css" %>
 
 
-<%= javascript_include_tag "jquery.simpleGal" %>
 <script>
 $(document).ready(function () {
   $('.thumbnails').simpleGal({
@@ -173,6 +188,40 @@ $(document).ready(function () {
 })
 </script>
 
+<script>
+$(document).ready(function () {
+  $("#notice").delay(3000).slideUp(200, function() {
+      $(this).alert('close');
+  });
+})
+
+</script>
+
+<script>
+$(document).ready(function () {
+  $("#alert").delay(3000).slideUp(200, function() {
+      $(this).alert('close');
+  });
+})
+
+</script>
+
+<script>
+$(function() {
+  $( "#age" ).slider({
+    animate: "fast"
+  });
+});
+
+</script>
+
+<script>
+
+$("#age").on("slide", function(slideEvt) {
+	$("#ageSliderVal").text(slideEvt.value);
+});
+
+</script>
 
 
 <!--

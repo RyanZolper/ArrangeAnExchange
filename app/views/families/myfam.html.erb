@@ -62,8 +62,12 @@ Your Family:
         <br><br>
       <h4>Special features:</h4><br><br>
 
-        <% @fam.features.each do |f| %>
-          <%= f.upcase %>!<br>
+        <% if @fam.features != nil %>
+          <% @fam.features.each do |f| %>
+            <%= f.upcase %>!<br>
+          <% end %>
+        <% else %>
+          None added
         <% end %>
         <br><br>
     <h3>Our area:</h3><br><br>

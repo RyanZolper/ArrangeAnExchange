@@ -8,15 +8,17 @@ class FamiliesController < ApplicationController
     end
 
     if params[:q]
-      @fams = @famils.search([params[:q], params[:s]]).order("created_at DESC")
+      @fams = @famils.search([params[:q], params[:s]]).order("created_at DESC").page params[:page]
     else
-      @fams = @famils.order("created_at DESC")
+      @fams = @famils.order("created_at DESC").page params[:page]
     end
   end
 
   def showfam
     @fam = Family.find(params[:id])
     @fam_attachments = @fam.fam_attachments.all
+    @hosteds = @fam.hosteds.all
+    @rated = @hosteds.average(:hoststars).to_f
   end
 
   def myfam
@@ -31,10 +33,17 @@ class FamiliesController < ApplicationController
 
   def create
     @fam = Family.new(fam_params)
-    if @fam.save
+    if @fam.save && params[:fam_attachments] != nil
       params[:fam_attachments]['image'].each do |a|
         @pichold = @fam.fam_attachments.create!(:image => a, :family_id => @fam.id)
       end
+      @fam.update_attribute('features', params[:family][:features])
+      @current_user.update_attribute('family_id', @fam.id)
+      @current_user.travelers.each do |x|
+        x.update_attribute('family_id', @fam.id)
+      end
+      redirect_to families_home_path
+    elsif @fam.save
       @fam.update_attribute('features', params[:family][:features])
       @current_user.update_attribute('family_id', @fam.id)
       @current_user.travelers.each do |x|

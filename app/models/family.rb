@@ -34,8 +34,9 @@ class Family < ActiveRecord::Base
   accepts_nested_attributes_for :fam_attachments
   has_many :users
   has_many :travelers
+  has_many :connections
   has_and_belongs_to_many :interesteds, class_name: "User", join_table: "save_interest", inverse_of: :saves
-  has_and_belongs_to_many :hosteds, class_name: "Traveler", join_table: "previous_hosting", inverse_of: :hosts
+  has_many :hosteds, :through => :connections, :source => :traveler
 
   def self.search(query)
     @a = ["Anywhere!", ""]

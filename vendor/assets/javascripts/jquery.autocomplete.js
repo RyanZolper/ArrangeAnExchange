@@ -465,7 +465,7 @@
 		limit: 300,
 		visibleLimit: 10,
 		visibleHeight: 0,
-		defaultHeightItem: 30,
+		defaultHeightItem: 10,
 
 		timeoutUpdate: 10,
 

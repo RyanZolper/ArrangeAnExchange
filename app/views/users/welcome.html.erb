@@ -1,15 +1,20 @@
-
-  <div class="absolute-center">
+<div class="container-fluid">
+  <div class="welcome-div" style="text-align:center; vertical-align:middle">
 
     <%= form_tag(families_home_path, method: "get") do %>
 
-      <%= label_tag(:q, "Where do you want to go?") %>
-      <%= text_field_tag(:q, nil, id: "country-input") %>
-      &nbsp;&nbsp;&nbsp;
-      <%= label_tag(:s, "How old are you?") %>
-      <%= select_tag(:s, options_for_select(13..28)) %>
-      &nbsp;&nbsp;&nbsp;
-      <%= submit_tag("Search") %>
+      <w1><%= label_tag(:q, "Where do you want to go?") %></w1><br>
+      <%= text_field_tag(:q, nil, {id: "country-input", size: "42"}) %><br><br>
+      <w2><%= label_tag(:s, "How old are you?") %></w2><w3><br><span id="ageSliderVal">18</span> years old<br></w3>
+      <w4>13</w4> <%= text_field_tag(:s, 18, {id: 'age', type: 'text',
+                       data: {'slider-id' => 'ageSlider',
+                              'slider-min' => '13',
+                              'slider-max' => '28',
+                              'slider-tooltip' => 'hide',
+                              'slider-step' => '1',
+                              'slider-value' => '18' }}) %> <w4>28</w4><br><br>
+      <%= submit_tag("Search", class: "btn btn-primary btn-lg") %>
     <% end %>
 
   </div>
+</div>

@@ -18,19 +18,138 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "users";
+@import "bootstrap-slider";
 
-//= depend_on_asset "bkg.jpg"
+.alert alert-success alert-dismissable {
+  padding-bottom:0px;
+}
+
+.alert alert-danger alert-dismissable {
+  padding-bottom:0px;
+}
+
+
 
 body {
-    background-image: url("bkg.jpg");
+    background-image: asset-url("bkg.jpg");
     background-size: 100% auto;
     background-attachment: fixed;
 }
+
 
 .navbar-brand {
   // Vertically center the text given $navbarHeight
   @elementHeight: 20px;
   padding: 5px 20px 5px;
   font-size: 20px;
-  line-height: 1.1;
+  line-height: 1;
+}
+
+.navbar-default {
+    background-color: #428BCA;
+    border-color: #E7E7E7;
+    text-align: center;
+    border-radius: 0px;
+}
+
+.navbar-text {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 24px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #FFFFFF;
+}
+
+div.row {
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+input[type=text]{
+  border-radius:5px;
+  border: 1px solid;
+}
+
+.slider-track {
+  border-radius:5px;
+  border: 1px solid;
+}
+
+.row + .row {
+  border-top:0;
+}
+
+n1 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 24px;
+}
+
+n2 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 18px;
+}
+
+nd1 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 18px;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+
+
+.container-gal {
+  text-align: center;
+  img { border-radius: 6px; }
+}
+
+
+
+.thumbnails {
+  display: inline-block;
+  border: 1px solid;
+  padding-top: 8px;
+  margin: auto;
+}
+
+
+
+
+
+.pad {
+  padding-top: 2px;
+}
+
+w1 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 48px;
+}
+
+w2 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 36px;
+}
+
+w3 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 24px;
+}
+
+w4 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 18px;
+}
+
+
+
+.pag-wrap {
+  text-align: center;
 }

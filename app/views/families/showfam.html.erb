@@ -1,6 +1,19 @@
 
+<% @v = 1 %>
+<%= @fam.tagline %>
+<% 20.times do %>
+  <% if ((@rated * 4).to_i) == @v %>
+    <% @c = ' checked="checked"' %>
+  <% end %>
 
-<%= @fam.tagline %><br>
+  <input class="star" type="radio" name="famrating" value=<%= @v %> disabled="disabled"<%= @c %>/>
+  <% @v += 1 %>
+  <% @c = nil %>
+<% end %>
+
+
+
+<br>
 
   <% if @fam.interesteds.include?(@current_user) %>
 
@@ -53,22 +66,21 @@
     </div>
   </div>
 </div>
+<div class="container-gal">
+  <div class="main-image">
+    <img src="<%= @fam.housepic %>" alt="Placeholder" height="400" class="house-main">
+  </div>
 
-
-<div class="main-image">
-  <img src="<%= @fam.housepic %>" alt="Placeholder" height="400" class="custom">
-</div>
-
-
-<div class="thumbnails">
-
-<% @fam_attachments.each do |pichold| %>
-
-  <a href="<%= pichold.image %>">
-    <%= image_tag("#{pichold.image}", height: '60', alt: "Thumbnails") %>
-  </a>
-
-<% end %>
+  <div class="thumbnails">
+    <a href="<%= @fam.housepic %>">
+      <%= image_tag("#{@fam.housepic.smthumb}", alt: "Thumbnails") %>
+    </a>
+  <% @fam_attachments.each do |pichold| %>
+    <a href="<%= pichold.image %>">
+      <%= image_tag("#{pichold.image.smthumb}", alt: "Thumbnails") %>
+    </a>
+  <% end %>
+  </div>
 </div>
 <br><br>
 
@@ -151,6 +163,31 @@
         Age: <%= trav.age %><br>
         <%= image_tag("#{trav.pic}", width: '300') %><br><br>
         <%= trav.tagline %><br><br>
+        <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-default" %>
+
+      </div>
+
+
+
+
+
+
+    <% end %>
+  </div>
+</div>
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <h3>Previously hosted:</h3><br><br>
+    <% @hosteds.each do |trav| %>
+
+      <div class="col-md-3">
+        Age: <%= trav.age %><br>
+        <%= image_tag("#{trav.pic}", width: '300') %><br><br>
+        <%= trav.connections.find_by(family_id: @fam.id).hostreview %><br><br>
+        Host rating: <%= trav.connections.find_by(family_id: @fam.id).hoststars %>/5<br><br>
         <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-default" %>
 
       </div>

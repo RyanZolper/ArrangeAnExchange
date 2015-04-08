@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     @fam = Family.find(params[:fam_id])
     @content = params[:content]
     UserMailer.connect_email(@user, @fam, @content).deliver_later
-    redirect_to :back, alert: "Message Sent!"
+    redirect_to :back, notice: "Message Sent!"
   end
 
 
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
-      redirect_to families_home_path, alert: "Login Success!"
+      redirect_to families_home_path, notice: "Login Success!"
       session[:current_user_id] = @user.id
     else redirect_to :back, alert: "Try Again"
     end
@@ -89,7 +89,7 @@ class UsersController < ApplicationController
 
   def logout
     session.delete :current_user_id
-    redirect_to root_path
+    redirect_to root_path, notice: "Logged Out"
   end
 
   def account

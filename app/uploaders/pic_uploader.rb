@@ -1,6 +1,15 @@
 # encoding: utf-8
 
 class PicUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick
+
+  version :bigthumb do
+    process resize_to_fit: [500,nil]
+  end
+
+  version :smthumb do
+    process resize_to_fit: [nil,60]
+  end
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

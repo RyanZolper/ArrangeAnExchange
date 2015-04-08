@@ -8,13 +8,13 @@
       <% x += 1 %>
       <% y += 1 %>
       <div class="row">
-        <div class="col-md-3"><%= image_tag("#{family.housepic}", width: '100%' ) %></div>
+        <div class="col-md-3"><%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", width: '100%' ) %></div>
         <div class="col-md-9">
 
           <% if @current_user != nil %>
-            <h3><%= link_to(family.tagline, showfam_path(family))  %></h3>
+            <w2><%= link_to(family.tagline, showfam_path(family))  %></w2>
           <% else %>
-            <h3><%= link_to family.tagline, "#", data: {toggle: "modal", target: "#myModal#{y}"} %></h3>
+            <w2><%= link_to family.tagline, "#", data: {toggle: "modal", target: "#myModal#{y}"} %></w2>
           <% end %>
 
           <br>
@@ -31,14 +31,14 @@
 
               <%= form_tag users_unsavefam_path do %>
                 <%= hidden_field_tag(:family_id, family.id) %>
-                <%= submit_tag("Unsave") %>
+                <%= submit_tag("Unsave", class: "btn btn-primary btn-sm") %>
               <% end %>
 
               <% else %>
 
                 <%= form_tag users_savefam_path do %>
                   <%= hidden_field_tag(:family_id, family.id) %>
-                  <%= submit_tag("Save") %>
+                  <%= submit_tag("Save", class: "btn btn-primary btn-sm") %>
                 <% end %>
 
               <% end %>
@@ -117,6 +117,11 @@
           </div>
         </div>
 
-      </div><br>
+      </div>
     <% end %>
+
+
+</div>
+<div class="pag-wrap">
+  <%= paginate @fams %>
 </div>
