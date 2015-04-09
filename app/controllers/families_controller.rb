@@ -1,6 +1,9 @@
 class FamiliesController < ApplicationController
 
   def home
+    @random = Faker::Number.number(10)
+    @temp = @random
+    @user = User.new
     if @current_user != nil
       @famils = Family.where.not(id: @current_user.family_id)
     else
@@ -18,7 +21,8 @@ class FamiliesController < ApplicationController
     @fam = Family.find(params[:id])
     @fam_attachments = @fam.fam_attachments.all
     @hosteds = @fam.hosteds.all
-    @rated = @hosteds.average(:hoststars).to_f
+    @rate20 = ((@hosteds.average(:hoststars).to_f) * 4).to_i
+    @rate5 = (@rate20.to_f / 4)
   end
 
   def myfam

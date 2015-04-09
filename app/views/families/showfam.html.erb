@@ -1,8 +1,11 @@
 
 <% @v = 1 %>
-<%= @fam.tagline %>
+<div class="center">
+<w2><%= @fam.tagline %></w2>
+<br>
+<div class="stars">
 <% 20.times do %>
-  <% if ((@rated * 4).to_i) == @v %>
+  <% if @rate20 == @v %>
     <% @c = ' checked="checked"' %>
   <% end %>
 
@@ -12,6 +15,9 @@
 <% end %>
 
 
+</div>
+<br>
+<w3>Host Rating: <%= @rate5 %>/5 (<%= @hosteds.count %> reviews)</w3>
 
 <br>
 
@@ -34,7 +40,7 @@
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
   Connect!
 </button>
-
+</div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -82,25 +88,37 @@
   <% end %>
   </div>
 </div>
-<br><br>
+<br>
 
-<h2>Our family is located in <%= @fam.city %>, <%= @fam.country %>.</h2>
-<br><br>
-<h2>About staying here:</h2><br><br>
+<div class="container-fluid">
 
-  <h3>Our family:</h3><br><br>
+  <div class="center">
+    <w2>Our family is located in <%= @fam.city %>, <%= @fam.country %>.</w2>
 
-    <%= @fam.bio %>
+    <br><br>
 
-    <h3>Our home:</h3><br><br>
+    <w1>About staying here</w1>
+  </div>
 
-    <h4>General info:</h4><br><br>
+  <div class="row">
+    <div class="center">
+      <w2>Our Family</w2><br><br>
+    </div>
 
-      <%= @fam.beds %> beds
-      <%= @fam.baths %> baths
+    <w3><%= @fam.bio %></w3>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="center"><w2>Our Home</w2><br><br></div>
+
+    <w2>General info:</w2><br><br>
       <%= @fam.size %> family members<br><br>
+      <%= @fam.beds %> beds,
+      <%= @fam.baths %> baths
+      <br><br>
 
-      <h4>Smokers?</h4><br><br>
+      <w3>Smokers?</w3><br><br>
 
       <% if @fam.smokers == true %>
         Yes
@@ -108,9 +126,9 @@
         No
       <% end %>
       <br><br>
-      <h4>Traveler Privacy:</h4><br><br>
+      <w2>Traveler Privacy:</w2><br><br>
 
-      <h4>Private bedroom?</h4><br><br>
+      <w3>Private bedroom?</w3><br><br>
 
       <% if @fam.pvtbed == true %>
         Yes!
@@ -118,7 +136,7 @@
         No
       <% end %>
       <br><br>
-      <h4>Private bathroom?</h4><br><br>
+      <w3>Private bathroom?</w3><br><br>
 
       <% if @fam.pvtbath = true %>
         Yes!
@@ -126,13 +144,15 @@
         No
       <% end %>
       <br><br>
-    <h4>Special features:</h4><br><br>
+    <w2>Special features:</w2><br><br>
 
       <% @fam.features.each do |f| %>
         <%= f.upcase %>!<br>
       <% end %>
       <br><br>
-  <h3>Our area:</h3><br><br>
+    </div>
+    <div class="col-md-6">
+  <div class="center"><w2>Our Area</w2></div><br><br>
 
     <h4>About life here:</h4><br><br>
 
@@ -145,18 +165,19 @@
       <h4>Local environment:</h4><br><br>
 
       <%= @fam.env %><br><br>
+    </div>
+  </div>
+
+</div>
 
 
 
 
-
-
-
-<br>
 <div class="container-fluid">
 
-  <h3>This family's travelers:</h3><br><br>
   <div class="row">
+    <div class="center"><w2>This family's travelers</w2><br></div>
+
     <% @fam.travelers.each do |trav| %>
 
       <div class="col-md-3">
@@ -181,19 +202,35 @@
   <div class="row">
 
     <h3>Previously hosted:</h3><br><br>
+    <% @x = 1 %>
     <% @hosteds.each do |trav| %>
-
+    <% @v = 1 %>
       <div class="col-md-3">
         Age: <%= trav.age %><br>
         <%= image_tag("#{trav.pic}", width: '300') %><br><br>
         <%= trav.connections.find_by(family_id: @fam.id).hostreview %><br><br>
-        Host rating: <%= trav.connections.find_by(family_id: @fam.id).hoststars %>/5<br><br>
+        Host rating:<br><br>
+
+        <div class="stars">
+        <% 20.times do %>
+          <% if ((trav.connections.find_by(family_id: @fam.id).hoststars) * 4) == @v %>
+            <% @c = ' checked="checked"' %>
+          <% end %>
+
+          <input class="star" type="radio" name="famrating<%= @x %>" value=<%= @v %> disabled="disabled"<%= @c %>/>
+          <% @v += 1 %>
+          <% @c = nil %>
+        <% end %>
+      </div>
+
+        <br><br>
         <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-default" %>
 
       </div>
 
 
 
+      <% @x += 1 %>
 
 
 

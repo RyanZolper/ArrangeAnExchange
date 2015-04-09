@@ -17,8 +17,10 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "families";
 @import "users";
 @import "bootstrap-slider";
+
 
 .alert alert-success alert-dismissable {
   padding-bottom:0px;
@@ -30,10 +32,37 @@
 
 
 
+
 body {
-    background-image: asset-url("bkg.jpg");
-    background-size: 100% auto;
-    background-attachment: fixed;
+  background-color: #FFC9A6;
+}
+
+#loginModal {
+  text-align: center;
+  .modal-dialog {
+    width: 50%;
+    margin: auto;
+  }
+}
+
+#signupModal {
+  text-align: center;
+  .modal-dialog {
+    width: 50%;
+  }
+}
+
+#nouserModal {
+  .row {
+    border: none;
+    .col-md-6 {
+      height: 380px;
+      .btn {
+        margin-bottom: 0;
+        margin-top: auto;
+      }
+    }
+  }
 }
 
 
@@ -52,31 +81,46 @@ body {
     border-radius: 0px;
 }
 
+.navbar-fixed-top {
+}
+
 .navbar-text {
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-size: 24px;
   margin-top: 10px;
   margin-bottom: 5px;
-  color: #FFFFFF;
+  color: white;
 }
 
 .navbar-default .navbar-nav > li > a {
   color: #FFFFFF;
 }
 
-div.row {
+.row {
   border-top: 2px solid;
   border-bottom: 2px solid;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  .row {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top: 0;
+    border-bottom: 0;
+  }
 }
+
 
 input[type=text]{
   border-radius:5px;
   border: 1px solid;
 }
+
+.form-control {
+  border: 1px solid;
+}
+
 
 .slider-track {
   border-radius:5px;
@@ -90,6 +134,7 @@ input[type=text]{
 n1 {
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-size: 24px;
+  color: white;
 }
 
 n2 {
@@ -104,6 +149,13 @@ nd1 {
   padding-right: 9px;
 }
 
+nl {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 18px;
+  color: #428BCA;
+  font-weight: bold;
+}
+
 
 
 .container-gal {
@@ -115,13 +167,24 @@ nd1 {
 
 .thumbnails {
   display: inline-block;
-  border: 1px solid;
   padding-top: 8px;
   margin: auto;
 }
 
+.stars {
+  display: inline-block;
+  margin: auto;
+}
 
+#thumb-lg {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 
+#connect {
+  bottom: 0;
+  right: 0;
+}
 
 
 .pad {
@@ -150,6 +213,6 @@ w4 {
 
 
 
-.pag-wrap {
+.center {
   text-align: center;
 }

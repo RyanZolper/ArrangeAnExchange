@@ -1,0 +1,17 @@
+<% @saved = @current_user.saves.where(id: @fam.id) %>
+
+<% if @saved.exists? %>
+
+<%= form_tag '/users/unsavefam', remote: true do %>
+  <%= hidden_field_tag(:family_id, @fam.id) %>
+  <%= submit_tag("Unsave", class: "btn btn-primary btn-lg btn-block") %>
+<% end %>
+
+<% else %>
+
+  <%= form_tag '/users/savefam', remote: true do %>
+    <%= hidden_field_tag(:family_id, @fam.id) %>
+    <%= submit_tag("Save", class: "btn btn-primary btn-lg btn-block") %>
+  <% end %>
+
+<% end %>

@@ -3,9 +3,21 @@
 <head>
   <title>TIYdemo</title>
   <%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+
+<% @acts = ['setup', 'logout', 'welcome'] %>
+
+<% if @acts.include?(action_name) %>
+<% else %>
+  <style>
+  body { padding-top:64px; }
+  </style>
+<% end %>
+
+
+
 </head>
 <body>
   <% if notice != nil %>
@@ -31,7 +43,7 @@
 
   <% if @current_user == nil %>
 
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -61,8 +73,12 @@
               <% end %>
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/users/loginpage"><n2>Login</n2></a></li>
-              <li><a href="/users/signup"><n2>Sign Up!</n2></a></li>
+              <li><button type="button" class="btn btn-link" id="login" data-toggle="modal" data-target="#loginModal">
+                <n1>Login</n1>
+              </button></li>
+              <li><button type="button" class="btn btn-link" id="signup" data-toggle="modal" data-target="#signupModal">
+                <n1>Sign Up!</n1>
+              </button></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -71,7 +87,7 @@
   <% else %>
 
 
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -91,11 +107,11 @@
             <div class="navbar-form">
               <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
 
-              <n1><%= label_tag(:q, "Where do you want to go?") %></n1>
+              <n1><%= label_tag(:q, "Where do you want to go?", style: 'color:white') %></n1>
                 <%= text_field_tag(:q, nil, id: "country-input") %>
                 &nbsp;&nbsp;
 
-                <n1><%= label_tag(:s, "How old are you?") %>&nbsp;&nbsp;</n1>
+                <n1><%= label_tag(:s, "How old are you?", style: 'color:white') %>&nbsp;&nbsp;</n1>
                 <%= select_tag :s, options_for_select(13..28) %>
                 &nbsp;&nbsp;
                 <%= submit_tag("Search", class: "btn btn-default") %>
@@ -121,6 +137,85 @@
 
   <% end %>
 <% end %>
+
+<div class="container-fluid">
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Log In!</h4>
+        </div>
+        <div class="modal-body">
+
+          <%= form_for @user, url: {controller: "users", action: "login"} do |f| %>
+            <div class="field">
+              <%= f.label :email %><br>
+              <%= f.search_field :email, class: "form-control" %>
+            </div>
+            <div class="field">
+              <%= f.label :password %><br>
+              <%= f.password_field :password, class: "form-control" %>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="actions">
+            <%= f.submit "Login", class: "btn btn-primary btn-lg btn-block" %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <w1 class="modal-title" id="myModalLabel">Sign Up!</w1>
+        </div>
+        <div class="modal-body">
+
+          <w2>Join Now To Start Your Adventure!</w2><br><br>
+
+          <%= form_for @user, url: {controller: "users", action: "create"} do |f| %>
+
+            <div class="field">
+              <w3><%= f.label :name %></w3><br>
+              <%= f.text_field :name, class: "form-control" %>
+            </div><br>
+
+            <div class="field">
+              <w3><%= f.label "Country of Residence" %></w3><br>
+              <%= f.text_field :country, class: "form-control" %>
+            </div><br>
+
+            <div class="field">
+              <w3><%= f.label :email %></w3><br>
+              <%= f.text_field :email, class: "form-control" %>
+            </div><br><br>
+
+
+            <%= hidden_field_tag(:temp, @temp) %>
+
+        </div>
+        <div class="modal-footer">
+          <div class="actions">
+            <%= f.submit "Sign Up!", class: "btn btn-primary btn-lg btn-block" %>
+            <%= f.hidden_field(:password, :value => @temp ) %>
+            <%= f.hidden_field(:password_confirmation, :value => @temp ) %>
+          </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <%= yield %>
@@ -154,6 +249,7 @@ var countries =
   <%= javascript_include_tag "autocomp.js" %>
   <%= javascript_include_tag "jquery.simpleGal" %>
   <%= javascript_include_tag "jquery.rating.js" %>
+  <%= javascript_include_tag "centermodals.js" %>
   <%= stylesheet_link_tag "jquery.rating.css" %>
 
 <script>
@@ -194,18 +290,13 @@ $(document).ready(function () {
 $('#famrating').rating('readOnly')
 </script>
 
-
-
-
-<!--
 <script>
-$(document).ready(function(){
-  $("#ref_butn").click(function(){
- location.reload();
-  });
-});
-
-
+$('#famrating1').rating('readOnly')
 </script>
--->
+
+<script>
+$('#famrating2').rating('readOnly')
+</script>
+
+
 </html>

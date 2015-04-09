@@ -1,9 +1,15 @@
 class UsersController < ApplicationController
-
+  skip_before_filter :verify_authenticity_token
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+  end
+
+  def welcome
+    @user= User.new
+    @random = Faker::Number.number(10)
+    @temp = @random
   end
 
   # GET /users/1
@@ -38,15 +44,19 @@ class UsersController < ApplicationController
 
 
   def savefam
-    @newfav = Family.find(params[:family_id])
-    @current_user.saves << @newfav
-    redirect_to :back
+    @fam = Family.find(params[:family_id])
+    @current_user.saves << @fam
+    respond_to do |format|
+      format.js
+    end
   end
 
   def unsavefam
     @fam = @current_user.saves.find(params[:family_id])
     @current_user.saves.delete(@fam)
-    redirect_to :back
+    respond_to do |format|
+      format.js
+    end
   end
 
   def connect

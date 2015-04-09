@@ -8,42 +8,39 @@
       <% x += 1 %>
       <% y += 1 %>
       <div class="row">
-        <div class="col-md-3"><%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", width: '100%' ) %></div>
-        <div class="col-md-9">
 
+        <div class="col-md-2" style="height:100%">
+          <div class="row" style="height:100%">
+            <div class="col-md-12" style="height:100%">
+          <%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", id: "thumb-lg", width: '100%' ) %>
+            </div>
+          </div>
+        </div
+        <div class="col-md-10">
           <% if @current_user != nil %>
-            <w2><%= link_to(family.tagline, showfam_path(family))  %></w2>
+            <w2><%= link_to(family.tagline, showfam_path(family), style: "color:#428BCA;weight:bold;")  %></w2>
           <% else %>
-            <w2><%= link_to family.tagline, "#", data: {toggle: "modal", target: "#myModal#{y}"} %></w2>
+            <w2><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></w2>
           <% end %>
+          <div class="row" style="width:80%;margin-right:0px;margin-left:auto;">
+          <div class="col-md-8">
+            <w3><%= family.city %>,
+            <%= family.country %><br>
+            <%= family.size %> family members<br>
+            <%= family.beds %> beds,
+            <%= family.baths %> baths</w3>
+          </div>
 
-          <br>
-          <%= family.city %>,
-          <%= family.country %>
-
-          <div class="right-align">
+        <div class="col-md-4">
 
             <% if @current_user != nil %>
+            <% @fam = family %>
 
-              <% @saved = @current_user.saves.where(id: family.id) %>
-
-              <% if @saved.exists? %>
-
-              <%= form_tag users_unsavefam_path do %>
-                <%= hidden_field_tag(:family_id, family.id) %>
-                <%= submit_tag("Unsave", class: "btn btn-primary btn-sm") %>
-              <% end %>
-
-              <% else %>
-
-                <%= form_tag users_savefam_path do %>
-                  <%= hidden_field_tag(:family_id, family.id) %>
-                  <%= submit_tag("Save", class: "btn btn-primary btn-sm") %>
-                <% end %>
-
-              <% end %>
-
-              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<%= x %>">
+            <div id="save_unsave<%= @fam.id %>">
+              <%= render 'save_unsave' %>
+            </div>
+            <br>
+              <button type="button" class="btn btn-primary btn-lg btn-block" id="connect" data-toggle="modal" data-target="#myModal<%= x %>">
                 Connect!
               </button>
 
@@ -81,47 +78,95 @@
 
             <% else %>
 
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<%= y %>">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#nouserModal">
               Save
-            </button>
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<%= y %>">
+            </button><br>
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#nouserModal">
               Connect!
             </button>
-
-
-            <div class="modal fade" id="myModal<%= y %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Please Log In or Sign Up for "View", "Save" and "Connect" features</h4>
-                  </div>
-                  <div class="modal-body">
-                    <a class="btn btn-primary btn-lg btn-block" href="/users/loginpage" role="button">Log In</a><br><br>
-                    <a class="btn btn-primary btn-lg btn-block" href="/users/signup" role="button">Sign Up!</a>
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
 
             <% end %>
 
 
-
+          </div>
           </div>
         </div>
-
       </div>
     <% end %>
 
+    <div class="modal fade" id="nouserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header" style="text-align:center">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <w3 class="modal-title" id="myModalLabel">Please Log In or Sign Up for "View", "Save" and "Connect" features</w3>
+          </div>
+          <div class="modal-body">
+            <div class="row" style="text-align:center">
+              <div class="col-md-6" style="border-right:2px;">
+                <w3>Join Now To Start Your Adventure!</w3><br><br>
+
+                <%= form_for @user, url: {controller: "users", action: "create"} do |f| %>
+
+                  <div class="field">
+                    <w3><%= f.label :name %></w3><br>
+                    <%= f.text_field :name, class: "form-control" %>
+                  </div><br>
+
+                  <div class="field">
+                    <w3><%= f.label "Country of Residence" %></w3><br>
+                    <%= f.text_field :country, class: "form-control" %>
+                  </div><br>
+
+                  <div class="field">
+                    <w3><%= f.label :email %></w3><br>
+                    <%= f.text_field :email, class: "form-control" %>
+                  </div><br><br>
+
+                  <div class="actions">
+                    <%= f.submit "Sign Up!", class: "btn btn-primary btn-lg btn-block" %>
+                    <%= f.hidden_field(:password, :value => @temp ) %>
+                    <%= f.hidden_field(:password_confirmation, :value => @temp ) %>
+                  </div>
+
+                  <%= hidden_field_tag(:temp, @temp) %>
+
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <w3>Please Log In to Continue</w3>
+                <br><br><br><br>
+                <%= form_for @user, url: {controller: "users", action: "login"} do |f| %>
+
+                  <div class="field">
+                    <w3><%= f.label :email %></w3><br>
+                    <%= f.search_field :email, class: "form-control" %>
+                  </div><br><br>
+
+                  <div class="field">
+                    <w3><%= f.label :password %></w3><br>
+                    <%= f.password_field :password, class: "form-control" %>
+                  </div><br><br><br>
+
+                  <div class="actions" style="margin-bottom:0;margin-top:auto;">
+                    <%= f.submit "Login", class: "btn btn-primary btn-lg btn-block" %>
+                  </div>
+
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
 </div>
-<div class="pag-wrap">
+<div class="center">
   <%= paginate @fams %>
 </div>
