@@ -59,6 +59,7 @@ class UsersController < ApplicationController
     @current_user.saves.delete(@fam)
     respond_to do |format|
       format.js
+      format.html { redirect_to :back }
     end
   end
 

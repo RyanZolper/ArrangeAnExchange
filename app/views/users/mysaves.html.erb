@@ -30,8 +30,8 @@
           <% else %>
             <w2><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></w2>
           <% end %>
-          <div class="row">
-            <div class="col-md-3">
+          <div class="row"><br>
+            <div class="col-md-4">
               <w3><%= family.city %>,
               <%= family.country %><br>
               <%= family.size %> family members<br>
@@ -39,7 +39,7 @@
               <%= family.baths %> baths</w3>
             </div>
 
-            <div class="col-md-5" style="text-align:center;">
+            <div class="col-md-4" style="text-align:center;">
               <div class="stars">
               <% @v = 1 %>
               <% @rate20 = (((family.hosteds.average(:hoststars).to_f) * 4).to_i) %>
@@ -76,7 +76,6 @@
 
 
 
-      </div>
 
       <div class="modal fade" id="myModal<%= x %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div style="text-align:center;" class="modal-dialog modal-lg">
@@ -121,9 +120,9 @@
 
               <%= form_tag users_host_review_path do %>
 
-                <w3 style="text-align:center;">Who traveled here?</w3>
+                <w3 style="text-align:center;">Who traveled here?</w3><br>
 
-                <select name="trav_id" id="trav_id">
+                <w3><select name="trav_id" id="trav_id"></w3>
                 <div class="row">
                   <% @current_user.travelers.each do |t| %>
                     <div style="display:inline-block; text-align:center;">
@@ -134,8 +133,8 @@
                   <% end %>
                 </select>
                 </div>
-
-                <div class="stars">
+                <div style="text-align:center;width:30%;margin:auto;display:block;">
+                <div class="stars" style="width:100%;margin:auto;padding:0px;">
                 <% @v = 1 %>
                 <% @rate20 = (((family.hosteds.average(:hoststars).to_f) * 4).to_i) %>
                 <% 20.times do %>
@@ -143,7 +142,13 @@
                       <% @c = ' checked="checked"' %>
                     <% end %>
 
-                    <input class="hover-star<%= @z %>" type="radio" name="ratefam" value=<%= @v %> title="<%= ((@v) / 4.0 ) %>"<%= @c %>/>
+                    <% if (((@v) / 4.0 ) % 1) == 0 %>
+                      <% @t = (((@v) / 4.0 ).to_i) %>
+                    <% else %>
+                      <% @t = ((@v) / 4.0 ) %>
+                    <% end %>
+
+                    <input class="hover-star<%= @z %>" type="radio" name="ratefam" value=<%= @v %> title="<%= @t %>"<%= @c %>/>
                     <% @v += 1 %>
                     <% @c = nil %>
                   <% end %>
@@ -151,12 +156,13 @@
 
                   <% @v = 0 %>
                 </div><br>
+              </div>
                 <div style="text-align:center;width:100%">
-                  <w3><span id="hover-rate" style="margin:0 0 0 20px;">Select a rating</span> out of 5</w3>
+                  <w3 id="clicked"><span id="hover-rate">Select a rating</span></w3><w3> out of 5</w3>
                 </div>
 
 
-                <w4><textarea rows="10" cols="75" name="review" placeholder="Hint: Be honest :) but host families must approve all reviews and ratings."></textarea></w4>
+                <textarea class="form-control" style="width:95%;margin:auto;" rows="10" cols="75" name="review" placeholder="Hint: Be honest :) but host families must approve all reviews and ratings."></textarea>
                 <%= hidden_field_tag 'user_id', @current_user.id %>
                 <%= hidden_field_tag 'fam_id', family.id %>
                 <br>
@@ -172,6 +178,7 @@
 
     <% end %>
 
+  </div>
 
 
 </div>

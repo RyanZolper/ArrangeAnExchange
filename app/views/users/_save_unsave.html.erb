@@ -2,10 +2,21 @@
 
 <% if @saved.exists? %>
 
-<%= form_tag '/users/unsavefam', remote: true do %>
-  <%= hidden_field_tag(:family_id, @fam.id) %>
-  <%= submit_tag("Unsave", class: "btn btn-primary btn-lg btn-block") %>
-<% end %>
+  <% if current_page?(action: 'mysaves') %>
+
+    <%= form_tag '/users/unsavefam' do %>
+      <%= hidden_field_tag(:family_id, @fam.id) %>
+      <%= submit_tag("Unsave", class: "btn btn-primary btn-lg btn-block") %>
+    <% end %>
+
+  <% else %>
+
+    <%= form_tag '/users/unsavefam', remote: true do %>
+      <%= hidden_field_tag(:family_id, @fam.id) %>
+      <%= submit_tag("Unsave", class: "btn btn-primary btn-lg btn-block") %>
+    <% end %>
+
+  <% end %>
 
 <% else %>
 

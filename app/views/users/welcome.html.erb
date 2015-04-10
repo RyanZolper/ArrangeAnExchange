@@ -5,7 +5,7 @@
 
       <w1><%= label_tag(:q, "Where do you want to go?") %></w1><br>
       <%= text_field_tag(:q, nil, {id: "country-input", size: "42"}) %><br><br>
-      <w2><%= label_tag(:s, "How old are you?") %></w2><w3><br><div id="ageSliderVal">18</div> years old<br></w3>
+      <w2><%= label_tag(:s, "How old are you?") %></w2><w2><br><span id="ageSliderVal">18</span> years old<br></w2>
       <w4>13</w4> <%= text_field_tag(:s, 18, {id: 'age', type: 'text',
                        data: {'slider-id' => 'ageSlider',
                               'slider-min' => '13',
