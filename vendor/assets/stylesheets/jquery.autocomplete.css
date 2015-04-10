@@ -13,6 +13,8 @@ text-transform: none;
 text-indent: 0px;
 text-shadow: none;
 text-align: start;
+font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+font-size: 18px;
 }
 
 .xdsoft_autocomplete .xdsoft_input{

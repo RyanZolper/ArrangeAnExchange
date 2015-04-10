@@ -23,12 +23,30 @@
             <w2><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></w2>
           <% end %>
           <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-3">
             <w3><%= family.city %>,
             <%= family.country %><br>
             <%= family.size %> family members<br>
             <%= family.beds %> beds,
             <%= family.baths %> baths</w3>
+          </div>
+
+          <div class="col-md-5" style="text-align:center;">
+            <div class="stars">
+            <% @v = 1 %>
+            <% @rate20 = (((family.hosteds.average(:hoststars).to_f) * 4).to_i) %>
+            <% 20.times do %>
+                <% if @rate20 == @v %>
+                  <% @c = ' checked="checked"' %>
+                <% end %>
+
+                <input class="star" type="radio" name="famrating<%= x %>" value=<%= @v %> disabled="disabled"<%= @c %>/>
+                <% @v += 1 %>
+                <% @c = nil %>
+              <% end %>
+              <% @v = 0 %>
+            </div><br>
+            <w3>Host Rating: <%= (family.hosteds.average(:hoststars).to_f) %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
           </div>
 
         <div class="col-md-4">
@@ -45,16 +63,16 @@
               </button>
 
               <div class="modal fade" id="myModal<%= x %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div style="text-align:center;" class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">Connect with this family from <%= family.country %>!</h4>
+                      <w2 class="modal-title" id="myModalLabel">Connect with this family in <%= family.country %>!</w2>
                     </div>
                     <div class="modal-body">
-                      This family will receive an email from you that looks like this:<br><br>
+                      <w3>This family will receive an email from you that looks like this:</w3><br><br>
 
-                      Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
+                      <w4>Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
 
                       The body of the email will be whatever you enter below!<br>
 
@@ -62,15 +80,14 @@
 
                       <%= form_tag users_connect_path do %>
                         <textarea rows="10" cols="75" name="content" placeholder="Hint: Friendlyness of connection email and connection success are directly correlated!"></textarea>
-                        <%= hidden_field_tag 'user_id', @current_user.id %>
+                      </w4><%= hidden_field_tag 'user_id', @current_user.id %>
                         <%= hidden_field_tag 'fam_id', family.id %>
                         <br>
-                        <%= submit_tag 'Send!', {class: "btn btn-primary btn-block btn-lg", style: "font-size:30px;"} %>
+                        <div style="width:70%;margin:auto;">
+                          <%= submit_tag 'Send!', {class: "btn btn-primary btn-block btn-lg", style: "font-size:30px;"} %>
+                        </div>
                       <% end %>
 
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>

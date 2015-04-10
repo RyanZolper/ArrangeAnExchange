@@ -1,19 +1,25 @@
-Enter your new password below:
+<div class="setup" style="width:50%;">
 
-<%= form_for @user, url: {action: "changepwd"} do |f| %>
+
+<w2>Enter your new password below</w2>
+
+<w3>
+  <%= form_for @user, url: {action: "changepwd"} do |f| %>
 
   <div class="field">
     <%= f.label :password %><br>
     <%= f.password_field :password %>
-  </div>
+  </div><br>
 
   <div class="field">
     <%= f.label :confirm %><br>
     <%= f.password_field :password_confirmation %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Change Password" %>
-  </div>
-
+<br>
+<div class="actions" style="width:40%;margin:auto;">
+  <%= f.submit "Change Password", class: "btn btn-primary btn-lg btn-block" %>
+</div>
+</w3>
 <% end %>
+
+</div>

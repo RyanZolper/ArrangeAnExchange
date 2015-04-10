@@ -22,12 +22,24 @@
 @import "bootstrap-slider";
 
 
-.alert alert-success alert-dismissable {
-  padding-bottom:0px;
+.alert {
+  margin-top:0;
+  margin-bottom:0;
+  padding-bottom:5px;
+  padding-top:5px;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 24px;
+  text-align: center;
 }
 
-.alert alert-danger alert-dismissable {
-  padding-bottom:0px;
+.alert {
+  margin-top:0;
+  margin-bottom:0;
+  padding-bottom:5px;
+  padding-top:5px;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 24px;
+  text-align: center;
 }
 
 
@@ -189,6 +201,11 @@ nl {
 .stars {
   display: inline-block;
   margin: auto;
+}
+
+
+.stars2 {
+  display: inline-block;
 }
 
 #thumb-lg {

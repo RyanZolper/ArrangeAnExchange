@@ -16,4 +16,14 @@ class UserMailer < ApplicationMailer
     mail(to: @to.email, subject: "#{@user.name} from #{@user.country} wishes to connect!", from: user.email)
   end
 
+  def host_review_email(user, trav, fam, review, rating)
+    @user = user
+    @fam = fam
+    @review = review
+    @rating = rating
+    @to = @fam.users.first
+    @trav = trav
+    mail(to: @to.email, subject: "#{@trav.name} wants to review their stay with you!", from: user.email)
+  end
+
 end

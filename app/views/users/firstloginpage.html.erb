@@ -1,7 +1,7 @@
 <div class="setup" style="width:50%;">
 <w2>Welcome to Arrange an Exchange!</w2>
 <br><br><br>
-<w3>Please enter your email and temporary password<w3><br><br>
+<w3>Please enter your email and temporary password<br><br>
 <%= form_for @user, url: {action: "firstlogin"} do |f| %>
   <div class="field">
     <%= f.label :email %><br>
@@ -14,5 +14,5 @@
   <div class="actions" style="width:40%;margin:auto;">
     <%= f.submit "Log In", class: "btn btn-primary btn-lg btn-block" %>
   </div>
-<% end %>
+<% end %></w3>
 </div>

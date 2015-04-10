@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post 'users/logout'
   post 'users/firstlogin'
   post 'users/connect'
+  post 'users/host_review'
 
   #fams
 

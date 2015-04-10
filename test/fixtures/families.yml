@@ -6,7 +6,6 @@
 #  name       :string
 #  profpic    :string
 #  housepic   :string
-#  bio        :string
 #  tagline    :string
 #  hostdates  :string
 #  pvtbed     :boolean
@@ -14,9 +13,7 @@
 #  beds       :integer
 #  baths      :integer
 #  size       :integer
-#  lifehere   :string
 #  features   :string           default("{}"), is an Array
-#  attracts   :string
 #  country    :string
 #  city       :string
 #  address    :string
@@ -26,6 +23,9 @@
 #  env        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  bio        :text
+#  lifehere   :text
+#  attracts   :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

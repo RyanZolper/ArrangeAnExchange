@@ -1,85 +1,233 @@
-Your Family:
-<br><br>
 
-  <div class="main-image">
-    <img src="<%= @fam.housepic %>" alt="Placeholder" height="400" class="custom">
+<% @v = 1 %>
+<div class="center"><br>
+<w1>Your Family Profile</w1><br>
+<w2><%= @fam.tagline %></w2><br>
+<div class="row" style="width:50%;margin:auto;border:none;">
+  <div class="col-md-4">
+    <div id="save_unsave<%= @fam.id %>">
+      <%= render 'save_unsave' %>
+    </div>
   </div>
+  <div class="col-md-4" style="padding-top:5px;">
+    <div class="stars">
+    <% 20.times do %>
+        <% if @rate20 == @v %>
+          <% @c = ' checked="checked"' %>
+        <% end %>
 
+        <input class="star" type="radio" name="famrating" value=<%= @v %> disabled="disabled"<%= @c %>/>
+        <% @v += 1 %>
+        <% @c = nil %>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="col-md-4">
+    <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#myModal">
+      Connect!
+    </button>
+  </div>
+</div>
+<w3>Host Rating: <%= @rate5 %>/5 (<%= @hosteds.count %> reviews)</w3>
+
+<br>
+
+
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Connect with this family from <%= @fam.country %>!</h4>
+      </div>
+      <div class="modal-body">
+        This family will receive an email from you that looks like this:<br><br>
+
+        Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
+
+        The body of the email will be whatever you enter below!<br>
+
+
+
+        <%= form_tag users_connect_path do %>
+          <textarea rows="10" cols="75" name="content" placeholder="Hint: Friendlyness of connection email and connection success are directly correlated!"></textarea>
+          <%= hidden_field_tag 'user_id', @current_user.id %>
+          <%= hidden_field_tag 'fam_id', @fam.id %>
+          <br>
+          <%= submit_tag 'Send!' %>
+        <% end %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-gal">
+  <div class="main-image">
+    <img src="<%= @fam.housepic %>" alt="Placeholder" height="400" class="house-main">
+  </div>
 
   <div class="thumbnails">
-
-  <% @fam_attachments.each do |pichold| %>
-
-    <a href="<%= pichold.image %>">
-      <%= image_tag("#{pichold.image}", height: '60', alt: "Thumbnails") %>
+    <a href="<%= @fam.housepic %>">
+      <%= image_tag("#{@fam.housepic.smthumb}", alt: "Thumbnails") %>
     </a>
-
+  <% @fam_attachments.each do |pichold| %>
+    <a href="<%= pichold.image %>">
+      <%= image_tag("#{pichold.image.smthumb}", alt: "Thumbnails") %>
+    </a>
   <% end %>
   </div>
-  <br><br>
+</div>
+<br>
 
-  <h2>Our family is located in <%= @fam.city %>, <%= @fam.country %>.</h2>
-  <br><br>
-  <h2>About staying here:</h2><br><br>
+<div class="container-fluid">
 
-    <h3>Our family:</h3><br><br>
+  <div class="center">
+    <w2>Our family is located in <%= @fam.city %>, <%= @fam.country %>.</w2>
 
-      <%= @fam.bio %>
+    <br><br>
 
-      <h3>Our home:</h3><br><br>
+    <w1>About staying here</w1>
+  </div>
 
-      <h4>General info:</h4><br><br>
+  <div class="row">
+    <div class="center">
+      <w2>Our Family</w2><br><br>
+    </div>
 
-        <%= @fam.beds %> beds
-        <%= @fam.baths %> baths
-        <%= @fam.size %> family members<br><br>
+    <w3><%= @fam.bio %></w3>
+  </div>
 
-        <h4>Smokers?</h4><br><br>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="center"><w2>Our Home</w2><br><br></div>
 
-        <% if @fam.smokers == true %>
-          Yes
-        <% else %>
-          No
-        <% end %>
-        <br><br>
-        <h4>Traveler Privacy:</h4><br><br>
+    <w2>General info:</w2><br><br>
+      <%= @fam.size %> family members<br><br>
+      <%= @fam.beds %> beds,
+      <%= @fam.baths %> baths
+      <br><br>
 
-        <h4>Private bedroom?</h4><br><br>
+      <w3>Smokers?</w3><br><br>
 
-        <% if @fam.pvtbed == true %>
-          Yes!
-        <% else %>
-          No
-        <% end %>
-        <br><br>
-        <h4>Private bathroom?</h4><br><br>
+      <% if @fam.smokers == true %>
+        Yes
+      <% else %>
+        No
+      <% end %>
+      <br><br>
+      <w2>Traveler Privacy:</w2><br><br>
 
-        <% if @fam.pvtbath = true %>
-          Yes!
-        <% else %>
-          No
-        <% end %>
-        <br><br>
-      <h4>Special features:</h4><br><br>
+      <w3>Private bedroom?</w3><br><br>
 
-        <% if @fam.features != nil %>
-          <% @fam.features.each do |f| %>
-            <%= f.upcase %>!<br>
+      <% if @fam.pvtbed == true %>
+        Yes!
+      <% else %>
+        No
+      <% end %>
+      <br><br>
+      <w3>Private bathroom?</w3><br><br>
+
+      <% if @fam.pvtbath = true %>
+        Yes!
+      <% else %>
+        No
+      <% end %>
+      <br><br>
+    <w2>Special features:</w2><br><br>
+
+      <% @fam.features.each do |f| %>
+        <%= f.upcase %>!<br>
+      <% end %>
+      <br><br>
+    </div>
+    <div class="col-md-6">
+  <div class="center"><w2>Our Area</w2></div><br><br>
+
+    <h4>About life here:</h4><br><br>
+
+    <%= @fam.lifehere %><br><br>
+
+    <h4>Attractions:</h4><br><br>
+
+      <%= @fam.attracts %><br><br>
+
+      <h4>Local environment:</h4><br><br>
+
+      <%= @fam.env %><br><br>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="center"><w2>This family's travelers</w2><br></div>
+
+    <% @fam.travelers.each do |trav| %>
+
+      <div class="col-md-3">
+        Age: <%= trav.age %><br>
+        <%= image_tag("#{trav.pic}", width: '300') %><br><br>
+        <%= trav.tagline %><br><br>
+        <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-default" %>
+
+      </div>
+
+
+
+
+
+
+    <% end %>
+  </div>
+</div>
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <h3>Previously hosted:</h3><br><br>
+    <% @x = 1 %>
+    <% @hosteds.each do |trav| %>
+    <% @v = 1 %>
+      <div class="col-md-3">
+        Age: <%= trav.age %><br>
+        <%= image_tag("#{trav.pic}", width: '300') %><br><br>
+        <%= trav.connections.find_by(family_id: @fam.id).hostreview %><br><br>
+        Host rating:<br><br>
+
+        <div class="stars">
+        <% 20.times do %>
+          <% if ((trav.connections.find_by(family_id: @fam.id).hoststars) * 4) == @v %>
+            <% @c = ' checked="checked"' %>
           <% end %>
-        <% else %>
-          None added
+
+          <input class="star" type="radio" name="famrating<%= @x %>" value=<%= @v %> disabled="disabled"<%= @c %>/>
+          <% @v += 1 %>
+          <% @c = nil %>
         <% end %>
+      </div>
+
         <br><br>
-    <h3>Our area:</h3><br><br>
+        <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-default" %>
 
-      <h4>About life here:</h4><br><br>
+      </div>
 
-      <%= @fam.lifehere %><br><br>
 
-      <h4>Attractions:</h4><br><br>
 
-        <%= @fam.attracts %><br><br>
+      <% @x += 1 %>
 
-        <h4>Local environment:</h4><br><br>
 
-        <%= @fam.env %><br><br>
+
+    <% end %>
+  </div>
+</div>

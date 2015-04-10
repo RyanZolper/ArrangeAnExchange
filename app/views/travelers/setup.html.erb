@@ -21,8 +21,8 @@
 
     <div class="form-group">
       <w3><%= f.label :age %></w3><br>
-      <%= f.text_field :age %>
-    </div>
+      <w3><%= f.select :age, options_for_select(13..28) %></w3>
+    </div><br>
     <div style="width:200px;margin-left:auto;margin-right:auto;">
     <div class="field">
       <w3><%= f.label :profile_picture %></w3><br>
@@ -36,7 +36,9 @@
 <br>
 <div class="form-group">
   <w3><%= label_tag "Traveler's Bio" %></w3>
-  <textarea style= "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;" class="form-control" rows="10" cols="75" name="bio" placeholder="Write a little bit about yourself! What would you want to know about a child before inviting him/her in your home?"></textarea>
+  <textarea class="form-control" style="text-align:center;font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;" rows="10" cols="75" name="bio" placeholder="Write a little bit about yourself or your child.
+
+    What would you want to know about a child before inviting him/her into your home?"></textarea></w3>
 </div>
 
 <div class="actions">

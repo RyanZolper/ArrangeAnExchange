@@ -18,7 +18,10 @@ class UsersController < ApplicationController
   end
 
   def mysaves
-    @fams = @current_user.saves
+    @user= User.new
+    @random = Faker::Number.number(10)
+    @temp = @random
+    @fams = @current_user.saves.order("created_at DESC").page params[:page]
   end
 
   def signup
@@ -65,6 +68,16 @@ class UsersController < ApplicationController
     @content = params[:content]
     UserMailer.connect_email(@user, @fam, @content).deliver_later
     redirect_to :back, notice: "Message Sent!"
+  end
+
+  def host_review
+    @user = User.find(params[:user_id])
+    @fam = Family.find(params[:fam_id])
+    @review = params[:review]
+    @rating = ((params[:ratefam].to_i) / 4.0 )
+    @trav = Traveler.find(params[:trav_id])
+    UserMailer.host_review_email(@user, @trav, @fam, @review, @rating).deliver_later
+    redirect_to :back, notice: "Message Sent"
   end
 
 

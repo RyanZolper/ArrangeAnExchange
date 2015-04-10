@@ -1,4 +1,3 @@
 $(function() {
-  $( "#age" ).slider({
-  });
+  $( "#age" ).slider({})
 });

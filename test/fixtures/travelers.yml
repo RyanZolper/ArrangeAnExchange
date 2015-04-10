@@ -7,13 +7,13 @@
 #  age          :integer
 #  destinations :string           default("{}"), is an Array
 #  trvldates    :string
-#  bio          :string
 #  tagline      :string
 #  pic          :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  family_id    :integer
 #  user_id      :integer
+#  bio          :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

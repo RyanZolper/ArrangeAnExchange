@@ -1,45 +1,38 @@
 
 <% @v = 1 %>
-<div class="center">
-<w2><%= @fam.tagline %></w2>
-<br>
-<div class="stars">
-<% 20.times do %>
-  <% if @rate20 == @v %>
-    <% @c = ' checked="checked"' %>
-  <% end %>
+<div class="center"><br>
+<w2><%= @fam.tagline %></w2><br>
+<div class="row" style="width:50%;margin:auto;border:none;">
+  <div class="col-md-4">
+    <div id="save_unsave<%= @fam.id %>">
+      <%= render 'save_unsave' %>
+    </div>
+  </div>
+  <div class="col-md-4" style="padding-top:5px;">
+    <div class="stars">
+    <% 20.times do %>
+        <% if @rate20 == @v %>
+          <% @c = ' checked="checked"' %>
+        <% end %>
 
-  <input class="star" type="radio" name="famrating" value=<%= @v %> disabled="disabled"<%= @c %>/>
-  <% @v += 1 %>
-  <% @c = nil %>
-<% end %>
+        <input class="star" type="radio" name="famrating" value=<%= @v %> disabled="disabled"<%= @c %>/>
+        <% @v += 1 %>
+        <% @c = nil %>
+      <% end %>
+    </div>
 
-
+  </div>
+  <div class="col-md-4">
+    <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#myModal">
+      Connect!
+    </button>
+  </div>
 </div>
-<br>
 <w3>Host Rating: <%= @rate5 %>/5 (<%= @hosteds.count %> reviews)</w3>
 
 <br>
 
-  <% if @fam.interesteds.include?(@current_user) %>
 
-    <%= form_tag users_unsavefam_path do %>
-      <%= hidden_field_tag(:family_id, @fam.id) %>
-      <%= submit_tag("Unsave") %>
-    <% end %>
-
-  <% else %>
-
-    <%= form_tag users_savefam_path do %>
-      <%= hidden_field_tag(:family_id, @fam.id) %>
-      <%= submit_tag("Save") %>
-    <% end %>
-
-  <% end %>
-
-<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-  Connect!
-</button>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -110,25 +103,25 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="center"><w2>Our Home</w2><br><br></div>
+      <div class="center"><w1>Our Home</w1><br><br>
 
-    <w2>General info:</w2><br><br>
-      <%= @fam.size %> family members<br><br>
+    <w2>General Info</w2><br><br>
+      <w3><%= @fam.size %> family members<br><br>
       <%= @fam.beds %> beds,
-      <%= @fam.baths %> baths
-      <br><br>
+      <%= @fam.baths %> baths</w3>
+      <br><br><br>
 
-      <w3>Smokers?</w3><br><br>
+      <w3>Smokers?
 
       <% if @fam.smokers == true %>
         Yes
       <% else %>
         No
-      <% end %>
+      <% end %></w3>
       <br><br>
-      <w2>Traveler Privacy:</w2><br><br>
+      <w2>Traveler Privacy</w2><br><br>
 
-      <w3>Private bedroom?</w3><br><br>
+      <w3>Private bedroom?<br><br>
 
       <% if @fam.pvtbed == true %>
         Yes!
@@ -136,38 +129,38 @@
         No
       <% end %>
       <br><br>
-      <w3>Private bathroom?</w3><br><br>
+      <w3>Private bathroom?<br><br>
 
       <% if @fam.pvtbath = true %>
         Yes!
       <% else %>
         No
       <% end %>
-      <br><br>
-    <w2>Special features:</w2><br><br>
+    </w3><br><br>
+    <w2>Special Features</w2><br><br>
 
       <% @fam.features.each do |f| %>
         <%= f.upcase %>!<br>
       <% end %>
-      <br><br>
+      <br><br></div>
     </div>
     <div class="col-md-6">
-  <div class="center"><w2>Our Area</w2></div><br><br>
+  <div class="center"><w1>Our Area</w1><br><br>
 
-    <h4>About life here:</h4><br><br>
+    <w2>About Life Here</w2><br><br>
 
-    <%= @fam.lifehere %><br><br>
+    <w3><%= @fam.lifehere %></w3><br><br>
 
-    <h4>Attractions:</h4><br><br>
+    <w2>Attractions</w2><br><br>
 
-      <%= @fam.attracts %><br><br>
+    <w3><%= @fam.attracts %></w3><br><br>
 
-      <h4>Local environment:</h4><br><br>
+      <w2>Local Environment</w2><br><br>
 
-      <%= @fam.env %><br><br>
+      <w3><%= @fam.env %></w3><br><br>
     </div>
   </div>
-
+</div>
 </div>
 
 

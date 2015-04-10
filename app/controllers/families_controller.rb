@@ -28,6 +28,9 @@ class FamiliesController < ApplicationController
   def myfam
     @fam = @current_user.family
     @fam_attachments = @fam.fam_attachments.all
+    @hosteds = @fam.hosteds.all
+    @rate20 = ((@hosteds.average(:hoststars).to_f) * 4).to_i
+    @rate5 = (@rate20.to_f / 4)
   end
 
   def setup

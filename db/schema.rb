@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407155514) do
+ActiveRecord::Schema.define(version: 20150410165332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20150407155514) do
   create_table "connections", force: :cascade do |t|
     t.integer  "family_id"
     t.integer  "traveler_id"
-    t.string   "hostreview"
-    t.string   "travreview"
     t.integer  "hoststars"
     t.integer  "travstars"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.text     "hostreview"
+    t.text     "travreview"
   end
 
   add_index "connections", ["family_id"], name: "index_connections_on_family_id", using: :btree
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20150407155514) do
     t.string   "name"
     t.string   "profpic"
     t.string   "housepic"
-    t.string   "bio"
     t.string   "tagline"
     t.string   "hostdates"
     t.boolean  "pvtbed"
@@ -49,9 +48,7 @@ ActiveRecord::Schema.define(version: 20150407155514) do
     t.integer  "beds"
     t.integer  "baths"
     t.integer  "size"
-    t.string   "lifehere"
     t.string   "features",   default: [],              array: true
-    t.string   "attracts"
     t.string   "country"
     t.string   "city"
     t.string   "address"
@@ -61,6 +58,9 @@ ActiveRecord::Schema.define(version: 20150407155514) do
     t.string   "env"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.text     "bio"
+    t.text     "lifehere"
+    t.text     "attracts"
   end
 
   create_table "save_interest", id: false, force: :cascade do |t|
@@ -73,13 +73,13 @@ ActiveRecord::Schema.define(version: 20150407155514) do
     t.integer  "age"
     t.string   "destinations", default: [],              array: true
     t.string   "trvldates"
-    t.string   "bio"
     t.string   "tagline"
     t.string   "pic"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "family_id"
     t.integer  "user_id"
+    t.text     "bio"
   end
 
   add_index "travelers", ["family_id"], name: "index_travelers_on_family_id", using: :btree
