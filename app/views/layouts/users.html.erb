@@ -13,21 +13,24 @@
     <%= javascript_include_tag "sliderreact.js" %>
     <%= javascript_include_tag "ageslider.js" %>
   <% end %>
+
+  <% if action_name == 'firstloginpage' %>
+    <%= stylesheet_link_tag 'background' %>
+  <% end %>
+
+  <% if action_name == 'check_email' %>
+    <%= stylesheet_link_tag 'background' %>
+  <% end %>
+
+  <% if action_name == 'changepwdpage' %>
+    <%= stylesheet_link_tag 'background' %>
+  <% end %>
+
+
+
 </head>
 <body>
 
-  <% if notice != nil %>
-    <div class="alert alert-success alert-dismissable" id="notice" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <%= notice %>
-    </div>
-  <% end %>
-  <% if alert != nil %>
-    <div class="alert alert-danger alert-dismissable" id="alert" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <%= alert %>
-    </div>
-  <% end %>
 
 
 <% if current_page?(root_url) %>
@@ -95,17 +98,18 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Log In!</h4>
+              <w1 class="modal-title" id="myModalLabel">Welcome back!</w1>
             </div>
             <div class="modal-body">
+              <w2>Log in, and find your perfect host.</w2><br><br>
 
               <%= form_for @user, url: {controller: "users", action: "login"} do |f| %>
                 <div class="field">
-                  <%= f.label :email %><br>
+                  <w3><%= f.label :email %></w3><br>
                   <%= f.search_field :email, class: "form-control" %>
-                </div>
+                </div><br>
                 <div class="field">
-                  <%= f.label :password %><br>
+                  <w3><%= f.label :password %></w3><br>
                   <%= f.password_field :password, class: "form-control" %>
                 </div>
             </div>
@@ -226,6 +230,18 @@
 
 <% end %>
 
+<% if notice != nil %>
+  <div class="alert alert-success alert-dismissable" id="notice" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= notice %>
+  </div>
+<% end %>
+<% if alert != nil %>
+  <div class="alert alert-danger alert-dismissable" id="alert" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= alert %>
+  </div>
+<% end %>
 
 
 

@@ -1,104 +1,156 @@
+<div class="container-fluid">
+<div class="setup">
 
-<h3>Family Setup</h3>
-
+<w2>Family Setup</w2>
 <%= form_for(@fam, {url: {action: "create"}, html: {multipart: "true"}}) do |f| %>
 
-<div class="form-group">
-  <%= f.label :name %><br>
-  <%= f.text_field :name %>
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="form-group">
+      <w3><%= f.label :name %></w3><br>
+      <%= f.text_field :name, placeholder: " The Adams Family " %>
+    </div><br>
+
+    <div style="width:220px;margin-left:auto;margin-right:auto;">
+      <div class="field">
+        <w3><%= f.label :main_house_picture %></w3><br><br>
+        <%= f.file_field :housepic %>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+
+    <%= f.fields_for :fam_attachments do |y| %>
+
+    <div style="width:320px;margin-left:auto;margin-right:auto;">
+       <div class="field">
+         <w3><%= y.label :more_pictures_of_your_house %></w3><br>
+         <w4>Hint:<br>Select multiple files to upload by holding the "Shift" key when you click each file</w4><br><br>
+         <%= y.file_field :image, :multiple => true, name: "fam_attachments[image][]" %>
+       </div>
+     </div>
+    <% end %><br>
+
+  </div>
 </div>
 
-<div class="form-group">
-  <%= f.label :tagline %><br>
-  <%= f.text_field :tagline %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="form-group">
+      <w3><%= f.label :tagline %></w3><br><br>
+      <%= f.text_field :tagline, class: "form-control", placeholder: "Come stay with us in France and eat croissants!" %>
+    </div>
+  </div>
+
+  <div class="col-md-3"><br>
+    <div class="form-group">
+      <w3><%= f.label :bedrooms %></w3><br>
+      <%= f.select "beds", options_for_select(1..10) %>
+    </div>
+
+    <div class="form-group">
+      <w3><%= f.label :bathrooms %></w3><br>
+      <%= f.select "baths", options_for_select(1..10) %>
+    </div>
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :main_house_picture %><br>
-  <%= f.file_field :housepic %>
+<div class="row">
+  <div class="col-md-7" style="text-align:left;">
+    <div class="row">
+      <w3><%= f.label :mark_some_features_of_your_home %><w3><br><br>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.check_box :features, {:multiple => true}, "pool", nil %>
+          <%= f.label :pool %>
+          <br><br>
+          <%= f.check_box :features, {:multiple => true}, "hot tub", nil %>
+          <%= f.label :hot_tub %>
+          <br><br>
+          <%= f.check_box :features, {:multiple => true}, "big yard", nil %>
+          <%= f.label :big_yard %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.check_box :features, {:multiple => true}, "great view", nil %>
+          <%= f.label :great_view %>
+          <br><br>
+          <%= f.check_box :features, {:multiple => true}, "oceanfront", nil %>
+          <%= f.label :oceanfront %>
+          <br><br>
+          <%= f.check_box :features, {:multiple => true}, "sunsets", nil %>
+          <%= f.label :sunsets %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.check_box :features, {:multiple => true}, "dogs", nil %>
+          <%= f.label :dogs %>
+          <br><br>
+          <%= f.check_box :features, {:multiple => true}, "cats", nil %>
+          <%= f.label :cats %>
+          <br><br>
+          <%= f.check_box :features, {:multiple => true}, "horses", nil %>
+          <%= f.label :horses %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-5">
+
+    <w3><div class="form-group">
+      <%= f.label :does_your_family_have_smokers? %><br />
+      <%= f.label :smokers, "Yes", :value => "true"  %>
+      <%= f.radio_button :smokers, true %>
+      <%= f.label :smokers, "No", :value => "false" %>
+      <%= f.radio_button :smokers, false, :checked => true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :will_visitor_have_a_private_bedroom? %><br />
+      <%= f.label :pvtbed, "Yes", :value => "true"  %>
+      <%= f.radio_button :pvtbed, true %>
+      <%= f.label :pvtbed, "No", :value => "false" %>
+      <%= f.radio_button :pvtbed, false, :checked => true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :will_visitor_have_a_private_bathroom? %><br />
+      <%= f.label :pvtbath, "Yes", :value => "true"  %>
+      <%= f.radio_button :pvtbath, true %>
+      <%= f.label :pvtbath, "No", :value => "false" %>
+      <%= f.radio_button :pvtbath, false, :checked => true %>
+    </div></w3>
+  </div>
 </div>
-<br>
-<%= f.fields_for :fam_attachments do |y| %>
-   <div class="field">
-     <%= y.label :more_pictures_of_your_house %><br>
-     <%= y.file_field :image, :multiple => true, name: "fam_attachments[image][]" %>
-   </div>
-<% end %>
-(Hint: select multiple files to upload by holding the "Shift" key when you click each file)<br><br>
-
-
-
-<div class="form-group">
-  <%= f.label :bedrooms %>
-  <%= f.select "beds", options_for_select(1..10) %>
-</div>
-
-<div class="form-group">
-  <%= f.label :bathrooms %>
-  <%= f.select "baths", options_for_select(1..10) %>
-</div>
-
-<div class="form-group">
-  <%= f.label :mark_cool_features_of_your_home %><br><br>
-  <%= f.check_box :features, {:multiple => true}, "pool", nil %>
-  <%= f.label :pool %>
-  <br><br>
-  <%= f.check_box :features, {:multiple => true}, "horses", nil %>
-  <%= f.label :horses %>
-  <br><br>
-  <%= f.check_box :features, {:multiple => true}, "great view", nil %>
-  <%= f.label :great_view %>
-  <br><br>
-  <%= f.check_box :features, {:multiple => true}, "oceanfront", nil %>
-  <%= f.label :oceanfront %>
-
-
-</div>
-
-
-<div class="form-group">
-  <%= f.label :does_your_family_have_smokers? %><br />
-  <%= f.label :smokers, "Yes", :value => "true"  %>
-  <%= f.radio_button :smokers, true %>
-  <%= f.label :smokers, "No", :value => "false" %>
-  <%= f.radio_button :smokers, false, :checked => true %>
-</div>
-
-<div class="form-group">
-  <%= f.label :will_visitor_have_private_bedroom? %><br />
-  <%= f.label :pvtbed, "Yes", :value => "true"  %>
-  <%= f.radio_button :pvtbed, true %>
-  <%= f.label :pvtbed, "No", :value => "false" %>
-  <%= f.radio_button :pvtbed, false, :checked => true %>
-</div>
-
-<div class="form-group">
-  <%= f.label :will_visitor_have_private_bathroom? %><br />
-  <%= f.label :pvtbath, "Yes", :value => "true"  %>
-  <%= f.radio_button :pvtbath, true %>
-  <%= f.label :pvtbath, "No", :value => "false" %>
-  <%= f.radio_button :pvtbath, false, :checked => true %>
-</div>
-
+<w3><br>
 <div class="form-group">
   <%= label_tag "Family Life" %><br>
-  <textarea rows="10" cols="75" name="bio" placeholder="Write a little bit about your family, and what it is like living with them!"></textarea>
+  <textarea style= "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;" rows="10" cols="75" name="bio" placeholder="Write a little bit about your family, and what it is like living with them!"></textarea>
 </div>
 
 <div class="form-group">
   <%= label_tag "Life In Your Area" %><br>
-  <textarea rows="10" cols="75" name="lifehere" placeholder="Write a little bit about life in your city/town."></textarea>
+  <textarea style= "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;" rows="10" cols="75" name="lifehere" placeholder="Write a little bit about life in your city/town."></textarea>
 </div>
 
 <div class="form-group">
   <%= label_tag "Local Attractions" %><br>
-  <textarea rows="10" cols="75" name="attracts" placeholder="Write about a few cool attractions in your area."></textarea>
+  <textarea style= "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;" rows="10" cols="75" name="attracts" placeholder="Write about a few cool attractions in your area."></textarea>
 </div>
 
+</w3>
 
 
 <div class="actions">
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-primary btn-lg" %>
 </div>
-
 <% end %>
+</div>
+</div>
+<br>

@@ -65,7 +65,7 @@
                         <%= hidden_field_tag 'user_id', @current_user.id %>
                         <%= hidden_field_tag 'fam_id', family.id %>
                         <br>
-                        <%= submit_tag 'Send!' %>
+                        <%= submit_tag 'Send!', {class: "btn btn-primary btn-block btn-lg", style: "font-size:30px;"} %>
                       <% end %>
 
                     </div>
@@ -123,20 +123,19 @@
                   <div class="field">
                     <w3><%= f.label :email %></w3><br>
                     <%= f.text_field :email, class: "form-control" %>
-                  </div><br><br>
-
-                  <div class="actions">
-                    <%= f.submit "Sign Up!", class: "btn btn-primary btn-lg btn-block" %>
-                    <%= f.hidden_field(:password, :value => @temp ) %>
-                    <%= f.hidden_field(:password_confirmation, :value => @temp ) %>
                   </div>
+                    <div class="actions">
+                      <%= f.hidden_field(:password, :value => @temp ) %>
+                      <%= f.hidden_field(:password_confirmation, :value => @temp ) %>
+                      <%= f.submit nil, id: "submit-signup", class: "hidden" %>
+                    </div>
 
                   <%= hidden_field_tag(:temp, @temp) %>
 
                 <% end %>
               </div>
               <div class="col-md-6">
-                <w3>Please Log In to Continue</w3>
+                <w3>Log In to Continue</w3>
                 <br><br><br><br>
                 <%= form_for @user, url: {controller: "users", action: "login"} do |f| %>
 
@@ -148,19 +147,26 @@
                   <div class="field">
                     <w3><%= f.label :password %></w3><br>
                     <%= f.password_field :password, class: "form-control" %>
-                  </div><br><br><br>
-
-                  <div class="actions" style="margin-bottom:0;margin-top:auto;">
-                    <%= f.submit "Login", class: "btn btn-primary btn-lg btn-block" %>
+                  <div class="actions">
+                    <%= f.submit nil, id: "submit-login", class: "hidden" %>
                   </div>
 
                 <% end %>
               </div>
             </div>
           </div>
+
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="submit-signup" class="btn btn-primary btn-block btn-lg">Sign Up!</label>
+              </div>
+              <div class="col-md-6">
+                <label for="submit-login" class="btn btn-primary btn-block btn-lg">Log In</label>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>

@@ -1,49 +1,48 @@
+<div class="container-fluid">
+<div class="setup">
+<w2>Traveler Setup</w2>
 
-<h3>Traveler Setup</h3>
+<div class="row" style="border:none;">
+  <div class="col-md-6">
+    <%= form_for @trav, url: {action: "create"} do |f| %>
 
-<%= form_for @trav, url: {action: "create"} do |f| %>
+    <div class="form-group">
+      <w3><%= f.label :name %></w3><br>
+      <%= f.text_field :name %>
+    </div>
 
+    <div class="form-group">
+      <w3><%= f.label :tagline %></w3><br>
+      <%= f.text_field :tagline, placeholder: "I want so see the world!" %>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+
+    <div class="form-group">
+      <w3><%= f.label :age %></w3><br>
+      <%= f.text_field :age %>
+    </div>
+    <div style="width:200px;margin-left:auto;margin-right:auto;">
+    <div class="field">
+      <w3><%= f.label :profile_picture %></w3><br>
+      <%= f.file_field :pic %>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+<br>
 <div class="form-group">
-  <%= f.label :name %><br>
-  <%= f.text_field :name %>
-</div>
-
-<div class="form-group">
-  <%= f.label :age %><br>
-  <%= f.text_field :age %>
-</div>
-
-<div class="field">
-  <%= f.label :profile_picture %><br>
-  <%= f.file_field :pic %>
-</div>
-
-
-<!--
-<div class="field">
-  <%= f.label :destinations %><br>
-  <%= f.text_field :destinations %>
-</div>
--->
-<!--
-<div class="field">
-  <%= f.label :traveldates %><br>
-  <%= f.text_field :trvldates %>
-</div>
--->
-
-<div class="form-group">
-  <%= f.label :tagline %><br>
-  <%= f.text_field :tagline %>
-</div>
-
-<div class="form-group">
-  <%= label_tag "Traveler's Bio" %>
-  <textarea class="form-control" rows="10" cols="75" name="bio" placeholder="Write a little bit about yourself! What would you want to know about a child before inviting him/her in your home?"></textarea>
+  <w3><%= label_tag "Traveler's Bio" %></w3>
+  <textarea style= "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;" class="form-control" rows="10" cols="75" name="bio" placeholder="Write a little bit about yourself! What would you want to know about a child before inviting him/her in your home?"></textarea>
 </div>
 
 <div class="actions">
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-primary btn-lg" %>
 </div>
 
 <% end %>
+</div>
+</div>
