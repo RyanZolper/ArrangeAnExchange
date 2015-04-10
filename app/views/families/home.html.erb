@@ -15,14 +15,14 @@
           <%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", id: "thumb-lg", width: '100%' ) %>
             </div>
           </div>
-        </div
+        </div>
         <div class="col-md-10">
           <% if @current_user != nil %>
             <w2><%= link_to(family.tagline, showfam_path(family), style: "color:#428BCA;weight:bold;")  %></w2>
           <% else %>
             <w2><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></w2>
           <% end %>
-          <div class="row" style="width:80%;margin-right:0px;margin-left:auto;">
+          <div class="row">
           <div class="col-md-8">
             <w3><%= family.city %>,
             <%= family.country %><br>
