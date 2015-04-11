@@ -5,12 +5,23 @@
   <% y = 0 %>
   <% @z = 1 %>
 
-  <w2 style="text-align:center;">My Saved Families</w2>
+  <div class="row" style="background-color:rgba(143, 143, 143, 0.25);">
+    <div class="col-md-12" style="text-align:center;">
+      <w2>My Saved Families</w2>
+    </div>
+  </div>
+
 
     <% @fams.each do |family| %>
       <% x += 1 %>
       <% y += 1 %>
-      <div class="row">
+      <% if (x % 2) == 0 %>
+        <% @bkg = "background-color:rgba(143, 143, 143, 0.25);" %>
+      <% else %>
+        <% @bkg = "" %>
+      <% end %>
+
+      <div class="row" style="text-align:center;<%= @bkg %>";>
 
         <div class="col-md-2" style="height:100%">
           <div class="row" style="height:100%">
@@ -42,10 +53,16 @@
             <div class="col-md-4" style="text-align:center;">
               <div class="stars">
               <% @v = 1 %>
-              <% @rate20 = (((family.hosteds.average(:hoststars).to_f) * 4).to_i) %>
+              <% @rate20 = ((family.hosteds.average(:hoststars) * 4).to_i) %>
               <% 20.times do %>
                   <% if @rate20 == @v %>
                     <% @c = ' checked="checked"' %>
+                  <% end %>
+
+                  <% if ((@rate20 / 4.0) % 1) == 0 %>
+                    <% @rate = ((@rate20 / 4).to_i) %>
+                  <% else %>
+                    <% @rate = (((@rate20).to_i) / 4.0) %>
                   <% end %>
 
                   <input class="star" type="radio" name="famrating<%= x %>" value=<%= @v %> disabled="disabled"<%= @c %>/>
@@ -54,7 +71,7 @@
                 <% end %>
                 <% @v = 0 %>
               </div><br>
-              <w3>Host Rating: <%= (family.hosteds.average(:hoststars).to_f) %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
+              <w3>Host Rating: <%= @rate %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
             </div>
 
             <div class="col-md-4">
@@ -148,7 +165,7 @@
                       <% @t = ((@v) / 4.0 ) %>
                     <% end %>
 
-                    <input class="hover-star<%= @z %>" type="radio" name="ratefam" value=<%= @v %> title="<%= @t %>"<%= @c %>/>
+                    <input class="hover-star<%= @z %>" type="radio" name="ratefam" value=<%= @t %> title="<%= @t %>"<%= @c %>/>
                     <% @v += 1 %>
                     <% @c = nil %>
                   <% end %>

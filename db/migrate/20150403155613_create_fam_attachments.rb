@@ -1,7 +1,7 @@
 class CreateFamAttachments < ActiveRecord::Migration
   def change
     create_table :fam_attachments do |t|
-      t.string :family_id
+      t.belongs_to :family, index: true
       t.string :image
 
       t.timestamps null: false

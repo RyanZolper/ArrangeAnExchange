@@ -3,10 +3,10 @@ class CreateConnections < ActiveRecord::Migration
     create_table :connections do |t|
        t.belongs_to :family, index: true
        t.belongs_to :traveler, index: true
-       t.string :hostreview
-       t.string :travreview
-       t.integer :hoststars
-       t.integer :travstars
+       t.text :hostreview
+       t.text :travreview
+       t.float :hoststars
+       t.float :travstars
        t.timestamps null: false
      end
 

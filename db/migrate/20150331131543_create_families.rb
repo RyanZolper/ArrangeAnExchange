@@ -4,7 +4,7 @@ class CreateFamilies < ActiveRecord::Migration
       t.string :name
       t.string :profpic
       t.string :housepic
-      t.string :bio
+      t.text :bio
       t.string :tagline
       t.string :hostdates
       t.boolean :pvtbed
@@ -12,9 +12,9 @@ class CreateFamilies < ActiveRecord::Migration
       t.integer :beds
       t.integer :baths
       t.integer :size
-      t.string :lifehere
+      t.text :lifehere
       t.string :features, array: true, default: []
-      t.string :attracts
+      t.text :attracts
       t.string :country
       t.string :city
       t.string :address

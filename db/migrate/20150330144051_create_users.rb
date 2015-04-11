@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :country
       t.string :password_digest
+      t.belongs_to :family, index: true
       t.timestamps null: false
     end
   end

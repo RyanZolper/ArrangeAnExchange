@@ -45,9 +45,6 @@
 
 
 
-body {
-  background-color: #FFC9A6;
-}
 
 #loginModal {
   text-align: center;
@@ -121,8 +118,6 @@ body {
 }
 
 .row {
-  border-top: 2px solid;
-  border-bottom: 2px solid;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
@@ -154,9 +149,6 @@ input[type=text]{
   border: 1px solid;
 }
 
-.row + .row {
-  border-top:0;
-}
 
 n1 {
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
@@ -220,10 +212,12 @@ nl {
 
 .setup {
   width: 70%;
+  height:100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5%;
   text-align: center;
+  border-radius:15px;
 }
 
 

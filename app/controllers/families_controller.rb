@@ -22,7 +22,11 @@ class FamiliesController < ApplicationController
     @fam_attachments = @fam.fam_attachments.all
     @hosteds = @fam.hosteds.all
     @rate20 = ((@hosteds.average(:hoststars).to_f) * 4).to_i
-    @rate5 = (@rate20.to_f / 4)
+    if (((@rate20) / 4.0 ) % 1) == 0
+      @rate5 = (((@rate20) / 4.0 ).to_i)
+    else
+      @rate5 = ((@rate20) / 4.0 )
+    end
   end
 
   def myfam
@@ -30,7 +34,11 @@ class FamiliesController < ApplicationController
     @fam_attachments = @fam.fam_attachments.all
     @hosteds = @fam.hosteds.all
     @rate20 = ((@hosteds.average(:hoststars).to_f) * 4).to_i
-    @rate5 = (@rate20.to_f / 4)
+    if (((@rate20) / 4.0 ) % 1) == 0
+      @rate5 = (((@rate20) / 4.0 ).to_i)
+    else
+      @rate5 = ((@rate20) / 4.0 )
+    end
   end
 
   def setup
@@ -40,6 +48,10 @@ class FamiliesController < ApplicationController
 
   def create
     @fam = Family.new(fam_params)
+    if params [:region] != nil
+      @fam.city << ", "
+      @fam.city << params[:region]
+    end
     if @fam.save && params[:fam_attachments] != nil
       params[:fam_attachments]['image'].each do |a|
         @pichold = @fam.fam_attachments.create!(:image => a, :family_id => @fam.id)
@@ -60,12 +72,6 @@ class FamiliesController < ApplicationController
     else redirect_to :back, alert: "Try again!"
     end
   end
-
-
-
-
-
-
 
 
 

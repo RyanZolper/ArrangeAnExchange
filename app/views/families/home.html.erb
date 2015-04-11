@@ -7,23 +7,27 @@
     <% @fams.each do |family| %>
       <% x += 1 %>
       <% y += 1 %>
-      <div class="row">
 
-        <div class="col-md-2" style="height:100%">
-          <div class="row" style="height:100%">
-            <div class="col-md-12" style="height:100%">
-              <%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", id: "thumb-lg", width: '100%' ) %>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-10">
+      <% if (x % 2) == 0 %>
+        <% @bkg = "background-color:rgba(143, 143, 143, 0.25);" %>
+      <% else %>
+        <% @bkg = "" %>
+      <% end %>
+
+      <div class="row" style="text-align:center;<%= @bkg %>">
+        <div class="col-md-12">
           <% if @current_user != nil %>
             <w2><%= link_to(family.tagline, showfam_path(family), style: "color:#428BCA;weight:bold;")  %></w2>
           <% else %>
             <w2><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></w2>
           <% end %>
-          <div class="row">
-          <div class="col-md-5">
+        </div>
+      </div>
+      <div class="row" style="<%= @bkg %>">
+        <div class="col-md-3">
+            <%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", id: "thumb-lg", width: '100%' ) %>
+        </div>
+          <div class="col-md-4" style="text-align:center;">
             <w3><%= family.city %>,
             <%= family.country %><br>
             <%= family.size %> family members<br>
@@ -31,13 +35,19 @@
             <%= family.baths %> baths</w3>
           </div>
 
-          <div class="col-md-3" style="text-align:center;">
+          <div class="col-md-2" style="text-align:center;">
             <div class="stars">
             <% @v = 1 %>
-            <% @rate20 = (((family.hosteds.average(:hoststars).to_f) * 4).to_i) %>
+            <% @rate20 = (((family.hosteds.average(:hoststars)) * 4).to_i) %>
             <% 20.times do %>
                 <% if @rate20 == @v %>
                   <% @c = ' checked="checked"' %>
+                <% end %>
+
+                <% if ((@rate20 / 4.0) % 1) == 0 %>
+                  <% @rate = ((@rate20 / 4).to_i) %>
+                <% else %>
+                  <% @rate = (((@rate20).to_i) / 4.0) %>
                 <% end %>
 
                 <input class="star" type="radio" name="famrating<%= x %>" value=<%= @v %> disabled="disabled"<%= @c %>/>
@@ -46,10 +56,10 @@
               <% end %>
               <% @v = 0 %>
             </div><br>
-            <w3>Host Rating: <%= (family.hosteds.average(:hoststars).to_f) %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
+            <w3>Host Rating: <%= @rate %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
           </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
 
             <% if @current_user != nil %>
             <% @fam = family %>
@@ -57,7 +67,7 @@
             <div id="save_unsave<%= @fam.id %>">
               <%= render 'save_unsave' %>
             </div>
-            <br>
+            <br><br>
               <button type="button" class="btn btn-primary btn-lg btn-block" id="connect" data-toggle="modal" data-target="#myModal<%= x %>">
                 Connect!
               </button>
@@ -111,6 +121,7 @@
           </div>
         </div>
       </div>
+      <br>
     <% end %>
 
     <div class="modal fade" id="nouserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -134,7 +145,7 @@
 
                   <div class="field">
                     <w3><%= f.label "Country of Residence" %></w3><br>
-                    <%= f.text_field :country, class: "form-control" %>
+                    <%= f.text_field :country, class: "form-control", id: "country-signup2", size: "42" %>
                   </div><br>
 
                   <div class="field">

@@ -15,7 +15,13 @@
           <% @c = ' checked="checked"' %>
         <% end %>
 
-        <input class="star" type="radio" name="famrating" value=<%= @v %> disabled="disabled"<%= @c %>/>
+        <% if (((@v) / 4.0 ) % 1) == 0 %>
+          <% @t = (((@v) / 4.0 ).to_i) %>
+        <% else %>
+          <% @t = ((@v) / 4.0 ) %>
+        <% end %>
+
+        <input class="star" type="radio" name="famrating" value=<%= @t %> disabled="disabled"<%= @c %>/>
         <% @v += 1 %>
         <% @c = nil %>
       <% end %>
@@ -198,11 +204,17 @@
     <% @x = 1 %>
     <% @hosteds.each do |trav| %>
     <% @v = 1 %>
+    <% if (((trav.connections.find_by(family_id: @fam.id).hoststars)) % 1) == 0 %>
+      <% @rate = (((trav.connections.find_by(family_id: @fam.id).hoststars)).to_i) %>
+    <% else %>
+      <% @rate = ((trav.connections.find_by(family_id: @fam.id).hoststars)) %>
+    <% end %>
       <div class="col-md-3">
         Age: <%= trav.age %><br>
         <%= image_tag("#{trav.pic}", width: '300') %><br><br>
         <%= trav.connections.find_by(family_id: @fam.id).hostreview %><br><br>
-        Host rating:<br><br>
+        Host rating: <%= @rate %>/5
+        <br><br>
 
         <div class="stars">
         <% 20.times do %>

@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
     @fam = Family.find(params[:fam_id])
     @review = params[:review]
-    @rating = ((params[:ratefam].to_i) / 4.0 )
+    @rating = (params[:ratefam].to_i)
     @trav = Traveler.find(params[:trav_id])
     UserMailer.host_review_email(@user, @trav, @fam, @review, @rating).deliver_later
     redirect_to :back, notice: "Message Sent"

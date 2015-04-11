@@ -24,7 +24,10 @@
 
 <% if action_name == 'setup' %>
 
-<%= stylesheet_link_tag 'background' %>
+<style>
+body { background-color:#428BCA }
+</style>
+
 
 <% else %>
 
@@ -192,7 +195,7 @@
 
             <div class="field">
               <w3><%= f.label "Country of Residence" %></w3><br>
-              <%= f.text_field :country, class: "form-control" %>
+              <%= f.text_field :country, class: "form-control", id: "country-signup", size: "42" %>
             </div><br>
 
             <div class="field">

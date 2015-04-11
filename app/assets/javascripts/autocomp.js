@@ -9,3 +9,9 @@ $(function(){
     source:[signupcountries]
   });
 });
+
+$(function(){
+  $('#country-signup2').autocomplete({
+    source:[signupcountries]
+  });
+});

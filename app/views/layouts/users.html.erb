@@ -38,196 +38,252 @@
 <% else @h = '50' %>
 <% end %>
 
-<% @a = ['account', 'mysaves', 'welcome'] %>
+<% if action_name == 'mysaves' %>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/families/home">
+        <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: '50' %>
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+      <div class="navbar-form">
+        <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
+
+        <n1><%= label_tag(:q, "Where do you want to go?", style: 'color:white') %></n1>
+          <%= text_field_tag(:q, nil, id: "country-input") %>
+          &nbsp;&nbsp;
+
+          <n1><%= label_tag(:s, "How old are you?", style: 'color:white') %>&nbsp;&nbsp;</n1>
+          <w4><%= select_tag :s, options_for_select(13..28) %></w4>
+          &nbsp;&nbsp;
+          <%= submit_tag("Search", class: "btn btn-default") %>
+        <% end %>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/families/home"><n2>Recent Families</n2></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><nd1>My Account</nd1><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/users/account"><n2>Account Info</n2></a></li>
+            <li><a href="/families/myfam"><n2>My Family</n2></a></li>
+            <li><a href="/travelers/mytrav"><n2>My Travelers</n2></a></li>
+            <li><a href="/users/logout"><n2>Log Out</n2></a></li>
+
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<style>
+body { padding-top:64px; }
+</style>
+
+<% else %>
+
+
+<% @a = ['account', 'welcome'] %>
 
 <% if @a.include?(action_name) == false %>
 
 
 
+<% elsif @current_user == nil %>
 
-  <% elsif @current_user == nil %>
-
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/families/home">
-              <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: @h %>
-            </a>
-          </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="navbar-collapse-1">
-            <% if current_page?(root_url) == false %>
-              <div class="navbar-form">
-                <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
-
-                  <%= label_tag(:q, "Where do you want to go?", style: 'color:white') %>
-                  <n1><%= text_field_tag(:q, nil, id: "country-input") %></n1>
-                  &nbsp;&nbsp;
-
-                  <n1><%= label_tag(:s, "How old are you?", style: 'color:white') %></n1>
-                  <%= text_field_tag(:s) %>
-
-                  <%= submit_tag("Search", class: "btn btn-default") %>
-                <% end %>
-              </div>
-            <% else %>
-              <p class="navbar-text" style="color:white">Welcome to Arrange An Exchange!</p>
-            <% end %>
-            <ul class="nav navbar-nav navbar-right">
-              <li><button type="button" class="btn btn-default navbar-btn" id="login" data-toggle="modal" data-target="#loginModal">
-                <nl>Log In</nl>
-              </button>&nbsp;&nbsp;</li>
-              <li><button type="button" class="btn btn-default navbar-btn" id="signup" data-toggle="modal" data-target="#signupModal">
-                <nl>Sign Up!</nl>
-              </button></li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
-    <div class="container-fluid">
-      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <w1 class="modal-title" id="myModalLabel">Welcome back!</w1>
-            </div>
-            <div class="modal-body">
-              <w2>Log in, and find your perfect host.</w2><br><br>
-
-              <%= form_for @user, url: {controller: "users", action: "login"} do |f| %>
-                <div class="field">
-                  <w3><%= f.label :email %></w3><br>
-                  <%= f.search_field :email, class: "form-control" %>
-                </div><br>
-                <div class="field">
-                  <w3><%= f.label :password %></w3><br>
-                  <%= f.password_field :password, class: "form-control" %>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <div class="actions">
-                <%= f.submit "Login", class: "btn btn-primary btn-lg btn-block" %>
-              </div>
-            </div>
-          <% end %>
-          </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/families/home">
+            <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: @h %>
+          </a>
         </div>
-      </div>
-    </div>
 
-    <div class="container-fluid">
-      <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <w1 class="modal-title" id="myModalLabel">Sign Up!</w1>
-            </div>
-            <div class="modal-body">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <% if current_page?(root_url) == false %>
+            <div class="navbar-form">
+              <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
 
-              <w2>Join Now To Start Your Adventure!</w2><br><br>
+                <%= label_tag(:q, "Where do you want to go?", style: 'color:white') %>
+                <n1><%= text_field_tag(:q, nil, id: "country-input") %></n1>
+                &nbsp;&nbsp;
 
-              <%= form_for @user, url: {controller: "users", action: "create"} do |f| %>
+                <n1><%= label_tag(:s, "How old are you?", style: 'color:white') %></n1>
+                <%= text_field_tag(:s) %>
 
-                <div class="field">
-                  <w3><%= f.label :name %></w3><br>
-                  <%= f.text_field :name, class: "form-control" %>
-                </div><br>
-
-                <div class="field">
-                  <w3><%= f.label "Country of Residence" %></w3><br>
-                  <%= f.text_field :country, class: "form-control", id: "country-signup", size: "42" %>
-                </div><br>
-
-                <div class="field">
-                  <w3><%= f.label :email %></w3><br>
-                  <%= f.text_field :email, class: "form-control" %>
-                </div><br><br>
-
-
-                <%= hidden_field_tag(:temp, @temp) %>
-
-            </div>
-            <div class="modal-footer">
-              <div class="actions">
-                <%= f.submit "Sign Up!", class: "btn btn-primary btn-lg btn-block" %>
-                <%= f.hidden_field(:password, :value => @temp ) %>
-                <%= f.hidden_field(:password_confirmation, :value => @temp ) %>
-              </div>
+                <%= submit_tag("Search", class: "btn btn-default") %>
               <% end %>
-
             </div>
+          <% else %>
+            <p class="navbar-text" style="color:white">Welcome to Arrange An Exchange!</p>
+          <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><button type="button" class="btn btn-default navbar-btn" id="login" data-toggle="modal" data-target="#loginModal">
+              <nl>Log In</nl>
+            </button>&nbsp;&nbsp;</li>
+            <li><button type="button" class="btn btn-default navbar-btn" id="signup" data-toggle="modal" data-target="#signupModal">
+              <nl>Sign Up!</nl>
+            </button></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  <div class="container-fluid">
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <w1 class="modal-title" id="myModalLabel">Welcome back!</w1>
+          </div>
+          <div class="modal-body">
+            <w2>Log in, and find your perfect host.</w2><br><br>
+
+            <%= form_for @user, url: {controller: "users", action: "login"} do |f| %>
+              <div class="field">
+                <w3><%= f.label :email %></w3><br>
+                <%= f.search_field :email, class: "form-control" %>
+              </div><br>
+              <div class="field">
+                <w3><%= f.label :password %></w3><br>
+                <%= f.password_field :password, class: "form-control" %>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <div class="actions">
+              <%= f.submit "Login", class: "btn btn-primary btn-lg btn-block" %>
+            </div>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <w1 class="modal-title" id="myModalLabel">Sign Up!</w1>
+          </div>
+          <div class="modal-body">
+
+            <w2>Join Now To Start Your Adventure!</w2><br><br>
+
+            <%= form_for @user, url: {controller: "users", action: "create"} do |f| %>
+
+              <div class="field">
+                <w3><%= f.label :name %></w3><br>
+                <%= f.text_field :name, class: "form-control" %>
+              </div><br>
+
+              <div class="field">
+                <w3><%= f.label "Country of Residence" %></w3><br>
+                <%= f.text_field :country, class: "form-control", id: "country-signup", size: "42" %>
+              </div><br>
+
+              <div class="field">
+                <w3><%= f.label :email %></w3><br>
+                <%= f.text_field :email, class: "form-control" %>
+              </div><br><br>
+
+
+              <%= hidden_field_tag(:temp, @temp) %>
+
+          </div>
+          <div class="modal-footer">
+            <div class="actions">
+              <%= f.submit "Sign Up!", class: "btn btn-primary btn-lg btn-block" %>
+              <%= f.hidden_field(:password, :value => @temp ) %>
+              <%= f.hidden_field(:password_confirmation, :value => @temp ) %>
+            </div>
+            <% end %>
+
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 
 
-  <% else %>
+<% else %>
 
 
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/families/home">
-              <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: @h %>
-            </a>
-          </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/families/home">
+            <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: @h %>
+          </a>
+        </div>
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="navbar-collapse-1">
-            <% if current_page?(root_url) == false %>
-              <div class="navbar-form">
-                <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <% if current_page?(root_url) == false %>
+            <div class="navbar-form">
+              <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
 
-                <n1><%= label_tag(:q, "Where do you want to go?", style: 'color:white') %></n1>
-                  <%= text_field_tag(:q, nil, id: "country-input") %>
-                  &nbsp;&nbsp;
+              <n1><%= label_tag(:q, "Where do you want to go?", style: 'color:white') %></n1>
+                <%= text_field_tag(:q, nil, id: "country-input") %>
+                &nbsp;&nbsp;
 
-                  <n1><%= label_tag(:s, "How old are you?", style: 'color:white') %></n1>&nbsp;&nbsp;
-                  <%= select_tag :s, options_for_select(13..28) %>
-                  &nbsp;&nbsp;
-                  <%= submit_tag("Search", class: "btn btn-default") %>
-                <% end %>
-              </div>
-            <% else %>
-              <p class="navbar-text" style="color:white">Welcome to Arrange An Exchange!</p>
-            <% end %>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/users/mysaves"><n2>My Saves</n2></a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><nd1>My Account</nd1><span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="/users/account"><n2>Account Info</n2></a></li>
-                  <li><a href="/families/myfam"><n2>My Family</n2></a></li>
-                  <li><a href="/travelers/mytrav"><n2>My Travelers</n2></a></li>
-                  <li><a href="/users/logout"><n2>Log Out</n2></a></li>
+                <n1><%= label_tag(:s, "How old are you?", style: 'color:white') %></n1>&nbsp;&nbsp;
+                <%= select_tag :s, options_for_select(13..28) %>
+                &nbsp;&nbsp;
+                <%= submit_tag("Search", class: "btn btn-default") %>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="navbar-text" style="color:white">Welcome to Arrange An Exchange!</p>
+          <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/users/mysaves"><n2>My Saves</n2></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><nd1>My Account</nd1><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/users/account"><n2>Account Info</n2></a></li>
+                <li><a href="/families/myfam"><n2>My Family</n2></a></li>
+                <li><a href="/travelers/mytrav"><n2>My Travelers</n2></a></li>
+                <li><a href="/users/logout"><n2>Log Out</n2></a></li>
 
-                </ul>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
 
+<% end %>
 <% end %>
 
 <% if notice != nil %>
