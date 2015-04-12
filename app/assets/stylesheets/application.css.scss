@@ -32,17 +32,10 @@
   text-align: center;
 }
 
-.alert {
-  margin-top:0;
-  margin-bottom:0;
-  padding-bottom:5px;
-  padding-top:5px;
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-  font-size: 24px;
-  text-align: center;
+
+.img-rounded {
+  border: 2px solid;
 }
-
-
 
 
 
@@ -89,8 +82,7 @@
 
 .navbar-brand {
   // Vertically center the text given $navbarHeight
-  @elementHeight: 20px;
-  padding: 5px 20px 5px;
+  padding: 0px 10px 0px;
   font-size: 20px;
   line-height: 1;
 }
@@ -99,11 +91,8 @@
     background-color: #428BCA;
     border-color: #E7E7E7;
     text-align: center;
-    border-radius: 0px;
 }
 
-.navbar-fixed-top {
-}
 
 .navbar-text {
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
@@ -123,10 +112,7 @@
   padding-left: 10px;
   padding-right: 10px;
   .row {
-    padding-top: 0;
-    padding-bottom: 0;
-    border-top: 0;
-    border-bottom: 0;
+    padding: 0;
   }
 }
 
@@ -179,7 +165,10 @@ nl {
 
 .container-gal {
   text-align: center;
-  img { border-radius: 6px; }
+  img {
+    border-radius: 6px;
+    border: 2px solid;
+    }
 }
 
 
@@ -188,6 +177,7 @@ nl {
   display: inline-block;
   padding-top: 8px;
   margin: auto;
+  color: #428BCA;
 }
 
 .stars {
@@ -200,10 +190,6 @@ nl {
   display: inline-block;
 }
 
-#thumb-lg {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
 
 #connect {
   bottom: 0;

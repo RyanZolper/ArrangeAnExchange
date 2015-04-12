@@ -25,39 +25,39 @@
       </div>
       <div class="row" style="<%= @bkg %>">
         <div class="col-md-3">
-            <%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", id: "thumb-lg", width: '100%' ) %>
+            <%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", width: '100%' ) %>
         </div>
-          <div class="col-md-4" style="text-align:center;">
-            <w3><%= family.city %>,
-            <%= family.country %><br>
-            <%= family.size %> family members<br>
-            <%= family.beds %> beds,
-            <%= family.baths %> baths</w3>
-          </div>
+        <div class="col-md-4" style="text-align:center;">
+          <w3><%= family.city %>,
+          <%= family.country %><br>
+          <%= family.size %> family members<br>
+          <%= family.beds %> beds,
+          <%= family.baths %> baths</w3>
+        </div>
 
-          <div class="col-md-2" style="text-align:center;">
-            <div class="stars">
-            <% @v = 1 %>
-            <% @rate20 = (((family.hosteds.average(:hoststars)) * 4).to_i) %>
-            <% 20.times do %>
-                <% if @rate20 == @v %>
-                  <% @c = ' checked="checked"' %>
-                <% end %>
-
-                <% if ((@rate20 / 4.0) % 1) == 0 %>
-                  <% @rate = ((@rate20 / 4).to_i) %>
-                <% else %>
-                  <% @rate = (((@rate20).to_i) / 4.0) %>
-                <% end %>
-
-                <input class="star" type="radio" name="famrating<%= x %>" value=<%= @v %> disabled="disabled"<%= @c %>/>
-                <% @v += 1 %>
-                <% @c = nil %>
+        <div class="col-md-2" style="text-align:center;">
+          <div class="stars">
+          <% @v = 1 %>
+          <% @rate20 = (((family.hosteds.average(:hoststars)) * 4).to_i) %>
+          <% 20.times do %>
+              <% if @rate20 == @v %>
+                <% @c = ' checked="checked"' %>
               <% end %>
-              <% @v = 0 %>
-            </div><br>
-            <w3>Host Rating: <%= @rate %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
-          </div>
+
+              <% if ((@rate20 / 4.0) % 1) == 0 %>
+                <% @rate = ((@rate20 / 4).to_i) %>
+              <% else %>
+                <% @rate = (((@rate20).to_i) / 4.0) %>
+              <% end %>
+
+              <input class="star" type="radio" name="famrating<%= x %>" value=<%= @v %> disabled="disabled"<%= @c %>/>
+              <% @v += 1 %>
+              <% @c = nil %>
+            <% end %>
+            <% @v = 0 %>
+          </div><br>
+          <w3>Host Rating: <%= @rate %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
+        </div>
 
         <div class="col-md-3">
 
@@ -117,11 +117,9 @@
             <% end %>
 
 
-          </div>
-          </div>
         </div>
       </div>
-      <br>
+
     <% end %>
 
     <div class="modal fade" id="nouserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

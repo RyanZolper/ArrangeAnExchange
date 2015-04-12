@@ -99,7 +99,7 @@
     <w1>About staying here</w1>
   </div>
 
-  <div class="row">
+  <div class="row" style="background-color:rgba(189, 189, 189, 1);">
     <div class="center">
       <w2>Our Family</w2><br><br>
     </div>
@@ -174,16 +174,16 @@
 
 <div class="container-fluid">
 
-  <div class="row">
-    <div class="center"><w2>This family's travelers</w2><br></div>
+  <div class="row center">
+    <w2>This family's travelers</w2><br>
 
     <% @fam.travelers.each do |trav| %>
 
-      <div class="col-md-3">
-        Age: <%= trav.age %><br>
+      <div class="col-md-4">
+        <w2>Age: <%= trav.age %></w2><br>
         <%= image_tag("#{trav.pic}", width: '300') %><br><br>
-        <%= trav.tagline %><br><br>
-        <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-default" %>
+        <w3><%= trav.tagline %></w3><br><br>
+        <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-primary btn-lg" %>
 
       </div>
 
@@ -198,9 +198,9 @@
 
 <div class="container-fluid">
 
-  <div class="row">
+  <div class="row center">
 
-    <h3>Previously hosted:</h3><br><br>
+    <w2>Previously Hosted</w2><br><br>
     <% @x = 1 %>
     <% @hosteds.each do |trav| %>
     <% @v = 1 %>
@@ -209,10 +209,10 @@
     <% else %>
       <% @rate = ((trav.connections.find_by(family_id: @fam.id).hoststars)) %>
     <% end %>
-      <div class="col-md-3">
-        Age: <%= trav.age %><br>
+      <div class="col-md-4">
+        <w2>Age: <%= trav.age %></w2><br>
         <%= image_tag("#{trav.pic}", width: '300') %><br><br>
-        <%= trav.connections.find_by(family_id: @fam.id).hostreview %><br><br>
+        <w4><%= trav.connections.find_by(family_id: @fam.id).hostreview %></w4><br><br>
         Host rating: <%= @rate %>/5
         <br><br>
 
@@ -229,7 +229,7 @@
       </div>
 
         <br><br>
-        <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-default" %>
+        <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-primary btn-lg" %>
 
       </div>
 

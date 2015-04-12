@@ -34,8 +34,8 @@
 
 
 <% if current_page?(root_url) %>
-  <% @h = '40' %>
-<% else @h = '50' %>
+  <% @h = '50' %>
+<% else @h = '62' %>
 <% end %>
 
 <% if action_name == 'mysaves' %>
@@ -51,7 +51,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/families/home">
-        <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: '50' %>
+        <%= image_tag "AAElogo.png", height: @h %>
       </a>
     </div>
 
@@ -113,7 +113,7 @@ body { padding-top:64px; }
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/families/home">
-            <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: @h %>
+            <%= image_tag "AAElogo.png", height: @h %>
           </a>
         </div>
 
@@ -242,7 +242,7 @@ body { padding-top:64px; }
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/families/home">
-            <%= image_tag "http://www.home-swap.org.uk/images/mutual-exchange.gif", height: @h %>
+            <%= image_tag "AAElogo.png", height: @h %>
           </a>
         </div>
 

@@ -39,7 +39,7 @@ puts @f.errors.full_messages
 @z = @f.users.create(name: "Ryan Zolper", email: "zolper11@gmail.com", password: "pwd", password_confirmation: "pwd", country: "Portugal")
 
 @z1 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 20, name: "Ryan", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/10556324_10203263270764015_3641761369509833284_n.jpg", tagline: "Making me breakfast: $3.
-Getting to know me: priceless!", user_id: @z.id, bio: "I'm a junior level Rails programmer and a persitent fisherman with a consistent lack of caught fish. I would love to travel to Germany, Italy, Spain, Mexico or Alaska.")
+Getting to know me: priceless!", user_id: @z.id, bio: "I'm a junior level Rails programmer and a persistent fisherman with a consistent lack of caught fish. I would love to travel to Germany, Italy, Spain, Mexico or Alaska.")
 @z2 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 18, name: "Sarah", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/252209_10151468806866309_1606142347_n.png", tagline: "The world is my oyster, I won't stop until I find the pearl!", user_id: @z.id, bio: "I'm a college student with aspirations of presidency and dreams of a utopian land. I'll travel anywhere (As long as it's warm...)!")
 
 #france0
@@ -140,7 +140,7 @@ end
 @fam = Family.create do |f|
   f.city = "Orléans"
   @c = f.country = "France"
-  f.tagline = "Stay with us in the lovely city of Orléans and live the high life!"
+  f.tagline = "Stay with us in the lovely town of Orléans and live the high life!"
   f.remote_housepic_url = "http://pics.green-acres.com/31882a/pics/31882a-10296_1.jpg"
   f.age_range = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   f.bio = "We are a happy family of five. We have nightly family suppers and make fresh omelettes every morning! Some things we like to do as a family are horseback riding, wine tastings and trips to Champagne country. We would love to host a kind teenager that would fit into our laid-back family dynamic and treat him or her like our own."
