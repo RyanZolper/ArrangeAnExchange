@@ -13,7 +13,11 @@
 #
 
 class User < ActiveRecord::Base
-  validates :email, presence: true, uniqueness: true
+  validates :email,
+    :presence => { message: " required"},
+    :uniqueness => { message: " belongs to an existing account" }
+  validates :country, :presence => { message: " required"}
+  validates :name, :presence => { message: " required"}
   belongs_to :family, inverse_of: :users
   has_many :travelers
   has_secure_password

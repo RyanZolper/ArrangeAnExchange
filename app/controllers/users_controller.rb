@@ -88,13 +88,14 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @temp = params[:temp]
     if @user.save
+      render js: %(window.location.pathname='#{users_check_email_path}')
       UserMailer.signup_email(@user, @temp).deliver_later
       session[:current_user_id] = @user.id
-      redirect_to users_check_email_path
     else
-      redirect_to 'users/signup', alert: "Try again, errors: #{@user.errors}"
-
-
+      flash[:alert] = "#{@user.errors.full_messages.to_sentence}"
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
@@ -105,9 +106,14 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
-      redirect_to families_home_path, notice: "Login Success!"
+      render js: %(location.reload())
+      flash[:notice] = "Login Success!"
       session[:current_user_id] = @user.id
-    else redirect_to :back, alert: "Try Again"
+    else
+      flash[:alert] = "Incorrect Password"
+      respond_to do |format|
+        format.js
+      end
     end
   end
 

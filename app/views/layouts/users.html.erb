@@ -134,7 +134,7 @@ body { padding-top:64px; }
               <% end %>
             </div>
           <% else %>
-            <p class="navbar-text" style="color:white">Welcome to Arrange An Exchange!</p>
+            <p class="navbar-text" style="color:white">Welcome to Arrange an Exchange!</p>
           <% end %>
           <ul class="nav navbar-nav navbar-right">
             <li><button type="button" class="btn btn-default navbar-btn" id="login" data-toggle="modal" data-target="#loginModal">
@@ -154,11 +154,13 @@ body { padding-top:64px; }
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <w1 class="modal-title" id="myModalLabel">Welcome back!</w1>
+            <div id="login_alert">
+            </div>
           </div>
           <div class="modal-body">
             <w2>Log in, and find your perfect host.</w2><br><br>
 
-            <%= form_for @user, url: {controller: "users", action: "login"} do |f| %>
+            <%= form_for @user, url: {controller: "users", action: "login"}, remote: true do |f| %>
               <div class="field">
                 <w3><%= f.label :email %></w3><br>
                 <%= f.search_field :email, class: "form-control" %>
@@ -186,12 +188,14 @@ body { padding-top:64px; }
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <w1 class="modal-title" id="myModalLabel">Sign Up!</w1>
+            <div id="signup_alert">
+            </div>
           </div>
           <div class="modal-body">
 
             <w2>Join Now To Start Your Adventure!</w2><br><br>
 
-            <%= form_for @user, url: {controller: "users", action: "create"} do |f| %>
+            <%= form_for @user, url: {controller: "users", action: "create"}, remote: true do |f| %>
 
               <div class="field">
                 <w3><%= f.label :name %></w3><br>
@@ -288,13 +292,12 @@ body { padding-top:64px; }
 
 <% if notice != nil %>
   <div class="alert alert-success alert-dismissable" id="notice" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <%= notice %>
   </div>
 <% end %>
-<% if alert != nil %>
+<% @acts = ['setup', 'changepwdpage'] %>
+<% if alert != nil && @acts.include?(action_name) %>
   <div class="alert alert-danger alert-dismissable" id="alert" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <%= alert %>
   </div>
 <% end %>

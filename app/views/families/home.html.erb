@@ -128,13 +128,15 @@
           <div class="modal-header" style="text-align:center">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <w3 class="modal-title" id="myModalLabel">Please Log In or Sign Up for "View", "Save" and "Connect" features</w3>
+            <div id="nouser_alert">
+            </div>
           </div>
           <div class="modal-body">
             <div class="row" style="text-align:center">
               <div class="col-md-6" style="border-right:2px;">
                 <w3>Join Now To Start Your Adventure!</w3><br><br>
 
-                <%= form_for @user, url: {controller: "users", action: "create"} do |f| %>
+                <%= form_for @user, url: {controller: "users", action: "create"}, remote: true do |f| %>
 
                   <div class="field">
                     <w3><%= f.label :name %></w3><br>
@@ -163,7 +165,7 @@
               <div class="col-md-6">
                 <w3>Log In to Continue</w3>
                 <br><br><br><br>
-                <%= form_for @user, url: {controller: "users", action: "login"} do |f| %>
+                <%= form_for @user, url: {controller: "users", action: "login"}, remote: true do |f| %>
 
                   <div class="field">
                     <w3><%= f.label :email %></w3><br>

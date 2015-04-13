@@ -27,7 +27,7 @@
           <div class="row" style="height:100%">
             <div class="col-md-12" style="height:100%">
               <%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", id: "thumb-lg", width: '100%' ) %>
-              
+
               <button type="button" class="btn btn-primary btn-lg btn-block" id="connect" data-toggle="modal" data-target="#review<%= x %>">
                 I stayed here!
               </button>
@@ -179,7 +179,7 @@
                 </div>
 
 
-                <textarea class="form-control" style="width:95%;margin:auto;" rows="10" cols="75" name="review" placeholder="Hint: Be honest :) but host families must approve all reviews and ratings."></textarea>
+                <w4><textarea class="form-control" style="width:95%;margin:auto;" rows="10" cols="75" name="review" placeholder="Hint: Be honest :) but host families must approve all reviews and ratings."></textarea></w4>
                 <%= hidden_field_tag 'user_id', @current_user.id %>
                 <%= hidden_field_tag 'fam_id', family.id %>
                 <br>
