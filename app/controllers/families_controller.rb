@@ -41,6 +41,35 @@ class FamiliesController < ApplicationController
     end
   end
 
+  def update
+    @fam = @current_user.family
+      if @fam.update(fam_params) && params[:fam_attachments] != nil
+        fa = 1
+        @fam.fam_attachments.each do |fat|
+        unless params[:fam_attachments]['image'][fa] == nil
+          @fam.fam_attachments.update_attribute(:image => params[:fam_attachments]['image'][fa])
+        end
+          fa += 1
+        end
+        redirect_to families_myfam_path, notice: 'Family Updated!'
+      else
+        if @fam.update(fam_params)
+          if params[:region] != ""
+            @fam.city << ", "
+            @fam.city << params[:region]
+          end
+          @fam.update_attribute('features', params[:family][:features])
+          if params[:otherfts] != ""
+            @fam.features << params[:otherfts]
+          end
+          redirect_to families_myfam_path, notice: 'Family Updated!'
+        else
+          redirect_to :back, alert: 'Try again!'
+        end
+      end
+  end
+
+
   def setup
     @fam = Family.new
     @fam_attachment = @fam.fam_attachments.build
@@ -57,6 +86,9 @@ class FamiliesController < ApplicationController
         @pichold = @fam.fam_attachments.create!(:image => a, :family_id => @fam.id)
       end
       @fam.update_attribute('features', params[:family][:features])
+      if params[:otherfts] != nil
+        @fam.features << params[:otherfts]
+      end
       @current_user.update_attribute('family_id', @fam.id)
       @current_user.travelers.each do |x|
         x.update_attribute('family_id', @fam.id)
@@ -64,6 +96,9 @@ class FamiliesController < ApplicationController
       redirect_to families_home_path
     elsif @fam.save
       @fam.update_attribute('features', params[:family][:features])
+      if params[:otherfts] != nil
+        @fam.features << params[:otherfts]
+      end
       @current_user.update_attribute('family_id', @fam.id)
       @current_user.travelers.each do |x|
         x.update_attribute('family_id', @fam.id)

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'users/mysaves'
   get 'users/changepwdpage'
   get 'users/account'
+  get 'users/updatefam'
 
   post 'users/changepwd'
   post 'users/savefam'
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
   get 'families/myfam'
 
   post 'families/create'
+  patch 'families/update'
 
   #travs
 

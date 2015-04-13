@@ -295,7 +295,7 @@ body { padding-top:64px; }
     <%= notice %>
   </div>
 <% end %>
-<% @acts = ['setup', 'changepwdpage'] %>
+<% @acts = ['changepwdpage', 'account'] %>
 <% if alert != nil && @acts.include?(action_name) %>
   <div class="alert alert-danger alert-dismissable" id="alert" role="alert">
     <%= alert %>

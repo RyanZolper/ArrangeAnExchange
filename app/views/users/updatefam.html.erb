@@ -1,40 +1,19 @@
 <div class="container-fluid">
 <div class="setup" style="background-color:rgba(189, 189, 189, 1);">
 <div>
-<w2>Family Setup</w2>
+<w2>Update Family</w2>
 </div>
-<%= form_for(@fam, {url: {action: "create"}, html: {multipart: "true"}}) do |f| %>
+<%= form_for(@fam, {url: {controller: "families", action: "update"}}) do |f| %>
 
 <div class="row" style="background-color:white;width:100%;margin:auto;">
-  <div class="col-md-6">
+  <div class="col-md-12">
 
     <div class="form-group">
       <w3><%= f.label :name %></w3><br>
       <%= f.text_field :name, placeholder: " The Adams Family " %>
-    </div><br>
-
-    <div style="width:220px;margin-left:auto;margin-right:auto;">
-      <div class="field">
-        <w3><%= f.label :main_house_picture %></w3><br><br>
-        <%= f.file_field :housepic %>
-      </div>
     </div>
-
   </div>
-  <div class="col-md-6">
 
-    <%= f.fields_for :fam_attachments do |y| %>
-
-    <div style="width:320px;margin-left:auto;margin-right:auto;">
-       <div class="field">
-         <w3><%= y.label :more_pictures_of_your_house %></w3><br>
-         <w4>Hint:<br>Select multiple files to upload by holding the "Shift" key when you click each file</w4><br><br>
-         <%= y.file_field :image, :multiple => true, name: "fam_attachments[image][]" %>
-       </div>
-     </div>
-    <% end %><br>
-
-  </div>
 </div>
 
 <div class="row">
@@ -60,7 +39,6 @@
   </div>
 
   <div class="col-md-3"><br>
-
     <div class="form-group">
       <w3><%= f.label :family_size %></w3><br>
       <w3><%= f.select :size, options_for_select(1..10) %></w3>
@@ -152,20 +130,20 @@
   </div>
 </div>
 <w3><br>
-  <div class="form-group">
-    <%= label_tag "Family Life" %><br>
-    <%= f.text_area :bio, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about your family, and what it is like living with them!" %>
-  </div>
+<div class="form-group">
+  <%= label_tag "Family Life" %><br>
+  <%= f.text_area :bio, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about your family, and what it is like living with them!" %>
+</div>
 
-  <div class="form-group">
-    <%= label_tag "Life In Your Area" %><br>
-    <%= f.text_area :lifehere, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about life in your city/town." %>
-  </div>
+<div class="form-group">
+  <%= label_tag "Life In Your Area" %><br>
+  <%= f.text_area :lifehere, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about life in your city/town." %>
+</div>
 
-  <div class="form-group">
-    <%= label_tag "Local Attractions" %><br>
-    <%= f.text_area :attracts, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write about a few cool attractions in your area." %>
-  </div>
+<div class="form-group">
+  <%= label_tag "Local Attractions" %><br>
+  <%= f.text_area :attracts, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write about a few cool attractions in your area." %>
+</div>
 
 </w3>
 

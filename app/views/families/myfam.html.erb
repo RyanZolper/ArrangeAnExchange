@@ -1,7 +1,13 @@
 
 <% @v = 1 %>
-<div class="center"><br>
+<div class="center">
+<br>
   <w1>Your Family Profile</w1><br>
+  <a type="button" class="btn btn-default btn-lg" href="/users/updatefam">
+    Edit Info
+  </a>
+
+<br>
 <w2><%= @fam.tagline %></w2><br>
 <div class="row" style="width:50%;margin:auto;border:none;">
   <div class="col-md-4">
@@ -73,9 +79,16 @@
   </div>
 </div>
 <div class="container-gal">
-  <div class="main-image">
+  <div class="main-image" style="position:relative;display:inline-block;">
     <img src="<%= @fam.housepic %>" alt="Placeholder" height="400" class="house-main">
-  </div>
+    <button type="button" class="btn btn-default btn-lg" style="display:none;" id="changemain" data-toggle="modal" data-target="#mainpicmodal">
+      Change Main Pic
+    </button>
+  </div><br>
+  <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#thumbmodal">
+    Change Other Pics
+  </button>
+<br>
 
   <div class="thumbnails">
     <a href="<%= @fam.housepic %>">
@@ -87,6 +100,7 @@
     </a>
   <% end %>
   </div>
+
 </div>
 <br>
 
@@ -243,3 +257,72 @@
     <% end %>
   </div>
 </div>
+
+<div class="modal fade" id="mainpicmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <w2 class="modal-title" id="myModalLabel">Change Main Image</w2>
+      </div>
+      <div class="modal-body">
+          <%= form_for(@fam, {url: {controller: "families", action: "update"}}) do |f| %>
+
+          <div class="field" style="width:40%;margin:auto;">
+            <%= f.file_field :housepic %>
+          </div><br>
+
+          <div class="actions">
+            <%= f.submit "Update Pic", class: "btn btn-primary btn-block btn-lg" %>
+          </div>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="thumbmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <w2 class="modal-title" id="myModalLabel">Change Other Images</w2><br>
+        <w4> To keep a previous image, enter nothing. </w4>
+      </div>
+      <div class="modal-body">
+          <%= form_for(@fam, {url: {controller: "families", action: "update"}, html: {multipart: "true"}}) do |f| %>
+          <% cnt = 1 %>
+          <%= f.fields_for :fam_attachments do |y| %>
+
+          <div style="width:320px;margin-left:auto;margin-right:auto;">
+             <div class="field">
+               <w3>Pic <%= cnt %></w3>
+               <%= y.file_field :image, name: "fam_attachments[image][#{cnt}]" %>
+             </div><br>
+           </div>
+           <% cnt += 1 %>
+          <% end %><br>
+
+          <div class="actions">
+            <%= f.submit "Update Pic", class: "btn btn-primary btn-block btn-lg" %>
+          </div>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+$(document).ready(function () {
+                $(document).on('mouseenter', '.main-image', function () {
+                    $(this).find("#changemain").show();
+                }).on('mouseleave', '.main-image', function () {
+                    $(this).find("#changemain").hide();
+                });
+            });
+
+</script>

@@ -133,7 +133,8 @@ body { background-color:#428BCA }
     <%= notice %>
   </div>
 <% end %>
-<% if alert != nil %>
+<% @acts = ['myfam', 'setup', 'mytrav'] %>
+<% if alert != nil && @acts.include?(action_name) %>
   <div class="alert alert-danger alert-dismissable" id="alert" role="alert">
     <%= alert %>
   </div>

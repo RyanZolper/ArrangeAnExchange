@@ -150,6 +150,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def updatefam
+    @fam = @current_user.family
+  end
+
 
 
   # PATCH/PUT /users/1
