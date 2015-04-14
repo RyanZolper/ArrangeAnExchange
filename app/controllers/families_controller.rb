@@ -19,7 +19,7 @@ class FamiliesController < ApplicationController
 
   def showfam
     @fam = Family.find(params[:id])
-    @fam_attachments = @fam.fam_attachments.all
+    @fam_attachments = @fam.fam_attachments.order("created_at DESC")
     @hosteds = @fam.hosteds.all
     @rate20 = ((@hosteds.average(:hoststars).to_f) * 4).to_i
     if (((@rate20) / 4.0 ) % 1) == 0
@@ -31,7 +31,7 @@ class FamiliesController < ApplicationController
 
   def myfam
     @fam = @current_user.family
-    @fam_attachments = @fam.fam_attachments.all
+    @fam_attachments = @fam.fam_attachments.order("created_at DESC")
     @hosteds = @fam.hosteds.all
     @rate20 = ((@hosteds.average(:hoststars).to_f) * 4).to_i
     if (((@rate20) / 4.0 ) % 1) == 0
@@ -41,14 +41,18 @@ class FamiliesController < ApplicationController
     end
   end
 
+  def updatepage
+    @fam = @current_user.family
+  end
+
   def update
     @fam = @current_user.family
       if @fam.update(fam_params) && params[:fam_attachments] != nil
-        fa = 1
-        @fam.fam_attachments.each do |fat|
-        unless params[:fam_attachments]['image'][fa] == nil
-          @fam.fam_attachments.update_attribute(:image => params[:fam_attachments]['image'][fa])
-        end
+        fa = 0
+        params[:fam_attachments]['image'].each do |a|
+          unless a == ""
+            @fam.fam_attachments[fa].update_attribute('image', a.to_s)
+          end
           fa += 1
         end
         redirect_to families_myfam_path, notice: 'Family Updated!'
@@ -77,7 +81,7 @@ class FamiliesController < ApplicationController
 
   def create
     @fam = Family.new(fam_params)
-    if params [:region] != nil
+    if params [:region] != ""
       @fam.city << ", "
       @fam.city << params[:region]
     end
@@ -86,7 +90,7 @@ class FamiliesController < ApplicationController
         @pichold = @fam.fam_attachments.create!(:image => a, :family_id => @fam.id)
       end
       @fam.update_attribute('features', params[:family][:features])
-      if params[:otherfts] != nil
+      if params[:otherfts] != ""
         @fam.features << params[:otherfts]
       end
       @current_user.update_attribute('family_id', @fam.id)
@@ -96,7 +100,7 @@ class FamiliesController < ApplicationController
       redirect_to families_home_path
     elsif @fam.save
       @fam.update_attribute('features', params[:family][:features])
-      if params[:otherfts] != nil
+      if params[:otherfts] != ""
         @fam.features << params[:otherfts]
       end
       @current_user.update_attribute('family_id', @fam.id)
@@ -115,7 +119,7 @@ class FamiliesController < ApplicationController
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def fam_params
-        params.require(:family).permit(:name, :profpic, :housepic, :bio, :tagline, :hostdates, :pvtbed, :pvtbath, :beds, :baths, :size, :lifehere, :features, :attracts, :country, :city, :address, :age_range, :morepics, :smokers, :env)
+        params.require(:family).permit(:name, :profpic, :housepic, :bio, :tagline, :hostdates, :pvtbed, :pvtbath, :beds, :baths, :size, :lifehere, :features, :attracts, :country, :city, :address, :age_range, :morepics, :smokers, :env, :fam_attachments_attributes => [:id, :image])
       end
 
 

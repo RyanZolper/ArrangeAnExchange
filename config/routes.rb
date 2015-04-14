@@ -4,16 +4,13 @@ Rails.application.routes.draw do
   #users
 
   root 'users#welcome'
-  get 'users/signup'
   get 'users/check_email'
-  get 'users/loginpage'
   get 'users/login'
   get 'users/logout'
   get 'users/firstloginpage'
   get 'users/mysaves'
   get 'users/changepwdpage'
   get 'users/account'
-  get 'users/updatefam'
 
   post 'users/changepwd'
   post 'users/savefam'
@@ -23,6 +20,8 @@ Rails.application.routes.draw do
   post 'users/firstlogin'
   post 'users/connect'
   post 'users/host_review'
+  post 'users/create'
+  patch 'users/update'
 
   #fams
 
@@ -30,6 +29,7 @@ Rails.application.routes.draw do
   get 'families/home'
   get 'showfam/:id' => 'families#showfam', as: 'showfam'
   get 'families/myfam'
+  get 'families/updatepage'
 
   post 'families/create'
   patch 'families/update'
@@ -42,14 +42,16 @@ Rails.application.routes.draw do
 
   post 'travelers/create'
 
+  #fam_attachments
+
+  post 'fam_attachments/create'
 
 
 
 
 
-  resources :fam_attachments
 
-  resources :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

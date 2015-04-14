@@ -41,17 +41,17 @@
   <div class="col-md-3"><br>
     <div class="form-group">
       <w3><%= f.label :family_size %></w3><br>
-      <w3><%= f.select :size, options_for_select(1..10) %></w3>
+      <w3><%= f.select :size, options_for_select((1..10), @fam.size) %></w3>
     </div>
 
     <div class="form-group">
       <w3><%= f.label :bedrooms %></w3><br>
-      <w3><%= f.select :beds, options_for_select(1..10) %></w3>
+      <w3><%= f.select :beds, options_for_select((1..10), @fam.beds) %></w3>
     </div>
 
     <div class="form-group">
       <w3><%= f.label :bathrooms %></w3><br>
-      <w3><%= f.select :baths, options_for_select(1..10) %></w3>
+      <w3><%= f.select :baths, options_for_select((1..10), @fam.baths) %></w3>
     </div>
   </div>
 </div>

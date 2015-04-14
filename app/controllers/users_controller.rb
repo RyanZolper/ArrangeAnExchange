@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-  end
+
 
   def welcome
     @user= User.new
@@ -12,8 +8,7 @@ class UsersController < ApplicationController
     @temp = @random
   end
 
-  # GET /users/1
-  # GET /users/1.json
+
   def show
   end
 
@@ -34,15 +29,6 @@ class UsersController < ApplicationController
   end
 
   def setupme
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
   end
 
 
@@ -82,8 +68,6 @@ class UsersController < ApplicationController
   end
 
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
     @temp = params[:temp]
@@ -150,14 +134,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def updatefam
-    @fam = @current_user.family
-  end
 
 
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     @user = @current_user
       if @user.update(user_params)
@@ -167,23 +146,17 @@ class UsersController < ApplicationController
       end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to users_url, notice: 'Account Deleted.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :password_digest, :family_id, :country)
     end
