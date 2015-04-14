@@ -6,6 +6,7 @@
 #  name       :string
 #  profpic    :string
 #  housepic   :string
+#  bio        :text
 #  tagline    :string
 #  hostdates  :string
 #  pvtbed     :boolean
@@ -13,7 +14,9 @@
 #  beds       :integer
 #  baths      :integer
 #  size       :integer
+#  lifehere   :text
 #  features   :string           default("{}"), is an Array
+#  attracts   :text
 #  country    :string
 #  city       :string
 #  address    :string
@@ -23,9 +26,7 @@
 #  env        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  bio        :text
-#  lifehere   :text
-#  attracts   :text
+#  show       :boolean          default("true")
 #
 
 require 'test_helper'

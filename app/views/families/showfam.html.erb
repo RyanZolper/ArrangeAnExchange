@@ -1,7 +1,7 @@
 
 <% @v = 1 %>
 <div class="center"><br>
-<w2><%= @fam.tagline %></w2><br>
+<span class="w2"><%= @fam.tagline %></span><br>
 <div class="row" style="width:50%;margin:auto;border:none;">
   <div class="col-md-4">
     <div id="save_unsave<%= @fam.id %>">
@@ -34,7 +34,7 @@
     </button>
   </div>
 </div>
-<w3>Host Rating: <%= @rate5 %>/5 (<%= @hosteds.count %> reviews)</w3>
+<span class="w3">Host Rating: <%= @rate5 %>/5 (<%= @hosteds.count %> reviews)</span>
 
 <br>
 
@@ -92,81 +92,83 @@
 <div class="container-fluid">
 
   <div class="center">
-    <w2>Our family is located in <%= @fam.city %>, <%= @fam.country %>.</w2>
+    <span class="w2">Our family is located in <%= @fam.city %>, <%= @fam.country %>.</span>
 
     <br><br>
 
-    <w1>About staying here</w1>
-  </div>
-
-  <div class="row" style="background-color:rgba(189, 189, 189, 1);">
-    <div class="center">
-      <w2>Our Family</w2><br><br>
+    <span class="w1">About staying here</span>
     </div>
 
-    <w3><%= @fam.bio %></w3>
+    <div class="row center" style="background-color:rgba(189, 189, 189, 1);">
+      <span class="w2">Our Family</span><br>
+
+      <span class="w3"><%= @fam.bio %></span>
+    </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="center"><w1>Our Home</w1><br><br>
 
-    <w2>General Info</w2><br><br>
-      <w3><%= @fam.size %> family members<br><br>
+    <div class="row">
+      <div class="col-md-6 center">
+      <span class="w1">Our Home</span><br><br>
+
+      <span class="w2">General Info</span><br>
+      <div class="w3"><%= @fam.size %> family members<br>
       <%= @fam.beds %> beds,
-      <%= @fam.baths %> baths</w3>
-      <br><br><br>
+      <%= @fam.baths %> baths<br>
 
-      <w3>Smokers?
+
+      Smokers?
 
       <% if @fam.smokers == true %>
-        Yes
+      Yes
       <% else %>
-        No
-      <% end %></w3>
-      <br><br>
-      <w2>Traveler Privacy</w2><br><br>
+      No
+      <% end %></div><br>
 
-      <w3>Private bedroom?<br><br>
+      <span class="w2">Traveler Privacy</span><br>
 
-      <% if @fam.pvtbed == true %>
+      <div class="w3">
+
+        Private bedroom?<br>
+
+        <% if @fam.pvtbed == true %>
         Yes!
-      <% else %>
+        <% else %>
         No
-      <% end %>
-      <br><br>
-      <w3>Private bathroom?<br><br>
+        <% end %>
+        <br>
+        Private bathroom?<br>
 
-      <% if @fam.pvtbath = true %>
+        <% if @fam.pvtbath = true %>
         Yes!
-      <% else %>
+        <% else %>
         No
-      <% end %>
-    </w3><br><br>
-    <w2>Special Features</w2><br><br>
+        <% end %>
+      </div><br>
+        <span class="w2">Special Features</span><br>
 
-      <% @fam.features.each do |f| %>
-        <%= f.upcase %>!<br>
-      <% end %>
-      <br><br></div>
+        <% @fam.features.each do |f| %>
+        <span class="w4"><%= f.upcase %>!</span><br>
+        <% end %>
+        <br><br>
     </div>
     <div class="col-md-6">
-  <div class="center"><w1>Our Area</w1><br><br>
+      <div class="center"><span class="w1">Our Area</span><br><br>
 
-    <w2>About Life Here</w2><br><br>
+        <span class="w2">About Life Here</span><br><br>
 
-    <w3><%= @fam.lifehere %></w3><br><br>
+        <span class="w3"><%= @fam.lifehere %></span><br><br>
 
-    <w2>Attractions</w2><br><br>
+        <span class="w2">Attractions</span><br><br>
 
-    <w3><%= @fam.attracts %></w3><br><br>
+        <span class="w3"><%= @fam.attracts %></span><br><br>
 
-      <w2>Local Environment</w2><br><br>
+        <span class="w2">Local Environment</span><br><br>
 
-      <w3><%= @fam.env %></w3><br><br>
+        <span class="w3"><%= @fam.env %></span><br><br>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 
@@ -175,14 +177,14 @@
 <div class="container-fluid">
 
   <div class="row center">
-    <w2>This family's travelers</w2><br>
+    <span class="w2">This family's travelers</span><br>
 
     <% @fam.travelers.each do |trav| %>
 
       <div class="col-md-4">
-        <w2>Age: <%= trav.age %></w2><br>
+        <span class="w2">Age: <%= trav.age %></span><br>
         <%= image_tag("#{trav.pic}", width: '300') %><br><br>
-        <w3><%= trav.tagline %></w3><br><br>
+        <span class="w3"><%= trav.tagline %></span><br><br>
         <%= link_to "View Profile", showtrav_path(trav), class: "btn btn-primary btn-lg" %>
 
       </div>
@@ -200,7 +202,7 @@
 
   <div class="row center">
 
-    <w2>Previously Hosted</w2><br><br>
+    <span class="w2">Previously Hosted</span><br><br>
     <% @x = 1 %>
     <% @hosteds.each do |trav| %>
     <% @v = 1 %>
@@ -210,9 +212,9 @@
       <% @rate = ((trav.connections.find_by(family_id: @fam.id).hoststars)) %>
     <% end %>
       <div class="col-md-4">
-        <w2>Age: <%= trav.age %></w2><br>
+        <span class="w2">Age: <%= trav.age %></span><br>
         <%= image_tag("#{trav.pic}", width: '300') %><br><br>
-        <w4><%= trav.connections.find_by(family_id: @fam.id).hostreview %></w4><br><br>
+        <span class="w4"><%= trav.connections.find_by(family_id: @fam.id).hostreview %></span><br><br>
         Host rating: <%= @rate %>/5
         <br><br>
 

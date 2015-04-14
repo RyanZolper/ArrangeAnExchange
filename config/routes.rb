@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  ActiveAdmin.routes(self)
+
   #users
 
   root 'users#welcome'
@@ -33,6 +35,9 @@ Rails.application.routes.draw do
 
   post 'families/create'
   patch 'families/update'
+  patch 'families/show'
+  patch 'families/hide'
+
 
   #travs
 

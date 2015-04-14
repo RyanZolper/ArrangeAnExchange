@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def welcome
     @user= User.new
     @random = Faker::Number.number(10)
-    @temp = @random
+    session[:temp] = @random
   end
 
 
@@ -24,8 +24,6 @@ class UsersController < ApplicationController
       session[:current_user_id] = nil
     end
     @user = User.new
-    @random = Faker::Number.number(10)
-    @temp = @random
   end
 
   def setupme
@@ -70,8 +68,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @temp = params[:temp]
-    if @user.save
+    @temp = session[:temp]
+    if @user.save(user_params)
       render js: %(window.location.pathname='#{users_check_email_path}')
       UserMailer.signup_email(@user, @temp).deliver_later
       session[:current_user_id] = @user.id
@@ -82,6 +80,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
 
   def loginpage
     @user = User.new
@@ -118,6 +117,7 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
       redirect_to users_changepwdpage_path
+      @user.update_attribute('changedpwd', 'true')
       session[:current_user_id] = @user.id
     else redirect_to :back, alert: "Try Again"
     end
@@ -133,7 +133,6 @@ class UsersController < ApplicationController
     else redirect_to :back, alert: "Try Again"
     end
   end
-
 
 
 

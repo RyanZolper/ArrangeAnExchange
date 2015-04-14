@@ -1,7 +1,7 @@
 <div class="container-fluid">
 <div class="setup" style="background-color:rgba(189, 189, 189, 1);">
 <div>
-<w2>Update Family</w2>
+<span class="w2">Update Family</span>
 </div>
 <%= form_for(@fam, {url: {controller: "families", action: "update"}}) do |f| %>
 
@@ -9,7 +9,7 @@
   <div class="col-md-12">
 
     <div class="form-group">
-      <w3><%= f.label :name %></w3><br>
+      <span class="w3"><%= f.label :name %></span><br>
       <%= f.text_field :name, placeholder: " The Adams Family " %>
     </div>
   </div>
@@ -19,17 +19,17 @@
 <div class="row">
   <div class="col-md-9">
     <div class="form-group">
-      <w3><%= f.label :tagline %></w3><br><br>
+      <span class="w3"><%= f.label :tagline %></span><br><br>
       <%= f.text_field :tagline, class: "form-control", placeholder: "Come stay with us in France and eat croissants!" %>
     </div><br>
     <div class="row">
       <div class="col-md-6">
-        <w3><%= f.label :city %></w3><br>
+        <span class="w3"><%= f.label :city %></span><br>
         <%= f.text_field :city, placeholder: " Paris " %>
       </div>
 
       <div class="col-md-6">
-        <w3><%= label_tag :state_or_region %></w3><br>
+        <span class="w3"><%= label_tag :state_or_region %></span><br>
         <%= text_field_tag 'region', nil, placeholder: " (If applicable)" %>
       </div>
     </div>
@@ -40,18 +40,18 @@
 
   <div class="col-md-3"><br>
     <div class="form-group">
-      <w3><%= f.label :family_size %></w3><br>
-      <w3><%= f.select :size, options_for_select((1..10), @fam.size) %></w3>
+      <span class="w3"><%= f.label :family_size %></span><br>
+      <span class="w3"><%= f.select :size, options_for_select((1..10), @fam.size) %></span>
     </div>
 
     <div class="form-group">
-      <w3><%= f.label :bedrooms %></w3><br>
-      <w3><%= f.select :beds, options_for_select((1..10), @fam.beds) %></w3>
+      <span class="w3"><%= f.label :bedrooms %></span><br>
+      <span class="w3"><%= f.select :beds, options_for_select((1..10), @fam.beds) %></span>
     </div>
 
     <div class="form-group">
-      <w3><%= f.label :bathrooms %></w3><br>
-      <w3><%= f.select :baths, options_for_select((1..10), @fam.baths) %></w3>
+      <span class="w3"><%= f.label :bathrooms %></span><br>
+      <span class="w3"><%= f.select :baths, options_for_select((1..10), @fam.baths) %></span>
     </div>
   </div>
 </div>
@@ -60,9 +60,9 @@
   <div class="col-md-7" style="text-align:left;">
     <div class="row">
       <div style="text-align:center;">
-      <w3>Mark some of your home's features</w3><br><br>
+      <span class="w3">Mark some of your home's features</span><br><br>
       </div>
-      <w3><div class="col-md-4">
+      <span class="w3"><div class="col-md-4">
         <div class="form-group">
           <%= f.check_box :features, {:multiple => true}, "pool", nil %>
           <%= f.label :pool %>
@@ -96,7 +96,7 @@
           <br><br>
           <%= f.check_box :features, {:multiple => true}, "horses", nil %>
           <%= f.label :horses %>
-        </div></w3>
+        </div></span>
       </div>
 
     </div>
@@ -104,7 +104,7 @@
 
   <div class="col-md-5">
 
-    <w3><div class="form-group">
+    <span class="w3"><div class="form-group">
       <%= f.label :does_your_family_have_smokers? %><br />
       <%= f.label :smokers, "Yes", :value => "true"  %>
       <%= f.radio_button :smokers, true %>
@@ -126,10 +126,10 @@
       <%= f.radio_button :pvtbath, true %>
       <%= f.label :pvtbath, "No", :value => "false" %>
       <%= f.radio_button :pvtbath, false, :checked => true %>
-    </div></w3>
+    </div></span>
   </div>
 </div>
-<w3><br>
+<span class="w3"><br>
 <div class="form-group">
   <%= label_tag "Family Life" %><br>
   <%= f.text_area :bio, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about your family, and what it is like living with them!" %>
@@ -145,7 +145,7 @@
   <%= f.text_area :attracts, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write about a few cool attractions in your area." %>
 </div>
 
-</w3>
+</span>
 
 
 <div class="actions">

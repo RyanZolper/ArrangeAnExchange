@@ -1,0 +1,15 @@
+<% @fam = @current_user.family %>
+
+<% if @fam.showing == true %>
+
+  <%= form_tag '/families/hide', method: :patch, remote: true do %>
+    <%= submit_tag("Hide", class: "btn btn-default btn-lg") %>
+  <% end %>
+
+<% else %>
+
+  <%= form_tag '/families/show', method: :patch, remote: true do %>
+    <%= submit_tag("Show", class: "btn btn-default btn-lg") %>
+  <% end %>
+
+<% end %>

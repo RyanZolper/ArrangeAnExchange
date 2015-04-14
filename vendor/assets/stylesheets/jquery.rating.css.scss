@@ -11,12 +11,6 @@ div {
     background: transparent;
     overflow: hidden;
   }
-  &.rating-cancel {
-    background: url(delete.gif) no-repeat 0 -16px;
-    a {
-      background: url(delete.gif) no-repeat 0 -16px;
-    }
-  }
   &.star-rating {
     background: image-url("housestar.png") no-repeat 0 0px;
     a {

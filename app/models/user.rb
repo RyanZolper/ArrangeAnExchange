@@ -7,9 +7,11 @@
 #  email           :string
 #  country         :string
 #  password_digest :string
+#  family_id       :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  family_id       :integer
+#  admin           :boolean
+#  changedpwd      :boolean          default("false")
 #
 
 class User < ActiveRecord::Base

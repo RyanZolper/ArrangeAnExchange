@@ -1,0 +1,229 @@
+
+<% if current_page?(root_url) %>
+  <% @h = '55' %>
+<% else @h = '65' %>
+<% end %>
+
+<% nonav = ['check_email', 'setup', 'changepwdpage', 'firstloginpage'] %>
+
+<% if nonav.include?(action_name) %>
+
+<% else %>
+
+
+<% if @current_user != nil %>
+
+  <!-- user not fixed -->
+
+  <% if controller_name == 'users' && action_name != 'mysaves' %>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/families/home">
+            <%= image_tag "AAElogo.png", height: @h %>
+          </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <% if current_page?(root_url) == false %>
+            <div class="navbar-form">
+              <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
+
+              <span class="n1"><%= label_tag(:q, "Where do you want to go?", style: 'color:white') %></span>
+                <%= text_field_tag(:q, nil, id: "country-input") %>
+                &nbsp;&nbsp;
+
+                <span class="n1"><%= label_tag(:s, "How old are you?", style: 'color:white') %></span>&nbsp;&nbsp;
+                <%= select_tag :s, options_for_select(13..28) %>
+                &nbsp;&nbsp;
+                <%= submit_tag("Search", class: "btn btn-default") %>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="navbar-text" style="color:white">Welcome to Arrange An Exchange!</p>
+          <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/users/mysaves"><span class="n2">My Saves</span></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="nd1">My Account</span><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/users/account"><span class="n2">Account Info</span></a></li>
+                <li><a href="/families/myfam"><span class="n2">My Family</span></a></li>
+                <li><a href="/travelers/mytrav"><span class="n2">My Travelers</span></a></li>
+                <li><a href="/users/logout"><span class="n2">Log Out</span></a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+  <% else %>
+
+    <!--user fixed -->
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/families/home">
+            <%= image_tag "AAElogo.png", height: @h %>
+          </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <div class="navbar-form">
+            <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
+
+            <span class="n1"><%= label_tag(:q, "Where do you want to go?", style: 'color:white') %></span>
+              <%= text_field_tag(:q, nil, id: "country-input") %>
+              &nbsp;&nbsp;
+
+              <span class="n1"><%= label_tag(:s, "How old are you?", style: 'color:white') %>&nbsp;&nbsp;</span>
+              <span class="w4"><%= select_tag :s, options_for_select(13..28) %></span>
+              &nbsp;&nbsp;
+              <%= submit_tag("Search", class: "btn btn-default") %>
+            <% end %>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <% if action_name == 'mysaves' %>
+              <li><a href="/families/home"><span class="n2">Recent Families</span></a></li>
+            <% else %>
+              <li><a href="/users/mysaves"><span class="n2">My Saves</span></a></li>
+            <% end %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="nd1">My Account</span><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/users/account"><span class="n2">Account Info</span></a></li>
+                <li><a href="/families/myfam"><span class="n2">My Family</span></a></li>
+                <li><a href="/travelers/mytrav"><span class="n2">My Travelers</span></a></li>
+                <li><a href="/users/logout"><span class="n2">Log Out</span></a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+  <% end %>
+
+<% else %>
+
+  <% if current_page?(root_url) %>
+
+  <!--no user not fixed -->
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/families/home">
+            <%= image_tag "AAElogo.png", height: @h %>
+          </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <% if current_page?(root_url) == false %>
+            <div class="navbar-form">
+              <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
+
+                <%= label_tag(:q, "Where do you want to go?", style: 'color:white') %>
+                <span class="n1"><%= text_field_tag(:q, nil, id: "country-input") %></span>
+                &nbsp;&nbsp;
+
+                <span class="n1"><%= label_tag(:s, "How old are you?", style: 'color:white') %></span>
+                <%= text_field_tag(:s) %>
+
+                <%= submit_tag("Search", class: "btn btn-default") %>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="navbar-text" style="color:white">Welcome to Arrange an Exchange!</p>
+          <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><button type="button" class="btn btn-default navbar-btn" id="login" data-toggle="modal" data-target="#loginModal">
+              <span class="nl">Log In</span>
+            </button>&nbsp;&nbsp;</li>
+            <li><button type="button" class="btn btn-default navbar-btn" id="signup" data-toggle="modal" data-target="#signupModal">
+              <span class="nl">Sign Up!</spac>
+            </button></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+  <% else %>
+  <!-- no user fixed -->
+
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/families/home">
+            <%= image_tag "AAElogo.png", height: @h %>
+          </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <div class="navbar-form">
+            <%= form_tag(families_home_path, method: "get", class: "navbar-form navbar-left") do %>
+
+              <span class="n1"><%= label_tag(:q, "Where do you want to go?") %></span>
+              <%= text_field_tag(:q, nil, id: "country-input") %>
+              &nbsp;&nbsp;
+              <span class="n1"><%= label_tag(:s, "How old are you?") %></span>&nbsp;&nbsp;
+              <%= select_tag :s, options_for_select(13..28) %>
+              &nbsp;&nbsp;
+              <%= submit_tag("Search", class: "btn btn-default") %>
+            <% end %>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+              <li><button type="button" class="btn btn-default navbar-btn" id="login" data-toggle="modal" data-target="#loginModal">
+                <span class="nl">Log In</span>
+              </button>&nbsp;&nbsp;</li>
+              <li><button type="button" class="btn btn-default navbar-btn" id="signup" data-toggle="modal" data-target="#signupModal">
+                <span class="nl">Sign Up!</span>
+              </button>&nbsp;&nbsp;</li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+
+  <% end %>
+
+<% end %>
+<% end %>

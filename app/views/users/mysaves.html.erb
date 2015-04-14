@@ -7,7 +7,7 @@
 
   <div class="row" style="background-color:rgba(143, 143, 143, 0.25);">
     <div class="col-md-12" style="text-align:center;">
-      <w2>My Saved Families</w2>
+      <span class="w2">My Saved Families</span>
     </div>
   </div>
 
@@ -37,17 +37,17 @@
         </div>
         <div class="col-md-10">
           <% if @current_user != nil %>
-            <w2><%= link_to(family.tagline, showfam_path(family), style: "color:#428BCA;weight:bold;")  %></w2>
+            <span class="w2"><%= link_to(family.tagline, showfam_path(family), style: "color:#428BCA;weight:bold;")  %></span>
           <% else %>
-            <w2><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></w2>
+            <span class="w2"><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></span>
           <% end %>
           <div class="row"><br>
             <div class="col-md-4">
-              <w3><%= family.city %>,
+              <span class="w3"><%= family.city %>,
               <%= family.country %><br>
               <%= family.size %> family members<br>
               <%= family.beds %> beds,
-              <%= family.baths %> baths</w3>
+              <%= family.baths %> baths</span>
             </div>
 
             <div class="col-md-4" style="text-align:center;">
@@ -71,7 +71,7 @@
                 <% end %>
                 <% @v = 0 %>
               </div><br>
-              <w3>Host Rating: <%= @rate %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
+              <span class="w3">Host Rating: <%= @rate %>/5<br>(<%= family.hosteds.count %> reviews)</span>
             </div>
 
             <div class="col-md-4">
@@ -99,12 +99,12 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <w2 class="modal-title" id="myModalLabel">Connect with this family in <%= family.country %>!</w2>
+              <div class="modal-title w2" id="myModalLabel">Connect with this family in <%= family.country %>!</div>
             </div>
             <div class="modal-body">
-              <w3>This family will receive an email from you that looks like this:</w3><br><br>
+              <span class="w3">This family will receive an email from you that looks like this:</span><br><br>
 
-              <w4>Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
+              <span class="w4">Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
 
               The body of the email will be whatever you enter below!<br>
 
@@ -112,7 +112,7 @@
 
               <%= form_tag users_connect_path do %>
                 <textarea rows="10" cols="75" name="content" placeholder="Hint: Friendlyness of connection email and connection success are directly correlated!"></textarea>
-              </w4><%= hidden_field_tag 'user_id', @current_user.id %>
+              </span><%= hidden_field_tag 'user_id', @current_user.id %>
                 <%= hidden_field_tag 'fam_id', family.id %>
                 <br>
                 <div style="width:70%;margin:auto;">
@@ -130,16 +130,16 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <w2 class="modal-title" id="myModalLabel">Stayed here? Review them!</w2>
+              <div class="modal-title w2" id="myModalLabel">Stayed here? Review them!</div>
             </div>
             <div class="modal-body">
-              <w3>This family will receive a review from you that they must approve.</w3><br><br>
+              <span class="w3">This family will receive a review from you that they must approve.</span><br><br>
 
               <%= form_tag users_host_review_path do %>
 
-                <w3 style="text-align:center;">Who traveled here?</w3><br>
+                <div class="w3 center">Who traveled here?</div><br>
 
-                <w3><select name="trav_id" id="trav_id"></w3>
+                <span class="w3"><select name="trav_id" id="trav_id"></span>
                 <div class="row">
                   <% @current_user.travelers.each do |t| %>
                     <div style="display:inline-block; text-align:center;">
@@ -175,11 +175,11 @@
                 </div><br>
               </div>
                 <div style="text-align:center;width:100%">
-                  <w3 id="clicked"><span id="hover-rate">Select a rating</span></w3><w3> out of 5</w3>
+                  <span class="w3" id="clicked"><span id="hover-rate">Select a rating</span></span><span class="w3"> out of 5</span>
                 </div>
 
 
-                <w4><textarea class="form-control" style="width:95%;margin:auto;" rows="10" cols="75" name="review" placeholder="Hint: Be honest :) but host families must approve all reviews and ratings."></textarea></w4>
+                <span class="w4"><textarea class="form-control" style="width:95%;margin:auto;" rows="10" cols="75" name="review" placeholder="Hint: Be honest :) but host families must approve all reviews and ratings."></textarea></span>
                 <%= hidden_field_tag 'user_id', @current_user.id %>
                 <%= hidden_field_tag 'fam_id', family.id %>
                 <br>

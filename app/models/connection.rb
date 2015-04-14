@@ -5,12 +5,12 @@
 #  id          :integer          not null, primary key
 #  family_id   :integer
 #  traveler_id :integer
-#  hoststars   :integer
-#  travstars   :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
 #  hostreview  :text
 #  travreview  :text
+#  hoststars   :float
+#  travstars   :float
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 class Connection < ActiveRecord::Base

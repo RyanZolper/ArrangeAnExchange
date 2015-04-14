@@ -5,20 +5,20 @@ class FamiliesController < ApplicationController
     @temp = @random
     @user = User.new
     if @current_user != nil
-      @famils = Family.where.not(id: @current_user.family_id)
+      @famils = Family.showing.where.not(id: @current_user.family_id)
     else
-      @famils = Family.all
+      @famils = Family.showing
     end
 
     if params[:q]
-      @fams = @famils.search([params[:q], params[:s]]).order("created_at DESC").page params[:page]
+      @fams = @famils.includes(:connections).search([params[:q], params[:s]]).order("created_at DESC").page params[:page]
     else
-      @fams = @famils.order("created_at DESC").page params[:page]
+      @fams = @famils.includes(:connections).order("created_at DESC").page params[:page]
     end
   end
 
   def showfam
-    @fam = Family.find(params[:id])
+    @fam = Family.includes(:connections, :hosteds).find(params[:id])
     @fam_attachments = @fam.fam_attachments.order("created_at DESC")
     @hosteds = @fam.hosteds.all
     @rate20 = ((@hosteds.average(:hoststars).to_f) * 4).to_i
@@ -38,6 +38,20 @@ class FamiliesController < ApplicationController
       @rate5 = (((@rate20) / 4.0 ).to_i)
     else
       @rate5 = ((@rate20) / 4.0 )
+    end
+  end
+
+  def show
+    @current_user.family.update_attribute('showing', true)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def hide
+    @current_user.family.update_attribute('showing', false)
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -119,7 +133,7 @@ class FamiliesController < ApplicationController
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def fam_params
-        params.require(:family).permit(:name, :profpic, :housepic, :bio, :tagline, :hostdates, :pvtbed, :pvtbath, :beds, :baths, :size, :lifehere, :features, :attracts, :country, :city, :address, :age_range, :morepics, :smokers, :env, :fam_attachments_attributes => [:id, :image])
+        params.require(:family).permit(:name, :profpic, :housepic, :bio, :tagline, :hostdates, :pvtbed, :pvtbath, :beds, :baths, :size, :lifehere, :features, :attracts, :country, :city, :address, :age_range, :morepics, :smokers, :env, :show, :fam_attachments_attributes => [:id, :image])
       end
 
 

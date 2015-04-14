@@ -1,15 +1,15 @@
 <% @travs.each do |trav| %>
 
 <div class="center" style="width:70%;margin:auto;">
-<w2>Age: <%= trav.age %></w2>
+<span class="w2">Age: <%= trav.age %></span>
 <br>
 <%=image_tag trav.pic, style: "height:300px;margin:auto;" %>
 <br><br>
-<w1>About Me</w1><br><br>
-<w2><%= trav.tagline %></w2>
+<span class="w1">About Me</span><br><br>
+<span class="w2"><%= trav.tagline %></span>
 <br><br>
 
-<w3><%= trav.bio %></w3>
+<span class="w3"><%= trav.bio %></span>
 <br><br>
 <%= link_to "Back to Family", showfam_path(trav.family), class: "btn btn-primary btn-lg" %>
 </div>

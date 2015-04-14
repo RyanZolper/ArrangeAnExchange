@@ -1,18 +1,18 @@
 <div class="setup" style="width:50%;">
-<w2>Welcome to Arrange an Exchange!</w2>
+<span class="w2">Welcome to Arrange an Exchange!</span>
 <br><br><br>
-<w3>Please enter your email and temporary password<br><br>
+<span class="w3">Please enter your email and temporary password<br><br>
 <%= form_for @user, url: {action: "firstlogin"} do |f| %>
   <div class="field">
     <%= f.label :email %><br>
-    <%= f.search_field :email, class: "form-control", value: "#{@current_user.email}" %>
+    <%= f.search_field :email, class: "form-control", style: 'width:40%;margin:auto;', value: "#{@current_user.email}" %>
   </div><br>
   <div class="field">
     <%= f.label :password %><br>
-    <%= f.password_field :password, class: "form-control" %>
+    <%= f.password_field :password, style: 'width:40%;margin:auto;', class: "form-control" %>
   </div><br>
   <div class="actions" style="width:40%;margin:auto;">
     <%= f.submit "Log In", class: "btn btn-primary btn-lg btn-block" %>
   </div>
-<% end %></w3>
+<% end %></span>
 </div>

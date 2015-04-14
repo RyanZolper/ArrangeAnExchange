@@ -6,6 +6,7 @@
 #  name       :string
 #  profpic    :string
 #  housepic   :string
+#  bio        :text
 #  tagline    :string
 #  hostdates  :string
 #  pvtbed     :boolean
@@ -13,7 +14,9 @@
 #  beds       :integer
 #  baths      :integer
 #  size       :integer
+#  lifehere   :text
 #  features   :string           default("{}"), is an Array
+#  attracts   :text
 #  country    :string
 #  city       :string
 #  address    :string
@@ -23,9 +26,7 @@
 #  env        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  bio        :text
-#  lifehere   :text
-#  attracts   :text
+#  show       :boolean          default("true")
 #
 
 class Family < ActiveRecord::Base
@@ -37,6 +38,7 @@ class Family < ActiveRecord::Base
   has_many :connections
   has_and_belongs_to_many :interesteds, class_name: "User", join_table: "save_interest", inverse_of: :saves
   has_many :hosteds, :through => :connections, :source => :traveler
+  scope :showing, -> { where(show: true) }
 
   def self.search(query)
     @a = ["Anywhere!", ""]

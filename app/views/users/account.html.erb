@@ -1,15 +1,20 @@
-Account Info:
-<br><br>
-  Email:
-  <br><br>
-  <%= @user.email %>
-  <br><br>
-Your Info:
-<br><br>
-  Name:
-  <br><br>
-  <%= @user.name %>
-  <br><br>
-  Country:
-  <br><br>
-  <%= @user.country %>
+<div class="container-fluid">
+  <div class="center setup">
+
+    <span class="w1">Account Info</span>
+    <br><br>
+      <span class="w2">Email</span>
+      <br><br>
+      <span class="w3"><%= @user.email %></span>
+      <br><br>
+    <span class="w1">Your Info</span>
+    <br><br>
+      <span class="w2">Name</span>
+      <br><br>
+      <span class="w3"><%= @user.name %></span>
+      <br><br>
+      <span class="w2">Country</span>
+      <br><br>
+      <%= @user.country %>
+  </div>
+</div>

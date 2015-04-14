@@ -3,16 +3,16 @@
 
     <%= form_tag(families_home_path, method: "get") do %>
 
-      <w1><%= label_tag(:q, "Where do you want to go?") %></w1><br>
+      <span class="w1"><%= label_tag(:q, "Where do you want to go?") %></span><br>
       <%= text_field_tag(:q, nil, {id: "country-input", size: "30"}) %><br><br>
-      <w2><%= label_tag(:s, "How old are you?") %></w2><w2><br><span id="ageSliderVal">18</span> years old<br></w2>
-      <w4>13</w4> <%= text_field_tag(:s, 18, {id: 'age', type: 'text',
+      <span class="w2"><%= label_tag(:s, "How old are you?") %></span><span class="w2"><br><span id="ageSliderVal">18</span> years old<br></span>
+      <span class="w4">13</span> <%= text_field_tag(:s, 18, {id: 'age', type: 'text',
                        data: {'slider-id' => 'ageSlider',
                               'slider-min' => '13',
                               'slider-max' => '28',
                               'slider-tooltip' => 'hide',
                               'slider-step' => '1',
-                              'slider-value' => '18' }}) %> <w4>28</w4><br><br>
+                              'slider-value' => '18' }}) %> <span class="w4">28</span><br><br>
       <%= submit_tag("Search", class: "btn btn-primary btn-lg") %>
     <% end %>
 

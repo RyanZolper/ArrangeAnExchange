@@ -17,9 +17,9 @@
       <div class="row" style="text-align:center;<%= @bkg %>">
         <div class="col-md-12">
           <% if @current_user != nil %>
-            <w2><%= link_to(family.tagline, showfam_path(family), style: "color:#428BCA;weight:bold;")  %></w2>
+            <span class="w2"><%= link_to(family.tagline, showfam_path(family), style: "color:#428BCA;weight:bold;")  %></span>
           <% else %>
-            <w2><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></w2>
+            <span class="w2"><%= link_to family.tagline, "#", {data: {toggle: "modal", target: "#nouserModal"}, style: "color:#428BCA;weight:bold;"} %></span>
           <% end %>
         </div>
       </div>
@@ -28,17 +28,17 @@
             <%= image_tag("#{family.housepic.bigthumb}", class: "img-rounded", width: '100%' ) %>
         </div>
         <div class="col-md-4" style="text-align:center;">
-          <w3><%= family.city %>,
+          <span class="w3"><%= family.city %>,
           <%= family.country %><br>
           <%= family.size %> family members<br>
           <%= family.beds %> beds,
-          <%= family.baths %> baths</w3>
+          <%= family.baths %> baths</span>
         </div>
 
         <div class="col-md-2" style="text-align:center;">
           <div class="stars">
           <% @v = 1 %>
-          <% @rate20 = (((family.hosteds.average(:hoststars)) * 4).to_i) %>
+          <% @rate20 = (((family.connections.average(:hoststars)) * 4).to_i) %>
           <% 20.times do %>
               <% if @rate20 == @v %>
                 <% @c = ' checked="checked"' %>
@@ -56,7 +56,7 @@
             <% end %>
             <% @v = 0 %>
           </div><br>
-          <w3>Host Rating: <%= @rate %>/5<br>(<%= family.hosteds.count %> reviews)</w3>
+          <span class="w3">Host Rating: <%= @rate %>/5<br>(<%= family.connections.count %> reviews)</span>
         </div>
 
         <div class="col-md-3">
@@ -77,12 +77,12 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <w2 class="modal-title" id="myModalLabel">Connect with this family in <%= family.country %>!</w2>
+                      <span class="modal-title w2" id="myModalLabel">Connect with this family in <%= family.country %>!</span>
                     </div>
                     <div class="modal-body">
-                      <w3>This family will receive an email from you that looks like this:</w3><br><br>
+                      <span class="w3">This family will receive an email from you that looks like this:</span><br><br>
 
-                      <w4>Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
+                      <span class="w4">Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
 
                       The body of the email will be whatever you enter below!<br>
 
@@ -90,7 +90,7 @@
 
                       <%= form_tag users_connect_path do %>
                         <textarea rows="10" cols="75" name="content" placeholder="Hint: Friendlyness of connection email and connection success are directly correlated!"></textarea>
-                      </w4><%= hidden_field_tag 'user_id', @current_user.id %>
+                      </span><%= hidden_field_tag 'user_id', @current_user.id %>
                         <%= hidden_field_tag 'fam_id', family.id %>
                         <br>
                         <div style="width:70%;margin:auto;">
@@ -127,29 +127,29 @@
         <div class="modal-content">
           <div class="modal-header" style="text-align:center">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <w3 class="modal-title" id="myModalLabel">Please Log In or Sign Up for "View", "Save" and "Connect" features</w3>
+            <div class="modal-title w3" id="myModalLabel">Please Log In or Sign Up for "View", "Save" and "Connect" features</div>
             <div id="nouser_alert">
             </div>
           </div>
           <div class="modal-body">
             <div class="row" style="text-align:center">
               <div class="col-md-6" style="border-right:2px;">
-                <w3>Join Now To Start Your Adventure!</w3><br><br>
+                <span class="w3">Join Now To Start Your Adventure!</span><br><br>
 
                 <%= form_for @user, url: {controller: "users", action: "create"}, remote: true do |f| %>
 
                   <div class="field">
-                    <w3><%= f.label :name %></w3><br>
+                    <span class="w3"><%= f.label :name %></span><br>
                     <%= f.text_field :name, class: "form-control" %>
                   </div><br>
 
                   <div class="field">
-                    <w3><%= f.label "Country of Residence" %></w3><br>
+                    <span class="w3"><%= f.label "Country of Residence" %></span><br>
                     <%= f.text_field :country, class: "form-control", id: "country-signup2", size: "42" %>
                   </div><br>
 
                   <div class="field">
-                    <w3><%= f.label :email %></w3><br>
+                    <span class="w3"><%= f.label :email %></span><br>
                     <%= f.text_field :email, class: "form-control" %>
                   </div>
                     <div class="actions">
@@ -163,17 +163,17 @@
                 <% end %>
               </div>
               <div class="col-md-6">
-                <w3>Log In to Continue</w3>
+                <span class="w3">Log In to Continue</span>
                 <br><br><br><br>
                 <%= form_for @user, url: {controller: "users", action: "login"}, remote: true do |f| %>
 
                   <div class="field">
-                    <w3><%= f.label :email %></w3><br>
+                    <span class="w3"><%= f.label :email %></span><br>
                     <%= f.search_field :email, class: "form-control" %>
                   </div><br><br>
 
                   <div class="field">
-                    <w3><%= f.label :password %></w3><br>
+                    <span class="w3"><%= f.label :password %></span><br>
                     <%= f.password_field :password, class: "form-control" %>
                   <div class="actions">
                     <%= f.submit nil, id: "submit-login", class: "hidden" %>
