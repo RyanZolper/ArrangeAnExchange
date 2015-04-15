@@ -4,13 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   before_action :current_user
 
-#  def authenticate_admin_user!
-#    if !signed_in?
-#      redirect_to root_path
-#    elsif !current_user.admin != true
-#      redirect_to root_path
-#    end
-#  end
+  def authenticate_admin_user!
+    if !signed_in?
+      redirect_to root_path
+    elsif !current_user.admin?
+      redirect_to root_path
+    end
+  end
 
 
   helper_method :current_user, :signed_in?
