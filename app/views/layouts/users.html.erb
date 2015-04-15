@@ -40,16 +40,10 @@
 body { padding-top:64px; }
 </style>
 
-<% else %>
+<% end %>
 
 
-<% @a = ['account', 'welcome'] %>
-
-<% if @a.include?(action_name) == false %>
-
-
-
-<% elsif @current_user == nil %>
+<% if @current_user == nil %>
 
   <div class="container-fluid">
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -135,12 +129,6 @@ body { padding-top:64px; }
 
 
 
-<% else %>
-
-
-
-
-<% end %>
 <% end %>
 
 <% if notice != nil %>

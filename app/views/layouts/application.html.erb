@@ -33,21 +33,6 @@ body { background-color:#428BCA }
 
 <% end %>
 
-<% if action_name == 'setup' %>
-
-
-<% else %>
-
-  <% if @current_user == nil %>
-
-
-  <% else %>
-
-
-
-
-  <% end %>
-<% end %>
 
 <% if notice != nil %>
   <div class="alert alert-success alert-dismissable" id="notice" role="alert">
