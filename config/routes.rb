@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'users/mysaves'
   get 'users/changepwdpage'
   get 'users/account'
+  get 'users/updatepage'
 
   post 'users/changepwd'
   post 'users/savefam'
@@ -44,8 +45,10 @@ Rails.application.routes.draw do
   get 'travelers/setup'
   get 'showtrav/:id' => 'travelers#showtrav', as: 'showtrav'
   get 'travelers/mytrav'
+  get 'travelers/updatepage/:id' => 'travelers#updatepage', as: 'updatetrav'
 
   post 'travelers/create'
+  patch 'travelers/update/:id' => 'travelers#update', as: 'update'
 
   #fam_attachments
 

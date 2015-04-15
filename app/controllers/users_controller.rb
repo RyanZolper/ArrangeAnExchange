@@ -134,12 +134,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def updatepage
+    @user = @current_user
+  end
 
 
   def update
     @user = @current_user
       if @user.update(user_params)
-        redirect_to travelers_setup_path
+        redirect_to users_account_path, notice: "Account Info Changed!"
       else
         redirect_to :back, alert: 'Try again!'
       end
@@ -157,6 +160,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :password_digest, :family_id, :country)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :password_digest, :family_id, :country, :admin)
     end
 end

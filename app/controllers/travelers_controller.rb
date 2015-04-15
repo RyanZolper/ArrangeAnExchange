@@ -20,6 +20,20 @@ class TravelersController < ApplicationController
     @travs = @current_user.family.travelers.all
   end
 
+  def updatepage
+    @trav = Traveler.find(params[:id])
+  end
+
+  def update
+    @trav = Traveler.find(params[:id])
+      if @trav.update(trav_params)
+        redirect_to travelers_mytrav_path, notice: "Updated #{@trav.name}!"
+      else
+        redirect_to :back, alert: 'Try again!'
+      end
+  end
+
+
 
 
 
@@ -30,7 +44,7 @@ class TravelersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trav_params
-      params.require(:traveler).permit(:name, :age, :destinations, :trvldates, :bio, :tagline, :family_id, :user_id)
+      params.require(:traveler).permit(:name, :age, :destinations, :pic, :trvldates, :bio, :tagline, :family_id, :user_id)
     end
 
 
