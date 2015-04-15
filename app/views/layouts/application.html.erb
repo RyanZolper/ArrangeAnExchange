@@ -102,13 +102,12 @@ body { background-color:#428BCA }
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <div class="modal-title" id="myModalLabel">Sign Up!</div>
+          <div class="modal-title w2" id="myModalLabel">Join Now To Start Your Adventure!</div>
           <div id="signup_alert">
           </div>
         </div>
         <div class="modal-body">
 
-          <span class="w2">Join Now To Start Your Adventure!</span><br><br>
 
           <%= form_for @user, url: {controller: "users", action: "create"}, remote: true do |f| %>
 

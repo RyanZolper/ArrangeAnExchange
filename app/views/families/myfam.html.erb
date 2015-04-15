@@ -6,7 +6,7 @@
 <br>
   <a type="button" class="btn btn-default btn-lg" href="/families/updatepage">
     Edit Info
-  </a><div style="display:inline-block;" id="show_hide" data-container="body" data-toggle="popover" data-placement="right" data-content="Click 'Hide' to remove your family from display. 'Show' adds it back."><%= render 'show_hide' %></div>
+  </a><div style="display:inline-block;" id="show_hide" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="'Hide' removes family from display.<br>'Show' adds it back."><%= render 'show_hide' %></div>
 
 <br>
 <span class="w2"><%= @fam.tagline %></span><br>
@@ -253,7 +253,7 @@
     <div class="modal-content">
       <div class="modal-header center">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <w2 class="modal-title" id="myModalLabel">Change Main Image</span>
+        <span class="modal-title w2" id="myModalLabel">Change Main Image</span>
       </div>
       <div class="modal-body">
           <%= form_for(@fam, {url: {controller: "families", action: "update"}}) do |f| %>
@@ -277,7 +277,7 @@
     <div class="modal-content">
       <div class="modal-header center">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <w2 class="modal-title" id="myModalLabel">Change Other Images</span><br>
+        <span class="modal-title w2" id="myModalLabel">Change Other Images</span><br>
         <span class="w4"> To keep a previous image, enter nothing. </span>
       </div>
       <div class="modal-body">
@@ -295,7 +295,7 @@
           <% end %><br>
 
           <div class="actions">
-            <%= f.submit "Update Pic", class: "btn btn-primary btn-block btn-lg" %>
+            <%= f.submit "Update Pics", class: "btn btn-primary btn-block btn-lg" %>
           </div>
           <% end %>
 

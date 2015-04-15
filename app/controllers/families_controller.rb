@@ -72,13 +72,17 @@ class FamiliesController < ApplicationController
         redirect_to families_myfam_path, notice: 'Family Updated!'
       else
         if @fam.update(fam_params)
-          if params[:region] != ""
-            @fam.city << ", "
-            @fam.city << params[:region]
+          if params[:region] != nil
+            if params[:region] != ""
+              @fam.city << ", "
+              @fam.city << params[:region]
+            end
           end
           @fam.update_attribute('features', params[:family][:features])
-          if params[:otherfts] != ""
-            @fam.features << params[:otherfts]
+          if params[:otherfts] != nil
+            if params[:otherfts] != ""
+              @fam.features << params[:otherfts]
+            end
           end
           redirect_to families_myfam_path, notice: 'Family Updated!'
         else

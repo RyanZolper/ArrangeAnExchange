@@ -1,6 +1,10 @@
 
 <% if current_page?(root_url) %>
-  <% @h = '55' %>
+  <% if @current_user == nil %>
+    <% @h = '55' %>
+  <% else %>
+    <% @h = '50' %>
+  <% end %>
 <% else @h = '65' %>
 <% end %>
 
