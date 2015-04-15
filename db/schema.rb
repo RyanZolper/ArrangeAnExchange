@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414225328) do
+ActiveRecord::Schema.define(version: 20150414152534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(version: 20150414225328) do
     t.string   "morepics",   default: [],                array: true
     t.boolean  "smokers"
     t.string   "env"
+    t.boolean  "showing",    default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.boolean  "showing",    default: true
   end
 
   create_table "save_interest", id: false, force: :cascade do |t|
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20150414225328) do
     t.integer  "family_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-    t.boolean  "admin"
+    t.boolean  "admin",           default: false
     t.boolean  "changedpwd",      default: false
   end
 

@@ -22,7 +22,7 @@ class CreateFamilies < ActiveRecord::Migration
       t.string :morepics, array:true, default: []
       t.boolean :smokers
       t.string :env
-      t.boolean :show, default: true
+      t.boolean :showing, default: true
 
       t.timestamps null: false
     end
