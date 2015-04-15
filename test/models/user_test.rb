@@ -10,7 +10,7 @@
 #  family_id       :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  admin           :boolean
+#  admin           :boolean          default("false")
 #  changedpwd      :boolean          default("false")
 #
 

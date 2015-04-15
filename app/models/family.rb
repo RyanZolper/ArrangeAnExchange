@@ -24,9 +24,9 @@
 #  morepics   :string           default("{}"), is an Array
 #  smokers    :boolean
 #  env        :string
+#  showing    :boolean          default("true")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  show       :boolean          default("true")
 #
 
 class Family < ActiveRecord::Base
@@ -38,7 +38,7 @@ class Family < ActiveRecord::Base
   has_many :connections
   has_and_belongs_to_many :interesteds, class_name: "User", join_table: "save_interest", inverse_of: :saves
   has_many :hosteds, :through => :connections, :source => :traveler
-  scope :showing, -> { where(show: true) }
+  scope :showing, -> { where(showing: true) }
 
   def self.search(query)
     @a = ["Anywhere!", ""]

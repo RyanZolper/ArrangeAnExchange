@@ -24,9 +24,9 @@
 #  morepics   :string           default("{}"), is an Array
 #  smokers    :boolean
 #  env        :string
+#  showing    :boolean          default("true")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  show       :boolean          default("true")
 #
 
 require 'test_helper'
