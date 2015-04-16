@@ -61,6 +61,8 @@ class UsersController < ApplicationController
     @review = params[:review]
     @rating = (params[:ratefam].to_i)
     @trav = Traveler.find(params[:trav_id])
+    @fam.hosteds << @trav
+    @fam.connections.last.update("hostreview" => @review, "hoststars" => @rating, "family_id" => @fam.id)
     UserMailer.host_review_email(@user, @trav, @fam, @review, @rating).deliver_later
     redirect_to :back, notice: "Message Sent"
   end
