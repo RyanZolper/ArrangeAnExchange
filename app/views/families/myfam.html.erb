@@ -149,9 +149,12 @@
         <% end %>
       </div><br>
         <span class="w2">Special Features</span><br>
-
-        <% @fam.features.each do |f| %>
-        <span class="w4"><%= f.upcase %>!</span><br>
+        <% if @fam.features != nil %>
+          <% @fam.features.each do |f| %>
+          <span class="w4"><%= f.upcase %>!</span><br>
+          <% end %>
+        <% else %>
+          <span class="w4">None added</span>
         <% end %>
         <br><br>
     </div>

@@ -70,24 +70,23 @@ class FamiliesController < ApplicationController
           fa += 1
         end
         redirect_to families_myfam_path, notice: 'Family Updated!'
-      else
-        if @fam.update(fam_params)
-          if params[:region] != nil
-            if params[:region] != ""
-              @fam.city << ", "
-              @fam.city << params[:region]
-            end
+      end
+      if @fam.update(fam_params)
+        if params[:region] != nil
+          if params[:region] != ""
+            @fam.city << ", "
+            @fam.city << params[:region]
           end
-          @fam.update_attribute('features', params[:family][:features])
-          if params[:otherfts] != nil
-            if params[:otherfts] != ""
-              @fam.features << params[:otherfts]
-            end
-          end
-          redirect_to families_myfam_path, notice: 'Family Updated!'
-        else
-          redirect_to :back, alert: 'Try again!'
         end
+        @fam.update_attribute('features', params[:family][:features])
+        if params[:otherfts] != nil
+          if params[:otherfts] != ""
+            @fam.features << params[:otherfts]
+          end
+        end
+        redirect_to families_myfam_path, notice: 'Family Updated!'
+      else
+        redirect_to :back, alert: 'Try again!'
       end
   end
 
