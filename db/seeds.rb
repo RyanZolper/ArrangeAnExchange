@@ -41,7 +41,7 @@ end
 @z0 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 20, name: "Ryan", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/10556324_10203263270764015_3641761369509833284_n.jpg", tagline: "Making me breakfast: $3.
 Getting to know me: priceless!", user_id: @z.id, bio: "I'm a junior level Rails programmer and a persistent fisherman with a consistent lack of caught fish. I would love to travel to Germany, Italy, Spain, Mexico or Alaska.")
 @z1 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 18, name: "Sarah", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/252209_10151468806866309_1606142347_n.png", tagline: "The world is my oyster, I won't stop until I find the pearl!", user_id: @z.id, bio: "I'm a college student with aspirations of presidency and dreams of a utopian land. I'll travel anywhere (As long as it's warm...)!")
-@z1 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 18, name: "Bobby", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/252209_10151468806866309_1606142347_n.png", tagline: "Next stop, the Vatican!", user_id: @z.id, bio: "Things I like: soccer, TFM, saying 'brah', chirpin', and chirpin'")
+@z1 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 18, name: "Bobby", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/10857974_946984665330890_5968634382504342058_n.jpg", tagline: "Next stop, the Vatican!", user_id: @z.id, bio: "Things I like: soccer, TFM, saying 'brah', chirpin', and chirpin'")
 
 #france0
 
