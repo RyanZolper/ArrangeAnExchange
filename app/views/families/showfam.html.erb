@@ -214,7 +214,7 @@
         <span class="w2">Age: <%= trav.age %></span><br>
         <%= image_tag("#{trav.pic}", width: '300') %><br><br>
         <span class="w4"><%= trav.connections.find_by(family_id: @fam.id).hostreview %></span><br><br>
-        Host rating: <%= @rate %>/5
+        <span class="w4">Host rating: <%= @rate %>/5</span>
         <br><br>
 
         <div class="stars">
