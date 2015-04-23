@@ -142,6 +142,7 @@ class UsersController < ApplicationController
   end
 
   def changepwd
+    @user = @current_user
     if @user.update(user_params)
       redirect_to travelers_setup_path
     else redirect_to :back, alert: "Try Again"
