@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   end
 
 
+
+
   helper_method :current_user, :signed_in?
 
   def current_user
