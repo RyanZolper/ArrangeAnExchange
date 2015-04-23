@@ -1,11 +1,19 @@
 <div class="container-fluid">
-<div class="setup" style="background-color:rgba(189, 189, 189, 1);">
-<div>
-<span class="w2">Family Setup</span>
+<div class="setup" style="background-color:rgba(189,189,189,0.6);">
+<div class="row w1 strokeme" style="background-color:#428BCA;color:white;width:100%;margin:auto;border-top-left-radius:15px;border-top-right-radius:15px;">
+  <div class="col-md-2">
+  <%= image_tag 'AAElogo.png', height: '80' %>
+  </div>
+  <div class="col-md-8">
+  Family Setup
+  </div>
+  <div class="col-md-2">
+  <%= image_tag 'favicon.png', height: '80' %>
+  </div>
 </div>
 <%= form_for(@fam, {url: {action: "create"}, html: {multipart: "true"}}) do |f| %>
 
-<div class="row" style="background-color:white;width:100%;margin:auto;">
+<div class="row" style="width:100%;margin:auto;">
   <div class="col-md-6">
 
     <div class="form-group">
@@ -26,10 +34,10 @@
     <%= f.fields_for :fam_attachments do |y| %>
 
     <div style="width:320px;margin-left:auto;margin-right:auto;">
-       <div class="field">
+       <br><div class="field">
          <span class="w3"><%= y.label :more_pictures_of_your_house %></span><br>
-         <span class="w4">Hint:<br>Select multiple files to upload by holding the "Shift" key when you click each file</span><br><br>
-         <%= y.file_field :image, :multiple => true, name: "fam_attachments[image][]" %>
+         <%= y.file_field :image, :multiple => true, name: "fam_attachments[image][]" %><br>
+         <span class="w4">Select multiple files to upload by holding the "Shift" key when you click each file</span><br><br>
        </div>
      </div>
     <% end %><br>
@@ -78,7 +86,7 @@
   </div>
 </div>
 <br>
-<div class="row" style="background-color:white;width:100%;margin:auto;">
+<div class="row" style="width:100%;margin:auto;">
   <div class="col-md-7" style="text-align:left;">
     <div class="row">
       <div style="text-align:center;">
@@ -175,4 +183,5 @@
 </div>
 <% end %><br>
 </div>
+
 </div>

@@ -15,6 +15,14 @@
     <%= stylesheet_link_tag 'background' %>
   <% end %>
 
+  <% if action_name == 'firsts' %>
+    <%= stylesheet_link_tag 'background' %>
+  <% end %>
+
+  <% if action_name == 'thanks' %>
+    <%= stylesheet_link_tag 'background' %>
+  <% end %>
+
   <% if action_name == 'check_email' %>
     <%= stylesheet_link_tag 'background' %>
   <% end %>
@@ -35,12 +43,20 @@
 
 <% if action_name == 'mysaves' %>
 
+<style>
+body { padding-top:64px; }
+</style>
+
+<% end %>
+
+<% if action_name == 'firsts' %>
 
 <style>
 body { padding-top:64px; }
 </style>
 
 <% end %>
+
 
 
 <% if @current_user == nil %>
@@ -136,7 +152,7 @@ body { padding-top:64px; }
     <%= notice %>
   </div>
 <% end %>
-<% @acts = ['changepwdpage', 'account'] %>
+<% @acts = ['changepwdpage', 'account', 'firsts'] %>
 <% if alert != nil && @acts.include?(action_name) %>
   <div class="alert alert-danger alert-dismissable" id="alert" role="alert">
     <%= alert %>

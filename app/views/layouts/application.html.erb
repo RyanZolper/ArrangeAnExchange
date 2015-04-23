@@ -28,7 +28,7 @@
 <% if @acts.include?(action_name) %>
 
 <style>
-body { background-color:#428BCA }
+body { background-color:rgba(255, 114, 0, 0.58) }
 </style>
 
 <% end %>
@@ -39,7 +39,7 @@ body { background-color:#428BCA }
     <%= notice %>
   </div>
 <% end %>
-<% @acts = ['myfam', 'setup', 'mytrav'] %>
+<% @acts = ['myfam', 'setup', 'firsts', 'mytrav'] %>
 <% if alert != nil && @acts.include?(action_name) %>
   <div class="alert alert-danger alert-dismissable" id="alert" role="alert">
     <%= alert %>

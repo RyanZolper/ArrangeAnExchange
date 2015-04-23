@@ -38,7 +38,11 @@
         <div class="col-md-2" style="text-align:center;">
           <div class="stars">
           <% @v = 1 %>
-          <% @rate20 = (((family.connections.average(:hoststars)) * 4).to_i) %>
+          <% if family.connections.average(:hoststars) != nil %>
+            <% @rate20 = (((family.connections.average(:hoststars)) * 4).to_i) %>
+          <% else %>
+            <% @rate20 = 0 %>
+          <% end %>
           <% 20.times do %>
               <% if @rate20 == @v %>
                 <% @c = ' checked="checked"' %>

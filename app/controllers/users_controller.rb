@@ -12,6 +12,11 @@ class UsersController < ApplicationController
   def show
   end
 
+  def firsts
+    @user = User.new
+    session[:firsts] = 'yes'
+  end
+
   def mysaves
     @user= User.new
     @random = Faker::Number.number(10)
@@ -72,12 +77,19 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @temp = session[:temp]
     if @user.save(user_params)
-      render js: %(window.location.pathname='#{users_check_email_path}')
-      UserMailer.signup_email(@user, @temp).deliver_later
+      respond_to do |format|
+        format.html { redirect_to travelers_setup_path }
+        format.js { render js: %(window.location.pathname='#{users_check_email_path}') }
+      end
+      flash[:notice] = "Successfully signed up. Welcome!"
+      if session[:firsts] == nil
+        UserMailer.signup_email(@user, @temp).deliver_later
+      end
       session[:current_user_id] = @user.id
     else
       flash[:alert] = "#{@user.errors.full_messages.to_sentence}"
       respond_to do |format|
+        format.html { redirect_to :back }
         format.js
       end
     end
@@ -131,7 +143,7 @@ class UsersController < ApplicationController
 
   def changepwd
     if @user.update(user_params)
-      redirect_to users_setupme_path
+      redirect_to travelers_setup_path
     else redirect_to :back, alert: "Try Again"
     end
   end

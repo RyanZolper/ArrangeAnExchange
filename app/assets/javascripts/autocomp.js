@@ -15,3 +15,10 @@ $(function(){
     source:[signupcountries]
   });
 });
+
+$(function(){
+  $('#cunt-signup').autocomplete({
+    style:{width:'50%',margin:'auto'},
+    source:[signupcountries]
+  });
+});

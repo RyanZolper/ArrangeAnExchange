@@ -1,6 +1,16 @@
 <div class="container-fluid">
-<div class="setup" style="background-color:rgba(189, 189, 189, 1);">
-<div class="row w2" style="background-color:white;width:100%;margin:auto;border-top-left-radius:15px;border-top-right-radius:15px;">Traveler Setup</div>
+<div class="setup" style="background-color:rgba(189,189,189,0.6);">
+  <div class="row w1 strokeme" style="background-color:#428BCA;color:white;width:100%;margin:auto;border-top-left-radius:15px;border-top-right-radius:15px;">
+    <div class="col-md-2">
+    <%= image_tag 'AAElogo.png', height: '80' %>
+    </div>
+    <div class="col-md-8">
+    Traveler Setup
+    </div>
+    <div class="col-md-2">
+    <%= image_tag 'favicon.png', height: '80' %>
+    </div>
+  </div>
 
 <div class="row" style="border:none;">
   <div class="col-md-6">
@@ -36,7 +46,7 @@
 <br>
 <div class="form-group">
   <span class="w3"><%= label_tag "Traveler's Bio" %></span><br>
-  <%= f.text_area :bio, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write about yourself and why you'll be a good guest." %>
+  <%= f.text_area :bio, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 8, cols: 75, placeholder: "Write about yourself and why you'll be a good guest." %>
 
 </div>
 <div class="actions">
@@ -45,4 +55,5 @@
 
 <% end %><br>
 </div>
+<br>
 </div>

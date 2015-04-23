@@ -98,36 +98,37 @@ class FamiliesController < ApplicationController
 
   def create
     @fam = Family.new(fam_params)
-    if params [:region] != ""
-      @fam.city << ", "
-      @fam.city << params[:region]
-    end
-    if @fam.save && params[:fam_attachments] != nil
-      params[:fam_attachments]['image'].each do |a|
-        @pichold = @fam.fam_attachments.create!(:image => a, :family_id => @fam.id)
+    if @fam.save
+      if params[:region] != "" && params[:region] != nil
+        @fam.city << ", "
+        @fam.city << params[:region]
+      end
+      if params[:fam_attachments] != nil
+        params[:fam_attachments]['image'].each do |a|
+          @pichold = @fam.fam_attachments.create!(:image => a, :family_id => @fam.id)
+        end
       end
       @fam.update_attribute('features', params[:family][:features])
-      if params[:otherfts] != ""
+      if params[:otherfts] != "" && params[:otherfts] != nil
         @fam.features << params[:otherfts]
       end
       @current_user.update_attribute('family_id', @fam.id)
       @current_user.travelers.each do |x|
         x.update_attribute('family_id', @fam.id)
       end
-      redirect_to families_home_path
-    elsif @fam.save
-      @fam.update_attribute('features', params[:family][:features])
-      if params[:otherfts] != ""
-        @fam.features << params[:otherfts]
+      if session[:firsts] == nil
+        redirect_to families_home_path
+      else
+        redirect_to users_thanks_path
       end
-      @current_user.update_attribute('family_id', @fam.id)
-      @current_user.travelers.each do |x|
-        x.update_attribute('family_id', @fam.id)
-      end
-      redirect_to families_home_path
     else redirect_to :back, alert: "Try again!"
     end
   end
+
+
+
+
+
 
 
 
