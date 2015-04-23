@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'users/changepwdpage'
   get 'users/account'
   get 'users/updatepage'
-  get 'users/firsts'
+  get 'new' => 'users#firsts'
   get 'users/thanks'
 
   patch 'users/changepwd'
