@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'users/firsts'
   get 'users/thanks'
 
-  post 'users/changepwd'
+  patch 'users/changepwd'
   post 'users/savefam'
   post 'users/unsavefam'
   post 'users/login'
