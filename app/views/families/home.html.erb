@@ -86,7 +86,7 @@
                     <div class="modal-body">
                       <span class="w3">This family will receive an email from you that looks like this:</span><br><br>
 
-                      <span class="w4">Subject: <%= @current_user.name %> from <%= @current_user.country %> wishes to connect!<br><br>
+                      <span class="w4">Subject: <%= @current_user.first_name %> from <%= @current_user.country %> wishes to connect!<br><br>
 
                       The body of the email will be whatever you enter below!<br>
 
@@ -143,13 +143,13 @@
                 <%= form_for @user, url: {controller: "users", action: "create"}, remote: true do |f| %>
 
                   <div class="field">
-                    <span class="w3"><%= f.label :name %></span><br>
-                    <%= f.text_field :name, class: "form-control" %>
+                    <span class="w3"><%= f.label :first_name %></span><br>
+                    <%= f.text_field :first_name, class: "form-control" %>
                   </div><br>
 
                   <div class="field">
-                    <span class="w3"><%= f.label "Country of Residence" %></span><br>
-                    <%= f.text_field :country, class: "form-control", id: "country-signup2", size: "42" %>
+                    <span class="w3"><%= f.label :first_name %></span><br>
+                    <%= f.text_field :first_name, class: "form-control" %>
                   </div><br>
 
                   <div class="field">

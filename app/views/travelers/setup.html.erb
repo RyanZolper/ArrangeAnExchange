@@ -1,6 +1,6 @@
 <div class="container-fluid">
-<div class="setup" style="background-color:rgba(189,189,189,0.6);">
-  <div class="row w1 strokeme" style="background-color:#428BCA;color:white;width:100%;margin:auto;border-top-left-radius:15px;border-top-right-radius:15px;">
+<div class="setup" style="background-color:#99CCFF;width:50%">
+  <div class="row w1 strokeme center" style="color:white;width:100%;margin:auto;border-top-left-radius:15px;border-top-right-radius:15px;">
     <div class="col-md-2">
     <%= image_tag 'AAElogo.png', height: '80' %>
     </div>
@@ -12,44 +12,46 @@
     </div>
   </div>
 
-<div class="row" style="border:none;">
-  <div class="col-md-6">
+  <div class="center w2">
+    Let's talk about who will be traveling.
+  </div><br>
+
     <%= form_for @trav, url: {action: "create"} do |f| %>
 
     <div class="form-group">
-      <span class="w3"><%= f.label :name %></span><br>
+      <span class="w3"><%= f.label :first_name %></span><br>
       <%= f.text_field :name %>
     </div>
 
     <div class="form-group">
       <span class="w3"><%= f.label :tagline %></span><br>
-      <%= f.text_field :tagline, placeholder: "I want so see the world!" %>
+      <%= f.text_field :tagline, class: "form-control", placeholder: "Describe your/their traveling goals. E.G. 'I want to see the world!'" %>
     </div>
 
-  </div>
-  <div class="col-md-6">
 
     <div class="form-group">
       <span class="w3"><%= f.label :age %></span><br>
-      <span class="w3"><%= f.select :age, options_for_select(13..28) %></span>
-    </div><br>
-    <div style="width:200px;margin-left:auto;margin-right:auto;">
+      <span class="w3"><%= f.select :age, options_for_select(13..28), class: "w3" %></span>
+    </div>
+    <div class="form-group">
+      <span class="w3"><%= f.label :gender %></span><br>
+      <span class="w3"><%= f.select :sex, "<option>Male</option><option>Female</option><option>Other</option><option>I'd rather not say</option>".html_safe %></span>
+    </div>
     <div class="field">
       <span class="w3"><%= f.label :profile_picture %></span><br>
-      <%= f.file_field :pic %>
-    </div>
-  </div>
-  </div>
-</div>
+      <%= f.file_field :pic, onchange: "readURL(this);" %>
+    </div><br>
+    <img id="img_prev" src="#" alt="your image" style="display:none" />
+    <br>
 
 
 <br>
 <div class="form-group">
   <span class="w3"><%= label_tag "Traveler's Bio" %></span><br>
-  <%= f.text_area :bio, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 8, cols: 75, placeholder: "Write about yourself and why you'll be a good guest." %>
+  <%= f.text_area :bio, class: "form-control", style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 8, cols: 60, placeholder: "Write about yourself and why you'll be a good guest." %>
 
 </div>
-<div class="actions">
+<div class="actions center">
   <%= f.submit class: "btn btn-primary btn-lg" %>
 </div>
 

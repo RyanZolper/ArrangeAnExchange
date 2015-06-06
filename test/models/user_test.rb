@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  name            :string
 #  email           :string
 #  country         :string
 #  password_digest :string
@@ -12,6 +11,9 @@
 #  updated_at      :datetime         not null
 #  admin           :boolean          default("false")
 #  changedpwd      :boolean          default("false")
+#  first_name      :string
+#  last_name       :string
+#  name            :string
 #
 
 require 'test_helper'

@@ -1,11 +1,19 @@
 <div class="container-fluid">
-<div class="setup" style="background-color:rgba(189, 189, 189, 1);">
-<div>
-<span class="w2">Update Family</span>
-</div>
+<div class="setup" style="background-color:#99CCFF;">
+  <div class="row w1 strokeme" style="color:white;width:100%;margin:auto;border-top-left-radius:15px;border-top-right-radius:15px;">
+    <div class="col-md-2">
+    <%= image_tag 'AAElogo.png', height: '80' %>
+    </div>
+    <div class="col-md-8 center">
+    Update Family
+    </div>
+    <div class="col-md-2">
+    <%= image_tag 'favicon.png', height: '80' %>
+    </div>
+  </div>
 <%= form_for(@fam, {url: {controller: "families", action: "update"}}) do |f| %>
 
-<div class="row" style="background-color:white;width:100%;margin:auto;">
+<div class="row">
   <div class="col-md-12">
 
     <div class="form-group">
@@ -56,7 +64,7 @@
   </div>
 </div>
 <br>
-<div class="row" style="background-color:white;width:100%;margin:auto;">
+<div class="row">
   <div class="col-md-7" style="text-align:left;">
     <div class="row">
       <div style="text-align:center;">
@@ -132,23 +140,23 @@
 <span class="w3"><br>
 <div class="form-group">
   <%= label_tag "Family Life" %><br>
-  <%= f.text_area :bio, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about your family, and what it is like living with them!" %>
+  <%= f.text_area :bio, class: "form-control", style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about your family, and what it is like living with them!" %>
 </div>
 
 <div class="form-group">
   <%= label_tag "Life In Your Area" %><br>
-  <%= f.text_area :lifehere, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about life in your city/town." %>
+  <%= f.text_area :lifehere, class: "form-control", style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about life in your city/town." %>
 </div>
 
 <div class="form-group">
   <%= label_tag "Local Attractions" %><br>
-  <%= f.text_area :attracts, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write about a few cool attractions in your area." %>
+  <%= f.text_area :attracts, class: "form-control", style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write about a few cool attractions in your area." %>
 </div>
 
 </span>
 
 
-<div class="actions">
+<div class="actions center">
   <%= f.submit class: "btn btn-primary btn-lg" %>
 </div>
 <% end %><br>

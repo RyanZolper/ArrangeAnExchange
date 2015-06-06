@@ -84,7 +84,11 @@ class FamiliesController < ApplicationController
             @fam.features << params[:otherfts]
           end
         end
-        redirect_to families_myfam_path, notice: 'Family Updated!'
+        if session[:firsts] == nil
+          redirect_to families_myfam_path, notice: 'Family Updated!'
+        else
+          redirect_to users_thanks_path, notice: 'Family Updated!'
+        end
       else
         redirect_to :back, alert: 'Try again!'
       end
@@ -116,11 +120,7 @@ class FamiliesController < ApplicationController
       @current_user.travelers.each do |x|
         x.update_attribute('family_id', @fam.id)
       end
-      if session[:firsts] == nil
-        redirect_to families_home_path
-      else
-        redirect_to users_thanks_path
-      end
+      redirect_to travelers_setup_path
     else redirect_to :back, alert: "Try again!"
     end
   end

@@ -1,26 +1,50 @@
-<div class="setup" style="width:50%;">
-<span class="w2">Welcome to Arrange an Exchange!</span>
+<div class="center" style="width:60%;margin:auto;">
+<br><span class="w2">Welcome to Arrange an Exchange!</span>
 <br><br>
-  <div class="w3">Congratulations on your private invitation!<br>
-    Enter your sign-up info below to get started.<br><br>
-    <div class="row">
+  <div class="row">
+    <div class="w3">Congratulations on your private invitation!<br>
+      Let's get started setting up your profile.<br>
+      <% if @current_user != nil %>
+      <br>
+        <div class="w2 center">
+          Already have an account?<br>
+          <% if @current_user.family == nil %>
+            <a class="btn btn-primary btn-lg" href="/families/setup">Create Family Profile</a>
+          <% else %>
+            <% if @current_user.travelers == nil %>
+              <a class="btn btn-primary btn-lg" href="/travelers/setup">Create Traveler Profile</a>
+            <% else %>
+              <a class="btn btn-primary btn-lg" href="/travelers/setup">Edit Profiles</a>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+      <br>
+      First we need to set up your account:<br>
+    </div>
+  </div>
+  <div class="row w3">
 
     <%= form_for @user, url: {controller: "users", action: "create"} do |f| %>
-    <div class="field">
-      <%= f.label :country %><br>
-      <%= f.text_field :country, id: "cunt-signup", class: 'form-control', style: 'background-color:rgba(189, 189, 189, 0);' %>
-    </div><br>
     <div class="col-md-6">
       <div class="field">
-        <%= f.label :name %><br>
-        <%= f.text_field :name, class: "form-control", style: 'margin:auto;background-color:rgba(189, 189, 189, 0);' %>
+        <%= f.label :first_name %><br>
+        <%= f.text_field :first_name, class: "form-control", style: 'margin:auto;background-color:rgba(189, 189, 189, 0);' %>
       </div><br>
+      <div class="field">
+        <%= f.label :last_name %><br>
+        <%= f.text_field :last_name, class: "form-control", style: 'margin:auto;background-color:rgba(189, 189, 189, 0);' %>
+      </div><br>
+      <div class="field">
+        <%= f.label :birthday %><br>
+        <%= f.date_select :bd, :start_year => Date.today.year - 12, :end_year => Date.today.year - 100, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }, :order => [:month, :day, :year]  %>
+      </div><br>
+    </div>
+    <div class="col-md-6">
       <div class="field">
         <%= f.label :email %><br>
         <%= f.text_field :email, class: "form-control", style: 'margin:auto;background-color:rgba(189, 189, 189, 0);' %>
       </div><br>
-    </div>
-    <div class="col-md-6">
       <div class="field">
         <%= f.label :password %><br>
         <%= f.password_field :password, style: 'margin:auto;background-color:rgba(189, 189, 189, 0);', class: "form-control" %>
@@ -33,8 +57,8 @@
       <div class="actions" style="width:40%;margin:auto;background-color:rgba(189, 189, 189, 0);">
         <%= f.submit "Sign Up!", class: "btn btn-primary btn-lg btn-block" %>
       </div>
-    </div>
-      <br><br>
+  </div>
+
     <% end %>
   </div>
 </div>

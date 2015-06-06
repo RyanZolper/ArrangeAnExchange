@@ -32,6 +32,11 @@
           <li><button type="button" onclick="location.href='http://arrangeanexchange.com'" class="btn btn-default navbar-btn">
             <span class="nl">Coming Soon</span>
           </button>&nbsp;&nbsp;</li>
+          <% if @current_user == nil %>
+            <li><button type="button" class="btn btn-default navbar-btn" id="login" data-toggle="modal" data-target="#loginModal">
+              <span class="nl">Log In</span>
+            </button>&nbsp;&nbsp;</li>
+          <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -40,7 +45,7 @@
 
 <% end %>
 
-<% nonav = ['check_email', 'setup', 'changepwdpage', 'firstloginpage', 'firsts', 'thanks'] %>
+<% nonav = ['check_email', 'setup', 'changepwdpage', 'firstloginpage', 'firsts', 'thanks', 'updatepage'] %>
 
 <% if nonav.include?(action_name) %>
 

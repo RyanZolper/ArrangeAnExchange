@@ -78,7 +78,7 @@ class UsersController < ApplicationController
     @temp = session[:temp]
     if @user.save(user_params)
       respond_to do |format|
-        format.html { redirect_to travelers_setup_path }
+        format.html { redirect_to families_setup_path }
         format.js { render js: %(window.location.pathname='#{users_check_email_path}') }
       end
       flash[:notice] = "Successfully signed up. Welcome!"
@@ -175,6 +175,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :password_digest, :family_id, :country, :admin)
+      params.require(:user).permit(:name, :bd, :id, :first_name, :last_name, :email, :password, :password_confirmation, :password_digest, :family_id, :country, :admin)
     end
 end

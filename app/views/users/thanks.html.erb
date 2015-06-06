@@ -1,6 +1,12 @@
-<div class="container-fluid center" style="display:table;">
-  <div style="display:table-cell;vertical-align:middle;">
-    <span class="w1">We're really looking forward to helping you explore!</span><br><br>
+<div class="container-fluid center">
+  <div>
+    <br><span class="w1">We're really looking forward to helping you explore!</span><br><br>
     <span class="w2">We'll email you when AAE is live and ready for use!</span>
+  </div>
+  <br><br><br><br>
+  <div style="width:50%;margin:auto;">
+    <a class="btn btn-primary btn-lg btn-block w2" href="/families/updatepage">View/Edit Family Profile</a>
+    <br><br>
+    <a class="btn btn-primary btn-lg btn-block w2" href="/travelers/updatepage/<%= @current_user.travelers.first.id %>">View/Edit Traveler Profile</a>
   </div>
 </div>

@@ -28,7 +28,7 @@
 <% if @acts.include?(action_name) %>
 
 <style>
-body { background-color:rgba(255, 114, 0, 0.58) }
+body { background-color:white }
 </style>
 
 <% end %>
@@ -97,13 +97,13 @@ body { background-color:rgba(255, 114, 0, 0.58) }
           <%= form_for @user, url: {controller: "users", action: "create"}, remote: true do |f| %>
 
             <div class="field">
-              <span class="w3"><%= f.label :name %></span><br>
-              <%= f.text_field :name, class: "form-control" %>
+              <span class="w3"><%= f.label :first_name %></span><br>
+              <%= f.text_field :last_name, class: "form-control" %>
             </div><br>
 
             <div class="field">
-              <span class="w3"><%= f.label "Country of Residence" %></span><br>
-              <%= f.text_field :country, class: "form-control", id: "country-signup", size: "42" %>
+              <span class="w3"><%= f.label :last_name %></span><br>
+              <%= f.text_field :last_name, class: "form-control" %>
             </div><br>
 
             <div class="field">
@@ -216,6 +216,24 @@ $(document).ready(function () {
   });
 })
 
+</script>
+
+<script>
+function readURL(input) {
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+
+reader.onload = function (e) {
+$('#img_prev')
+.attr('src', e.target.result)
+.attr('style', 'display:inline')
+.width(150)
+.height(200);
+};
+
+reader.readAsDataURL(input.files[0]);
+}
+}
 </script>
 
 

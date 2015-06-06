@@ -1,43 +1,44 @@
 <div class="container-fluid">
-<div class="setup" style="background-color:rgba(189,189,189,0.6);">
-<div class="row w1 strokeme" style="background-color:#428BCA;color:white;width:100%;margin:auto;border-top-left-radius:15px;border-top-right-radius:15px;">
+<div class="setup" style="background-color:#99CCFF;">
+<div class="row w1 strokeme" style="color:white;width:100%;margin:auto;border-top-left-radius:15px;border-top-right-radius:15px;">
   <div class="col-md-2">
   <%= image_tag 'AAElogo.png', height: '80' %>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8 center">
   Family Setup
   </div>
   <div class="col-md-2">
   <%= image_tag 'favicon.png', height: '80' %>
   </div>
 </div>
+<br>
 <%= form_for(@fam, {url: {action: "create"}, html: {multipart: "true"}}) do |f| %>
 
-<div class="row" style="width:100%;margin:auto;">
+<div class="row">
   <div class="col-md-6">
 
     <div class="form-group">
       <span class="w3"><%= f.label :name %></span><br>
-      <%= f.text_field :name, placeholder: " The Adams Family " %>
+      <%= f.text_field :name, value: " The #{@current_user.last_name} Family " %>
     </div><br>
 
-    <div style="width:220px;margin-left:auto;margin-right:auto;">
       <div class="field">
         <span class="w3"><%= f.label :main_house_picture %></span><br><br>
         <%= f.file_field :housepic %>
       </div>
-    </div>
+      <img id="img_prev" src="#" alt="your image" style="display:none" />
+      <br>
 
   </div>
   <div class="col-md-6">
 
     <%= f.fields_for :fam_attachments do |y| %>
 
-    <div style="width:320px;margin-left:auto;margin-right:auto;">
+    <div>
        <br><div class="field">
          <span class="w3"><%= y.label :more_pictures_of_your_house %></span><br>
          <%= y.file_field :image, :multiple => true, name: "fam_attachments[image][]" %><br>
-         <span class="w4">Select multiple files to upload by holding the "Shift" key when you click each file</span><br><br>
+         <span class="w4">Select multiple files to upload by holding<br>the "Shift" key when you click each file</span><br><br>
        </div>
      </div>
     <% end %><br>
@@ -46,28 +47,35 @@
 </div>
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-12">
     <div class="form-group">
       <span class="w3"><%= f.label :tagline %></span><br><br>
       <%= f.text_field :tagline, class: "form-control", placeholder: "Come stay with us in France and eat croissants!" %>
     </div><br>
-    <div class="row">
-      <div class="col-md-6">
-        <span class="w3"><%= f.label :city %></span><br>
-        <%= f.text_field :city, placeholder: " Paris " %>
-      </div>
+  </div>
+</div>
 
-      <div class="col-md-6">
-        <span class="w3"><%= label_tag :state_or_region %></span><br>
-        <%= text_field_tag 'region', nil, placeholder: " (If applicable)" %>
-      </div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <span class="w3"><%= f.label :city %></span><br>
+      <%= f.text_field :city, placeholder: " Paris " %>
     </div>
+    <br>
 
-
-
+    <div class="form-group">
+      <span class="w3"><%= label_tag :state_or_region %></span><br>
+      <%= text_field_tag 'region', nil, placeholder: " (If applicable)" %>
+    </div>
+      <br>
+    <div class="form-group">
+      <span class="w3"><%= f.label "Country of Residence" %></span><br>
+      <%= f.text_field :country, class: "form-control", id: "country-signup", size: "42" %>
+    </div><br>
   </div>
 
-  <div class="col-md-3"><br>
+
+  <div class="col-md-6"><br>
 
     <div class="form-group">
       <span class="w3"><%= f.label :family_size %></span><br>
@@ -86,13 +94,11 @@
   </div>
 </div>
 <br>
-<div class="row" style="width:100%;margin:auto;">
-  <div class="col-md-7" style="text-align:left;">
+<div class="row w3">
+  <div class="col-md-7">
     <div class="row">
-      <div style="text-align:center;">
-      <span class="w3">Mark some of your home's features</span><br><br>
-      </div>
-      <span class="w3"><div class="col-md-4">
+      <span class="w3">Mark some of your home's features:</span><br><br>
+      <div class="col-md-4">
         <div class="form-group">
           <%= f.check_box :features, {:multiple => true}, "pool", nil %>
           <%= f.label :pool %>
@@ -126,7 +132,7 @@
           <br><br>
           <%= f.check_box :features, {:multiple => true}, "horses", nil %>
           <%= f.label :horses %>
-        </div></span>
+        </div>
       </div>
 
     </div>
@@ -162,23 +168,23 @@
 <span class="w3"><br>
   <div class="form-group">
     <%= label_tag "Family Life" %><br>
-    <%= f.text_area :bio, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about your family, and what it is like living with them!" %>
+    <%= f.text_area :bio, class: "form-control", style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about your family, and what it is like living with them!" %>
   </div>
 
   <div class="form-group">
     <%= label_tag "Life In Your Area" %><br>
-    <%= f.text_area :lifehere, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about life in your city/town." %>
+    <%= f.text_area :lifehere, class: "form-control", style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write a little bit about life in your city/town." %>
   </div>
 
   <div class="form-group">
     <%= label_tag "Local Attractions" %><br>
-    <%= f.text_area :attracts, style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write about a few cool attractions in your area." %>
+    <%= f.text_area :attracts, class: "form-control", style: "font-family:Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size:18px;", rows: 10, cols: 75, placeholder: "Write about a few cool attractions in your area." %>
   </div>
 
 </span>
 
 
-<div class="actions">
+<div class="actions center">
   <%= f.submit class: "btn btn-primary btn-lg" %>
 </div>
 <% end %><br>

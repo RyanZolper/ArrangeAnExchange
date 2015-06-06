@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
     @fam = fam
     @content = content
     @to = @fam.users.first
-    mail(to: @to.email, subject: "#{@user.name} from #{@user.country} wishes to connect!", from: user.email)
+    mail(to: @to.email, subject: "#{@user.first_name} from #{@user.country} wishes to connect!", from: user.email)
   end
 
   def host_review_email(user, trav, fam, review, rating)
