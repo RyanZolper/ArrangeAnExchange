@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     :uniqueness => { message: " belongs to an existing account" }
   validates :first_name, :presence => { message: " required"}
   validates :last_name, :presence => { message: " required"}
-  validates :bd, :presence => { message: " required"}  
+  validates :bd, :presence => { message: " required"}
   validate :bd_check
   belongs_to :family, inverse_of: :users
   has_many :travelers
@@ -30,9 +30,11 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :saves, class_name: "Family", join_table: "save_interest", inverse_of: :interesteds
 
   def bd_check
+    if bd != nil
     if bd > Date.today - 18.years
       errors.add(:base, "User must be 18. Please ask a parent for help, if you need to.")
     end
+  end
   end
 
 
