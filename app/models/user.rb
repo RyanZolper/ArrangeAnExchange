@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
     :uniqueness => { message: " belongs to an existing account" }
   validates :first_name, :presence => { message: " required"}
   validates :last_name, :presence => { message: " required"}
+  validates :bd, :presence => { message: " required"}  
   validate :bd_check
   belongs_to :family, inverse_of: :users
   has_many :travelers
