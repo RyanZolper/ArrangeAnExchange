@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   #users
 
-  get 'users#welcome'
+  get 'users/welcome'
   get 'users/check_email'
   get 'users/login'
   get 'users/logout'
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'users/changepwdpage'
   get 'users/account'
   get 'users/updatepage'
-  root 'new' => 'users#firsts'
+  root 'users#firsts'
   get 'users/thanks'
 
   patch 'users/changepwd'
