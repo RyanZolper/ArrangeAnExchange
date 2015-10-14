@@ -17,6 +17,10 @@
 #
 
 class Traveler < ActiveRecord::Base
+  validates :name, :presence => { message: " required"}
+  validates :age, :presence => { message: " required"}
+  validates :tagline, :presence => { message: " required"}
+
   mount_uploader :pic, PicUploader
   belongs_to :family, inverse_of: :travelers
   belongs_to :user, inverse_of: :travelers
