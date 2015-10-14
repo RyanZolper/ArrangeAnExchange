@@ -43,6 +43,9 @@ Getting to know me: priceless!", user_id: @z.id, bio: "I'm a junior level Rails 
 @z1 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 18, name: "Sarah", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/252209_10151468806866309_1606142347_n.png", tagline: "The world is my oyster, I won't stop until I find the pearl!", user_id: @z.id, bio: "I'm a college student with aspirations of presidency and dreams of a utopian land. I'll travel anywhere (As long as it's warm...)!")
 @z2 = @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 18, name: "Bobby", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/10857974_946984665330890_5968634382504342058_n.jpg", tagline: "Next stop, the Vatican!", user_id: @z.id, bio: "Things I like: soccer, TFM, saying 'brah', chirpin', and chirpin'")
 
+
+=begin
+
 #france0
 
 @fam = Family.create do |f|
@@ -339,3 +342,4 @@ end
     @cnt += 1
   end
 end
+=end
