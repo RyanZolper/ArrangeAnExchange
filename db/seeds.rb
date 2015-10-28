@@ -191,7 +191,7 @@ end
   f.city = "Avignon"
   @c = f.country = "France"
   f.tagline = "Come pick roses and make fresh cheese in Avignon!"
-  f.remote_housepic_url = "http://www.infoteli.com/wp-content/uploads/2011/01/Dream-old-house-design-architecture.jpg"
+  f.remote_housepic_url = "http://www.chinadaily.com.cn/photo/images/attachement/jpg/site1/20130106/0023ae9885da12531c4508.jpg"
   f.age_range = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   f.bio = "We are a happy family of four. We have nightly family suppers and make fresh omelettes every morning! Some things we like to do as a family are horseback riding, wine tastings and trips to Champagne country. We would love to host a kind teenager that would fit into our laid-back family dynamic and treat him or her like our own."
   f.lifehere = "Life in Bordeaux is relaxing and rewarding. The neighbors are friendly and the community is very supportive. If you don't say 'bonjour!' when you pass it's clear you aren't from around here!"
