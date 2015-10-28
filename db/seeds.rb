@@ -51,7 +51,7 @@ Getting to know me: priceless!", user_id: @z.id, bio: "I'm a junior level Rails 
   f.city = "Bordeaux"
   @c = f.country = "France"
   f.tagline = "There are no outsiders if you stay in our home, only family."
-  f.remote_housepic_url = "http://www.premierfrenchproperty.com/files/property_images/IMG_7634_0.jpg"
+  f.remote_housepic_url = "http://www.hope.edu/student/residential/cottages/outsidecottagepics/frenchhouse.JPG"
   f.age_range = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   f.bio = "We are a happy family of four. We have nightly family suppers and make fresh omelettes every morning! Some things we like to do as a family are horseback riding, wine tastings and trips to Champagne country. We would love to host a kind teenager that would fit into our laid-back family dynamic and treat him or her like our own."
   f.lifehere = "Life in Bordeaux is relaxing and rewarding. The neighbors are friendly and the community is very supportive. If you don't say 'bonjour!' when you pass it's clear you aren't from around here!"
