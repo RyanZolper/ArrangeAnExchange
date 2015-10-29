@@ -35,8 +35,8 @@ end
 @f.fam_attachments.create(remote_image_url: "https://s3.amazonaws.com/tiybucket/myhouse/20150411_113854.jpg")
 @f.fam_attachments.create(remote_image_url: "https://s3.amazonaws.com/tiybucket/myhouse/20150411_113949.jpg")
 
-@z = @f.users.create(name: "Ryan Zolper", email: "zolper11@gmail.com", admin: true, password: "pwd", password_confirmation: "pwd", country: "Portugal")
-@f.users.create(name: "Phillip R. Demo", email: "demo@AAE.com", admin: false, password: "password", password_confirmation: "password", country: "Portugal")
+@z = @f.users.create(first_name: "Ryan", last_name: "Zolper", email: "zolper11@gmail.com", admin: true, password: "pwd", password_confirmation: "pwd", country: "Portugal")
+@f.users.create(first_name: "Phillip", last_name: "Demo", email: "demo@AAE.com", admin: false, password: "password", password_confirmation: "password", country: "Portugal")
 
 @f.travelers.create(destinations: ["United States", Faker::Address.country, Faker::Address.country], age: 20, name: "Ryan", remote_pic_url: "https://s3.amazonaws.com/tiybucket/myhouse/10556324_10203263270764015_3641761369509833284_n.jpg", tagline: "Making me breakfast: $3.
 Getting to know me: priceless!", user_id: @z.id, bio: "I'm a junior level Rails programmer and a persistent fisherman with a consistent lack of caught fish. I would love to travel to Germany, Italy, Spain, Mexico or Alaska.")
